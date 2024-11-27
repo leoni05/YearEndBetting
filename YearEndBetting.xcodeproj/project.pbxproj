@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5073F9213C71FCAA448DC931 /* Pods_YearEndBetting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0458348EBA222EB2374B1FB7 /* Pods_YearEndBetting.framework */; };
 		D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A52CF6B17000023305 /* AppDelegate.swift */; };
 		D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A72CF6B17000023305 /* SceneDelegate.swift */; };
 		D026C7AA2CF6B17000023305 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0458348EBA222EB2374B1FB7 /* Pods_YearEndBetting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearEndBetting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AE77C14BA40BF4A2FFE1915 /* Pods-YearEndBetting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearEndBetting.debug.xcconfig"; path = "Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting.debug.xcconfig"; sourceTree = "<group>"; };
+		BFC503B9E22317C958F232CD /* Pods-YearEndBetting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearEndBetting.release.xcconfig"; path = "Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting.release.xcconfig"; sourceTree = "<group>"; };
 		D026C7A22CF6B17000023305 /* YearEndBetting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YearEndBetting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D026C7A52CF6B17000023305 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D026C7A72CF6B17000023305 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5073F9213C71FCAA448DC931 /* Pods_YearEndBetting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6236F3A65AC84B474C301F03 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5AE77C14BA40BF4A2FFE1915 /* Pods-YearEndBetting.debug.xcconfig */,
+				BFC503B9E22317C958F232CD /* Pods-YearEndBetting.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D026C7992CF6B17000023305 = {
 			isa = PBXGroup;
 			children = (
 				D026C7A42CF6B17000023305 /* YearEndBetting */,
 				D026C7A32CF6B17000023305 /* Products */,
+				6236F3A65AC84B474C301F03 /* Pods */,
+				E8D0EA8ED41D14C927467FEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = YearEndBetting;
 			sourceTree = "<group>";
 		};
+		E8D0EA8ED41D14C927467FEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0458348EBA222EB2374B1FB7 /* Pods_YearEndBetting.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D026C7B62CF6B17200023305 /* Build configuration list for PBXNativeTarget "YearEndBetting" */;
 			buildPhases = (
+				61D36E2BA701DB64BE3F1B89 /* [CP] Check Pods Manifest.lock */,
 				D026C79E2CF6B17000023305 /* Sources */,
 				D026C79F2CF6B17000023305 /* Frameworks */,
 				D026C7A02CF6B17000023305 /* Resources */,
+				89DC3249C6B948654A1417B4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61D36E2BA701DB64BE3F1B89 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YearEndBetting-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89DC3249C6B948654A1417B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D026C79E2CF6B17000023305 /* Sources */ = {
@@ -287,6 +356,7 @@
 		};
 		D026C7B72CF6B17200023305 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AE77C14BA40BF4A2FFE1915 /* Pods-YearEndBetting.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -315,6 +385,7 @@
 		};
 		D026C7B82CF6B17200023305 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFC503B9E22317C958F232CD /* Pods-YearEndBetting.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
