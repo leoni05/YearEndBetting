@@ -45,10 +45,10 @@ class GameItemCell: UITableViewCell {
         titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
         contentView.addSubview(titleLabel)
         
-        statusLabel.font = .systemFont(ofSize: 15)
+        statusLabel.font = .systemFont(ofSize: 14, weight: .medium)
         statusLabel.textColor = .darkGray
         let changeOfAMC = "+500,102 AMC"
-        let statusString = "예측 결과 2위 \(changeOfAMC)"
+        let statusString = "게임 1위, 예측 결과 2위 \(changeOfAMC)"
         let attrString = NSMutableAttributedString(string: statusString)
         let range = (statusString as NSString).range(of: changeOfAMC)
         attrString.addAttribute(.foregroundColor, value: UIColor.systemRed as Any, range: range)
