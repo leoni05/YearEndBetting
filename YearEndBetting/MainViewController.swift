@@ -33,6 +33,12 @@ class MainViewController: UIViewController {
         gameListTableView.register(GameItemCell.self, forCellReuseIdentifier: GameItemCell.reuseIdentifier)
         gameListTableView.separatorStyle = .none
         gameListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+        
+        DispatchQueue.main.async {
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(loginVC, animated: false)
+        }
     }
 
     required init(coder aDecoder: NSCoder) {
