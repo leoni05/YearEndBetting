@@ -13,6 +13,7 @@
 		D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* MainViewController.swift */; };
 		D026C7AF2CF6B17200023305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D026C7AE2CF6B17200023305 /* Assets.xcassets */; };
 		D026C7B22CF6B17200023305 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D026C7B12CF6B17200023305 /* Base */; };
+		D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E813362CFAB3A60047D2FE /* GameItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D026C7AE2CF6B17200023305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D026C7B12CF6B17200023305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D026C7B32CF6B17200023305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0E813362CFAB3A60047D2FE /* GameItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				D026C7A42CF6B17000023305 /* YearEndBetting */,
-				D026C7A32CF6B17000023305 /* Products */,
 				6236F3A65AC84B474C301F03 /* Pods */,
 				E8D0EA8ED41D14C927467FEF /* Frameworks */,
 			);
@@ -65,6 +66,7 @@
 				D026C7A22CF6B17000023305 /* YearEndBetting.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D026C7A42CF6B17000023305 /* YearEndBetting */ = {
@@ -73,9 +75,11 @@
 				D026C7A52CF6B17000023305 /* AppDelegate.swift */,
 				D026C7A72CF6B17000023305 /* SceneDelegate.swift */,
 				D026C7A92CF6B17000023305 /* MainViewController.swift */,
+				D0E813362CFAB3A60047D2FE /* GameItemCell.swift */,
 				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
 				D026C7B02CF6B17200023305 /* LaunchScreen.storyboard */,
 				D026C7B32CF6B17200023305 /* Info.plist */,
+				D026C7A32CF6B17000023305 /* Products */,
 			);
 			path = YearEndBetting;
 			sourceTree = "<group>";
@@ -203,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */,
+				D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */,
 				D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */,
 				D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */,
 			);
