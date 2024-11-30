@@ -35,15 +35,25 @@ class GameItemCell: UITableViewCell {
         rightButtonLabel.backgroundColor = .systemGray5
         rightButtonLabel.textAlignment = .center
         rightButtonLabel.text = "베팅"
-        rightButtonLabel.font = .systemFont(ofSize: 14)
+        rightButtonLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         rightButtonLabel.textColor = .darkGray
         rightButtonLabel.layer.cornerRadius = 5.0
         rightButtonLabel.clipsToBounds = true
         contentView.addSubview(rightButtonLabel)
         
         titleLabel.text = "Round 1. 미스터리 박스"
-        titleLabel.font = .systemFont(ofSize: 16)
+        titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
         contentView.addSubview(titleLabel)
+        
+        statusLabel.font = .systemFont(ofSize: 15)
+        statusLabel.textColor = .darkGray
+        let changeOfAMC = "+500,102 AMC"
+        let statusString = "예측 결과 2위 \(changeOfAMC)"
+        let attrString = NSMutableAttributedString(string: statusString)
+        let range = (statusString as NSString).range(of: changeOfAMC)
+        attrString.addAttribute(.foregroundColor, value: UIColor.systemRed as Any, range: range)
+        statusLabel.attributedText = attrString
+        contentView.addSubview(statusLabel)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -57,6 +67,7 @@ class GameItemCell: UITableViewCell {
                              bottom: GameItemCell.cellMarginVertical, right: GameItemCell.cellMarginHorizontal))
         
         rightButtonLabel.pin.right(15).vCenter().width(50).height(30)
-        titleLabel.pin.before(of: rightButtonLabel).left().top(12).marginLeft(15).marginRight(5).sizeToFit(.width)
+        titleLabel.pin.before(of: rightButtonLabel).left(15).top(12).marginRight(5).sizeToFit(.width)
+        statusLabel.pin.before(of: rightButtonLabel).left(15).bottom(12).marginRight(5).sizeToFit(.width)
     }
 }
