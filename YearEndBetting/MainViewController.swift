@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
         coinAmountLabel.sizeToFit()
         upperArea.addSubview(coinAmountLabel)
         
-        greetingLabel.text = "즐거운 연말 보내세요"
+        greetingLabel.text = "OOO팀 송년회에 오신 걸 환영합니다"
         greetingLabel.font = .systemFont(ofSize: 15)
         greetingLabel.textColor = .systemGray
         greetingLabel.sizeToFit()
