@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5073F9213C71FCAA448DC931 /* Pods_YearEndBetting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0458348EBA222EB2374B1FB7 /* Pods_YearEndBetting.framework */; };
+		D00799DC2CFB68DC009AFBFB /* GroupItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */; };
 		D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A52CF6B17000023305 /* AppDelegate.swift */; };
 		D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A72CF6B17000023305 /* SceneDelegate.swift */; };
 		D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 		0458348EBA222EB2374B1FB7 /* Pods_YearEndBetting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearEndBetting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE77C14BA40BF4A2FFE1915 /* Pods-YearEndBetting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearEndBetting.debug.xcconfig"; path = "Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting.debug.xcconfig"; sourceTree = "<group>"; };
 		BFC503B9E22317C958F232CD /* Pods-YearEndBetting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearEndBetting.release.xcconfig"; path = "Target Support Files/Pods-YearEndBetting/Pods-YearEndBetting.release.xcconfig"; sourceTree = "<group>"; };
+		D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemCell.swift; sourceTree = "<group>"; };
 		D026C7A22CF6B17000023305 /* YearEndBetting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YearEndBetting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D026C7A52CF6B17000023305 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D026C7A72CF6B17000023305 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				D026C7A52CF6B17000023305 /* AppDelegate.swift */,
 				D026C7A72CF6B17000023305 /* SceneDelegate.swift */,
 				D0E813382CFAE6510047D2FE /* LoginViewController.swift */,
+				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
 				D026C7A92CF6B17000023305 /* MainViewController.swift */,
 				D0E813362CFAB3A60047D2FE /* GameItemCell.swift */,
 				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
@@ -211,6 +214,7 @@
 			files = (
 				D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */,
 				D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */,
+				D00799DC2CFB68DC009AFBFB /* GroupItemCell.swift in Sources */,
 				D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */,
 				D0E813392CFAE6510047D2FE /* LoginViewController.swift in Sources */,
 				D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */,

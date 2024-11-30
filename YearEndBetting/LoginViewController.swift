@@ -17,7 +17,24 @@ class LoginViewController: UIViewController {
     private var askingNameLabel = UILabel()
     private var askingFavoriteLabel = UILabel()
     
+    private var groupListTableView = UITableView()
+    
     // MARK: - Life Cycle
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        groupListTableView.estimatedRowHeight = GroupItemCell.cellHeight
+        groupListTableView.delegate = self
+        groupListTableView.dataSource = self
+        groupListTableView.register(GroupItemCell.self, forCellReuseIdentifier: GroupItemCell.reuseIdentifier)
+        groupListTableView.separatorStyle = .none
+        groupListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +49,41 @@ class LoginViewController: UIViewController {
         askingNameLabel.font = .systemFont(ofSize: 25, weight: .bold)
         askingNameLabel.numberOfLines = 0
         self.view.addSubview(askingNameLabel)
+        
+        self.view.addSubview(groupListTableView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         greetingLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
             .marginTop(40).marginHorizontal(20).sizeToFit(.width)
-        askingNameLabel.pin.below(of: greetingLabel, aligned: .left).right(20).marginTop(15).sizeToFit(.width)
+        askingNameLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
+            .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+        groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
+            .marginTop(60)
     }
     
+}
+
+// MARK: - TableView DataSource
+
+extension LoginViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupItemCell.reuseIdentifier, for: indexPath) as? GroupItemCell else {
+            return UITableViewCell()
+        }
+        return cell
+    }
+}
+
+// MARK: - TableView Delegate
+
+extension LoginViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return GroupItemCell.cellHeight
+    }
 }
