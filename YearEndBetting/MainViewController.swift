@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     
     private var coinDescLabel = UILabel()
     private var coinAmountLabel = UILabel()
-    private var greetingLabel = UILabel()
+    private var groupNameLabel = UILabel()
     
     private var listTitleLabel = UILabel()
     private var gameListTableView = UITableView()
@@ -55,11 +55,11 @@ class MainViewController: UIViewController {
         coinAmountLabel.sizeToFit()
         upperArea.addSubview(coinAmountLabel)
         
-        greetingLabel.text = "OOO팀 송년회에 오신 걸 환영합니다"
-        greetingLabel.font = .systemFont(ofSize: 15)
-        greetingLabel.textColor = .systemGray
-        greetingLabel.sizeToFit()
-        upperArea.addSubview(greetingLabel)
+        groupNameLabel.text = "애교가 넘치는 사랑의 하츄핑"
+        groupNameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        groupNameLabel.textColor = .systemGray
+        groupNameLabel.sizeToFit()
+        upperArea.addSubview(groupNameLabel)
         
         listTitleLabel.text = "진행 중인 게임 목록"
         listTitleLabel.font = .systemFont(ofSize: 16)
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
         
         coinDescLabel.pin.top(70).hCenter()
         coinAmountLabel.pin.bottom(70).hCenter()
-        greetingLabel.pin.bottom(30).hCenter()
+        groupNameLabel.pin.bottom(30).hCenter()
         
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)
         gameListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
