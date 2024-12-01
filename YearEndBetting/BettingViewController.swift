@@ -17,6 +17,7 @@ class BettingViewController: UIViewController {
     private var askingSelectionLabel = UILabel()
     private var groupListTableView = UITableView()
     private var selectedTargetLabel = UILabel()
+    private var amountPlaceHolder = UILabel()
     
     private enum AskingStatus {
         case askingTarget
@@ -28,9 +29,13 @@ class BettingViewController: UIViewController {
             case .askingTarget:
                 askingSelectionLabel.isHidden = false
                 groupListTableView.isHidden = false
+                selectedTargetLabel.isHidden = true
+                amountPlaceHolder.isHidden = true
             case .askingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
+                selectedTargetLabel.isHidden = false
+                amountPlaceHolder.isHidden = false
             default:
                 break
             }
@@ -80,6 +85,12 @@ class BettingViewController: UIViewController {
         targetAttrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: targetRange)
         selectedTargetLabel.attributedText = targetAttrString
         self.view.addSubview(selectedTargetLabel)
+        
+        amountPlaceHolder.text = "얼마나 베팅할까요?"
+        amountPlaceHolder.font = .systemFont(ofSize: 22, weight: .semibold)
+        amountPlaceHolder.numberOfLines = 0
+        amountPlaceHolder.textColor = .systemGray
+        self.view.addSubview(amountPlaceHolder)
     }
     
     override func viewDidLayoutSubviews() {
@@ -139,6 +150,8 @@ private extension BettingViewController {
         if askingStatus == .askingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            amountPlaceHolder.pin.below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(45).marginHorizontal(20).sizeToFit(.width)
         }
     }
 }
