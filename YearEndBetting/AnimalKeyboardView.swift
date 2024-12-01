@@ -57,8 +57,7 @@ class AnimalKeyboardView: UIView {
         let cellWidth = (self.frame.size.width - (cellGap * Double(columnCnt - 1))) / Double(columnCnt)
         let cellHeight = (self.frame.size.height - (cellGap * Double(rowCnt - 1))) / Double(rowCnt)
         
-        var idx = 0
-        while idx < animalViews.count {
+        for idx in animalViews.indices {
             let r = idx / columnCnt
             let c = idx % columnCnt
             var x = 0.0
@@ -66,7 +65,6 @@ class AnimalKeyboardView: UIView {
             if c > 0 { x = animalViews[idx - 1].frame.maxX + cellGap }
             if r > 0 { y = animalViews[idx - columnCnt].frame.maxY + cellGap }
             animalViews[idx].pin.top(y).left(x).width(cellWidth).height(cellHeight)
-            idx += 1
         }
         animalContainerView.pin.wrapContent().center()
     }
