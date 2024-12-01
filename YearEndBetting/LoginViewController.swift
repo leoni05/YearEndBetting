@@ -116,9 +116,18 @@ extension LoginViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - Private Extensions
+// MARK: - GroupItemCellDelegate
 
 extension LoginViewController: GroupItemCellDelegate {
+    func cellContentsTouched(cellIndex: Int) {
+        askingStatus = .askingFavoriteAnimals
+        layout()
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension LoginViewController {
     func layout() {
         greetingLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
             .marginTop(60).marginHorizontal(20).sizeToFit(.width)
@@ -133,10 +142,5 @@ extension LoginViewController: GroupItemCellDelegate {
             askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
         }
-    }
-    
-    func cellContentsTouched(cellIndex: Int) {
-        askingStatus = .askingFavoriteAnimals
-        layout()
     }
 }
