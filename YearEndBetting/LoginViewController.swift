@@ -56,11 +56,11 @@ class LoginViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         greetingLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-            .marginTop(40).marginHorizontal(20).sizeToFit(.width)
+            .marginTop(60).marginHorizontal(20).sizeToFit(.width)
         askingNameLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
             .marginTop(15).marginHorizontal(20).sizeToFit(.width)
         groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
-            .marginTop(60)
+            .marginTop(110)
     }
     
 }
