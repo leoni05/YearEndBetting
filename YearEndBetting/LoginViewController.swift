@@ -134,7 +134,11 @@ extension LoginViewController: GroupItemCellDelegate {
 
 extension LoginViewController: AnimalKeyboardViewDelegate {
     func selectedAnimalChanged(selectedAnimals: Int) {
-        
+        if selectedAnimals == ((1<<0) | (1<<2) | (1<<4) | (1<<8)) {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
+        }
     }
 }
 
