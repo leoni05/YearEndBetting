@@ -18,6 +18,7 @@ class BettingViewController: UIViewController {
     private var groupListTableView = UITableView()
     private var selectedTargetLabel = UILabel()
     private var amountPlaceHolder = UILabel()
+    private var amountKeyboardView = AmountKeyboardView()
     
     private enum AskingStatus {
         case askingTarget
@@ -31,11 +32,13 @@ class BettingViewController: UIViewController {
                 groupListTableView.isHidden = false
                 selectedTargetLabel.isHidden = true
                 amountPlaceHolder.isHidden = true
+                amountKeyboardView.isHidden = true
             case .askingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
                 selectedTargetLabel.isHidden = false
                 amountPlaceHolder.isHidden = false
+                amountKeyboardView.isHidden = false
             default:
                 break
             }
@@ -53,6 +56,8 @@ class BettingViewController: UIViewController {
         groupListTableView.register(GroupItemCell.self, forCellReuseIdentifier: GroupItemCell.reuseIdentifier)
         groupListTableView.separatorStyle = .none
         groupListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+        
+        amountKeyboardView.delegate = self
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -87,10 +92,12 @@ class BettingViewController: UIViewController {
         self.view.addSubview(selectedTargetLabel)
         
         amountPlaceHolder.text = "얼마나 베팅할까요?"
-        amountPlaceHolder.font = .systemFont(ofSize: 22, weight: .semibold)
+        amountPlaceHolder.font = .systemFont(ofSize: 25, weight: .semibold)
         amountPlaceHolder.numberOfLines = 0
         amountPlaceHolder.textColor = .systemGray
         self.view.addSubview(amountPlaceHolder)
+        
+        self.view.addSubview(amountKeyboardView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -134,6 +141,18 @@ extension BettingViewController: GroupItemCellDelegate {
     }
 }
 
+// MARK: - AnimalKeyboardViewDelegate
+
+extension BettingViewController: AmountKeyboardViewDelegate {
+    func digitStringTouched(string: String) {
+        
+    }
+    
+    func eraseDigitTouched() {
+        
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension BettingViewController {
@@ -152,6 +171,8 @@ private extension BettingViewController {
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
             amountPlaceHolder.pin.below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(45).marginHorizontal(20).sizeToFit(.width)
+            amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+                .height(250).marginHorizontal(20).marginBottom(10)
         }
     }
 }
