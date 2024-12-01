@@ -130,7 +130,7 @@ extension LoginViewController: GroupItemCellDelegate {
     }
 }
 
-// MARK: - GroupItemCellDelegate
+// MARK: - AnimalKeyboardViewDelegate
 
 extension LoginViewController: AnimalKeyboardViewDelegate {
     func selectedAnimalChanged(selectedAnimals: Int) {
