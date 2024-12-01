@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     private var askingNameLabel = UILabel()
     private var groupListTableView = UITableView()
     private var askingFavoriteLabel = UILabel()
+    private var animalKeyboardView = AnimalKeyboardView()
     
     private enum AskingStatus {
         case askingName
@@ -50,6 +51,8 @@ class LoginViewController: UIViewController {
         groupListTableView.register(GroupItemCell.self, forCellReuseIdentifier: GroupItemCell.reuseIdentifier)
         groupListTableView.separatorStyle = .none
         groupListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+        
+        animalKeyboardView.delegate = self
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -82,6 +85,8 @@ class LoginViewController: UIViewController {
         self.view.addSubview(askingFavoriteLabel)
         
         self.view.addSubview(groupListTableView)
+        
+        self.view.addSubview(animalKeyboardView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,6 +130,14 @@ extension LoginViewController: GroupItemCellDelegate {
     }
 }
 
+// MARK: - GroupItemCellDelegate
+
+extension LoginViewController: AnimalKeyboardViewDelegate {
+    func selectedAnimalChanged(selectedAnimals: Int) {
+        
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension LoginViewController {
@@ -141,6 +154,8 @@ private extension LoginViewController {
         if askingStatus == .askingFavoriteAnimals {
             askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            animalKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+                .height(320)
         }
     }
 }

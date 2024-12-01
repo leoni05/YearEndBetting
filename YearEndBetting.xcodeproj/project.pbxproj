@@ -14,6 +14,8 @@
 		D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* MainViewController.swift */; };
 		D026C7AF2CF6B17200023305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D026C7AE2CF6B17200023305 /* Assets.xcassets */; };
 		D026C7B22CF6B17200023305 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D026C7B12CF6B17200023305 /* Base */; };
+		D0C67B562CFC2324008C9BA7 /* AnimalKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */; };
+		D0C67B582CFC289C008C9BA7 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B572CFC289C008C9BA7 /* AnimalView.swift */; };
 		D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E813362CFAB3A60047D2FE /* GameItemCell.swift */; };
 		D0E813392CFAE6510047D2FE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E813382CFAE6510047D2FE /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 		D026C7AE2CF6B17200023305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D026C7B12CF6B17200023305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D026C7B32CF6B17200023305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKeyboardView.swift; sourceTree = "<group>"; };
+		D0C67B572CFC289C008C9BA7 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		D0E813362CFAB3A60047D2FE /* GameItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameItemCell.swift; sourceTree = "<group>"; };
 		D0E813382CFAE6510047D2FE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +84,8 @@
 				D026C7A72CF6B17000023305 /* SceneDelegate.swift */,
 				D0E813382CFAE6510047D2FE /* LoginViewController.swift */,
 				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
+				D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */,
+				D0C67B572CFC289C008C9BA7 /* AnimalView.swift */,
 				D026C7A92CF6B17000023305 /* MainViewController.swift */,
 				D0E813362CFAB3A60047D2FE /* GameItemCell.swift */,
 				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
@@ -212,7 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C67B582CFC289C008C9BA7 /* AnimalView.swift in Sources */,
 				D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */,
+				D0C67B562CFC2324008C9BA7 /* AnimalKeyboardView.swift in Sources */,
 				D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */,
 				D00799DC2CFB68DC009AFBFB /* GroupItemCell.swift in Sources */,
 				D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */,
@@ -370,6 +378,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -401,6 +410,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
