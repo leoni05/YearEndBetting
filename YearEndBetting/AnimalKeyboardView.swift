@@ -61,7 +61,10 @@ class AnimalKeyboardView: UIView {
         let rowCnt = (animalViews.count + columnCnt - 1) / columnCnt
         let cellWidth = (self.frame.size.width - (cellGap * Double(columnCnt - 1))) / Double(columnCnt)
         let cellHeight = (self.frame.size.height - (cellGap * Double(rowCnt - 1))) / Double(rowCnt)
-        
+        if cellWidth < 0 || cellHeight < 0 {
+            return
+        }
+
         for idx in animalViews.indices {
             let r = idx / columnCnt
             let c = idx % columnCnt
