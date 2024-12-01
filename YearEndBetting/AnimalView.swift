@@ -18,6 +18,16 @@ class AnimalView: UIView {
     private var imageView = UIImageView()
     private var label = UILabel()
     
+    var isSelected = false {
+        didSet {
+            if let imageName = imageName {
+                let imageNameSuffix = isSelected ? ".fill" : ""
+                imageView.image = UIImage(systemName: imageName + imageNameSuffix)
+                imageView.tintColor = isSelected ? UIColor(named: "DarkPink") : .systemGray3
+            }
+        }
+    }
+    
     // MARK: - Life Cycle
     
     init(koreanString: String, imageName: String) {
@@ -28,7 +38,7 @@ class AnimalView: UIView {
         self.clipsToBounds = true
         
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .systemGray
+        imageView.tintColor = .systemGray3
         imageView.image = UIImage(systemName: imageName)
         imageViewArea.addSubview(imageView)
         
@@ -36,6 +46,7 @@ class AnimalView: UIView {
         
         label.text = koreanString
         label.font = .systemFont(ofSize: 14)
+        label.textColor = .black
         label.sizeToFit()
         self.addSubview(label)
     }

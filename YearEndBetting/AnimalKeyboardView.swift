@@ -30,6 +30,7 @@ class AnimalKeyboardView: UIView {
         AnimalView(koreanString: "개미", imageName: "ant")
     ]
     private var animalContainerView = UIView()
+    private var selectedAnimals: Int = 0
     
     private let cellGap = 10.0
     private let columnCnt = 3
@@ -42,6 +43,10 @@ class AnimalKeyboardView: UIView {
         for idx in animalViews.indices {
             animalViews[idx].tag = (1 << idx)
             animalContainerView.addSubview(animalViews[idx])
+            
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(animalViewTouched(_:)))
+            gesture.numberOfTapsRequired = 1
+            animalViews[idx].addGestureRecognizer(gesture)
         }
         self.addSubview(animalContainerView)
     }
@@ -67,5 +72,18 @@ class AnimalKeyboardView: UIView {
             animalViews[idx].pin.top(y).left(x).width(cellWidth).height(cellHeight)
         }
         animalContainerView.pin.wrapContent().center()
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension AnimalKeyboardView {
+    @objc func animalViewTouched(_ sender: UITapGestureRecognizer) {
+        if let view = sender.view as? AnimalView {
+            view.isSelected.toggle()
+            if view.isSelected { selectedAnimals |= view.tag }
+            else { selectedAnimals &= ~view.tag }
+            delegate?.selectedAnimalChanged(selectedAnimals: selectedAnimals)
+        }
     }
 }
