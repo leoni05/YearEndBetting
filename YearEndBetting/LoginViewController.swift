@@ -30,10 +30,12 @@ class LoginViewController: UIViewController {
                 askingNameLabel.isHidden = false
                 groupListTableView.isHidden = false
                 askingFavoriteLabel.isHidden = true
+                animalKeyboardView.isHidden = true
             case .askingFavoriteAnimals:
                 askingNameLabel.isHidden = true
                 groupListTableView.isHidden = true
                 askingFavoriteLabel.isHidden = false
+                animalKeyboardView.isHidden = false
             default:
                 break
             }
