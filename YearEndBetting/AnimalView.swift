@@ -13,15 +13,31 @@ class AnimalView: UIView {
     
     // MARK: - Properties
     
-    private var koreanString: String?
     private var imageName: String?
+    private var imageViewArea = UIView()
+    private var imageView = UIImageView()
+    private var label = UILabel()
     
     // MARK: - Life Cycle
     
     init(koreanString: String, imageName: String) {
         super.init(frame: .zero)
-        self.koreanString = koreanString
         self.imageName = imageName
+        self.backgroundColor = .systemGray6
+        self.layer.cornerRadius = 10.0
+        self.clipsToBounds = true
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemGray
+        imageView.image = UIImage(systemName: imageName)
+        imageViewArea.addSubview(imageView)
+        
+        self.addSubview(imageViewArea)
+        
+        label.text = koreanString
+        label.font = .systemFont(ofSize: 14)
+        label.sizeToFit()
+        self.addSubview(label)
     }
     
     required init?(coder: NSCoder) {
@@ -30,6 +46,8 @@ class AnimalView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        label.pin.bottom(10).hCenter()
+        imageViewArea.pin.above(of: label).top().horizontally()
+        imageView.pin.center().size(50)
     }
 }
