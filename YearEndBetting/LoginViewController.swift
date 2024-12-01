@@ -15,9 +15,29 @@ class LoginViewController: UIViewController {
     
     private var greetingLabel = UILabel()
     private var askingNameLabel = UILabel()
+    private var groupListTableView = UITableView()
     private var askingFavoriteLabel = UILabel()
     
-    private var groupListTableView = UITableView()
+    private enum AskingStatus {
+        case askingName
+        case askingFavoriteAnimals
+    }
+    private var askingStatus: AskingStatus? {
+        didSet {
+            switch askingStatus {
+            case .askingName:
+                askingNameLabel.isHidden = false
+                groupListTableView.isHidden = false
+                askingFavoriteLabel.isHidden = true
+            case .askingFavoriteAnimals:
+                askingNameLabel.isHidden = true
+                groupListTableView.isHidden = true
+                askingFavoriteLabel.isHidden = false
+            default:
+                break
+            }
+        }
+    }
     
     // MARK: - Life Cycle
     
@@ -39,6 +59,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        askingStatus = .askingName
         
         greetingLabel.text = "반가워요!"
         greetingLabel.font = .systemFont(ofSize: 25, weight: .bold)
@@ -50,17 +71,17 @@ class LoginViewController: UIViewController {
         askingNameLabel.numberOfLines = 0
         self.view.addSubview(askingNameLabel)
         
+        askingFavoriteLabel.text = "애교가 넘치는 사랑의 하츄핑은\n어떤 동물을 좋아하나요?"
+        askingFavoriteLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        askingFavoriteLabel.numberOfLines = 0
+        self.view.addSubview(askingFavoriteLabel)
+        
         self.view.addSubview(groupListTableView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        greetingLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-            .marginTop(60).marginHorizontal(20).sizeToFit(.width)
-        askingNameLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
-            .marginTop(15).marginHorizontal(20).sizeToFit(.width)
-        groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
-            .marginTop(110)
+        layout()
     }
     
 }
@@ -93,7 +114,24 @@ extension LoginViewController: UITableViewDelegate {
 // MARK: - Private Extensions
 
 extension LoginViewController: GroupItemCellDelegate {
-    func cellContentsTouched(cellIndex: Int) {
+    func layout() {
+        greetingLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+            .marginTop(60).marginHorizontal(20).sizeToFit(.width)
         
+        if askingStatus == .askingName {
+            askingNameLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
+                .marginTop(110)
+        }
+        if askingStatus == .askingFavoriteAnimals {
+            askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+        }
+    }
+    
+    func cellContentsTouched(cellIndex: Int) {
+        askingStatus = .askingFavoriteAnimals
+        layout()
     }
 }
