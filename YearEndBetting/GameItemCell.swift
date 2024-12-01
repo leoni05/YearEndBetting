@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import PinLayout
 
+protocol GameItemCellDelegate: AnyObject {
+    func cellContentsTouched(cellIndex: Int)
+}
+
 class GameItemCell: UITableViewCell {
     
     // MARK: - Properties
@@ -17,6 +21,8 @@ class GameItemCell: UITableViewCell {
     static let cellHeight = 80.0
     static let cellMarginHorizontal = 16.0
     static let cellMarginVertical = 6.0
+    
+    weak var delegate: GameItemCellDelegate?
     
     private var rightButtonLabel = UILabel()
     private var titleLabel = UILabel()
@@ -54,6 +60,10 @@ class GameItemCell: UITableViewCell {
         attrString.addAttribute(.foregroundColor, value: UIColor.systemRed as Any, range: range)
         statusLabel.attributedText = attrString
         contentView.addSubview(statusLabel)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
+        gesture.numberOfTapsRequired = 1
+        contentView.addGestureRecognizer(gesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -69,5 +79,15 @@ class GameItemCell: UITableViewCell {
         rightButtonLabel.pin.right(15).vCenter().width(50).height(30)
         titleLabel.pin.before(of: rightButtonLabel).left(15).top(12).marginRight(5).sizeToFit(.width)
         statusLabel.pin.before(of: rightButtonLabel).left(15).bottom(12).marginRight(5).sizeToFit(.width)
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension GameItemCell {
+    @objc func cellContentsTouched(_ sender: UITapGestureRecognizer) {
+        if let view = sender.view {
+            self.delegate?.cellContentsTouched(cellIndex: view.tag)
+        }
     }
 }

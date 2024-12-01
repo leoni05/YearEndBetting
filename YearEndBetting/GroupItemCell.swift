@@ -70,7 +70,7 @@ class GroupItemCell: UITableViewCell {
 // MARK: - Private Extensions
 
 private extension GroupItemCell {
-    @objc func cellContentsTouched(_ sender: UIView) {
+    @objc func cellContentsTouched(_ sender: UITapGestureRecognizer) {
         if let idx = cellIndex {
             delegate?.cellContentsTouched(cellIndex: idx)
         }

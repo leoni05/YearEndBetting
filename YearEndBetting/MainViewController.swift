@@ -103,6 +103,8 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GameItemCell.reuseIdentifier, for: indexPath) as? GameItemCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
+        cell.tag = indexPath.row
         return cell
     }
 }
@@ -112,5 +114,13 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return GameItemCell.cellHeight
+    }
+}
+
+// MARK: - GroupItemCellDelegate
+
+extension MainViewController: GameItemCellDelegate {
+    func cellContentsTouched(cellIndex: Int) {
+        self.navigationController?.pushViewController(BettingViewController(), animated: true)
     }
 }
