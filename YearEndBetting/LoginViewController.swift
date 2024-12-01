@@ -76,6 +76,8 @@ extension LoginViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupItemCell.reuseIdentifier, for: indexPath) as? GroupItemCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
+        cell.cellIndex = indexPath.row
         return cell
     }
 }
@@ -85,5 +87,13 @@ extension LoginViewController: UITableViewDataSource {
 extension LoginViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return GroupItemCell.cellHeight
+    }
+}
+
+// MARK: - Private Extensions
+
+extension LoginViewController: GroupItemCellDelegate {
+    func cellContentsTouched(cellIndex: Int) {
+        
     }
 }

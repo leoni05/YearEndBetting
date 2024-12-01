@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import PinLayout
 
+protocol GroupItemCellDelegate: AnyObject {
+    func cellContentsTouched(cellIndex: Int)
+}
+
 class GroupItemCell: UITableViewCell {
     
     // MARK: - Properties
@@ -17,6 +21,9 @@ class GroupItemCell: UITableViewCell {
     static let cellHeight = 80.0
     static let cellMarginHorizontal = 16.0
     static let cellMarginVertical = 6.0
+    
+    var cellIndex: Int?
+    weak var delegate: GroupItemCellDelegate?
     
     private var titleLabel = UILabel()
     private var subTitleLabel = UILabel()
@@ -39,6 +46,10 @@ class GroupItemCell: UITableViewCell {
         subTitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         subTitleLabel.textColor = .darkGray
         contentView.addSubview(subTitleLabel)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
+        gesture.numberOfTapsRequired = 1
+        contentView.addGestureRecognizer(gesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -53,6 +64,16 @@ class GroupItemCell: UITableViewCell {
         
         titleLabel.pin.horizontally(15).top(12).sizeToFit(.width)
         subTitleLabel.pin.horizontally(15).bottom(12).sizeToFit(.width)
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension GroupItemCell {
+    @objc func cellContentsTouched(_ sender: UIView) {
+        if let idx = cellIndex {
+            delegate?.cellContentsTouched(cellIndex: idx)
+        }
     }
 }
 
