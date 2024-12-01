@@ -155,7 +155,7 @@ private extension LoginViewController {
             askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
             animalKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-                .height(320)
+                .height(320).marginHorizontal(20)
         }
     }
 }
