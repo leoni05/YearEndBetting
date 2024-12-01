@@ -71,9 +71,14 @@ class LoginViewController: UIViewController {
         askingNameLabel.numberOfLines = 0
         self.view.addSubview(askingNameLabel)
         
-        askingFavoriteLabel.text = "애교가 넘치는 사랑의 하츄핑은\n어떤 동물을 좋아하나요?"
         askingFavoriteLabel.font = .systemFont(ofSize: 25, weight: .bold)
         askingFavoriteLabel.numberOfLines = 0
+        let groupName = "애교가 넘치는 사랑의 하츄핑"
+        let askingFavoriteString = "\(groupName)은\n어떤 동물을 좋아하나요?"
+        let attrString = NSMutableAttributedString(string: askingFavoriteString)
+        let range = (askingFavoriteString as NSString).range(of: groupName)
+        attrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: range)
+        askingFavoriteLabel.attributedText = attrString
         self.view.addSubview(askingFavoriteLabel)
         
         self.view.addSubview(groupListTableView)
