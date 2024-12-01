@@ -17,6 +17,25 @@ class BettingViewController: UIViewController {
     private var askingSelectionLabel = UILabel()
     private var groupListTableView = UITableView()
     
+    private enum AskingStatus {
+        case askingTarget
+        case askingAmount
+    }
+    private var askingStatus: AskingStatus? {
+        didSet {
+            switch askingStatus {
+            case .askingTarget:
+                askingSelectionLabel.isHidden = false
+                groupListTableView.isHidden = false
+            case .askingAmount:
+                askingSelectionLabel.isHidden = true
+                groupListTableView.isHidden = true
+            default:
+                break
+            }
+        }
+    }
+    
     // MARK: - Life Cycle
     
     init() {
@@ -37,6 +56,7 @@ class BettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        askingStatus = .askingTarget
         
         currentCoinLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         currentCoinLabel.numberOfLines = 0
@@ -58,13 +78,7 @@ class BettingViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        currentCoinLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-            .marginTop(60).marginHorizontal(20).sizeToFit(.width)
-        askingSelectionLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
-            .marginTop(15).marginHorizontal(20).sizeToFit(.width)
-        groupListTableView.pin.below(of: askingSelectionLabel).horizontally(self.view.pin.safeArea).bottom()
-            .marginTop(110)
+        layout()
     }
     
 }
@@ -98,6 +112,27 @@ extension BettingViewController: UITableViewDelegate {
 
 extension BettingViewController: GroupItemCellDelegate {
     func cellContentsTouched(cellIndex: Int) {
-        
+        askingStatus = .askingAmount
+        layout()
     }
 }
+
+// MARK: - Private Extensions
+
+private extension BettingViewController {
+    func layout() {
+        currentCoinLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+            .marginTop(60).marginHorizontal(20).sizeToFit(.width)
+        
+        if askingStatus == .askingTarget {
+            askingSelectionLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            groupListTableView.pin.below(of: askingSelectionLabel).horizontally(self.view.pin.safeArea).bottom()
+                .marginTop(110)
+        }
+        if askingStatus == .askingAmount {
+            
+        }
+    }
+}
+
