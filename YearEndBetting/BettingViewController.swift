@@ -16,6 +16,7 @@ class BettingViewController: UIViewController {
     private var currentCoinLabel = UILabel()
     private var askingSelectionLabel = UILabel()
     private var groupListTableView = UITableView()
+    private var selectedTargetLabel = UILabel()
     
     private enum AskingStatus {
         case askingTarget
@@ -58,14 +59,9 @@ class BettingViewController: UIViewController {
         self.view.backgroundColor = .white
         askingStatus = .askingTarget
         
-        currentCoinLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        currentCoinLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         currentCoinLabel.numberOfLines = 0
-        let currentAMC = "1,000,000 AMC"
-        let currentCoinString = "현재 \(currentAMC) 보유 중!"
-        let attrString = NSMutableAttributedString(string: currentCoinString)
-        let range = (currentCoinString as NSString).range(of: currentAMC)
-        attrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: range)
-        currentCoinLabel.attributedText = attrString
+        currentCoinLabel.text = "현재 1,000,000 AMC 보유 중!"
         self.view.addSubview(currentCoinLabel)
         
         askingSelectionLabel.text = "누구에게 베팅할까요?"
@@ -74,6 +70,16 @@ class BettingViewController: UIViewController {
         self.view.addSubview(askingSelectionLabel)
         
         self.view.addSubview(groupListTableView)
+        
+        selectedTargetLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        selectedTargetLabel.numberOfLines = 0
+        let target = "애교가 넘치는 사랑의 하츄핑"
+        let selectedTargetString = "\(target)에게"
+        let targetAttrString = NSMutableAttributedString(string: selectedTargetString)
+        let targetRange = (selectedTargetString as NSString).range(of: target)
+        targetAttrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: targetRange)
+        selectedTargetLabel.attributedText = targetAttrString
+        self.view.addSubview(selectedTargetLabel)
     }
     
     override func viewDidLayoutSubviews() {
@@ -131,7 +137,8 @@ private extension BettingViewController {
                 .marginTop(110)
         }
         if askingStatus == .askingAmount {
-            
+            selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
         }
     }
 }
