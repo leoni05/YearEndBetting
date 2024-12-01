@@ -37,7 +37,6 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async {
             let loginVC = LoginViewController()
             loginVC.modalPresentationStyle = .fullScreen
-            loginVC.modalTransitionStyle = .crossDissolve
             self.navigationController?.present(loginVC, animated: false)
         }
     }

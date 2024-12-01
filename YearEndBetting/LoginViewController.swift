@@ -135,9 +135,12 @@ extension LoginViewController: GroupItemCellDelegate {
 extension LoginViewController: AnimalKeyboardViewDelegate {
     func selectedAnimalChanged(selectedAnimals: Int) {
         if selectedAnimals == ((1<<0) | (1<<2) | (1<<4) | (1<<8)) {
-            DispatchQueue.main.async {
+            let alert = UIAlertController(title: "", message: "2024 송년회에 오신 것을 환영합니다~!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default) { _ in
                 self.dismiss(animated: true)
             }
+            alert.addAction(action)
+            present(alert, animated: true)
         }
     }
 }
