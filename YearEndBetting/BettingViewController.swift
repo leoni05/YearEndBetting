@@ -285,22 +285,24 @@ private extension BettingViewController {
             label.sizeToFit()
             return label
         }
-        let newLabel = UILabel()
-        newLabel.text = digit
-        newLabel.font = .systemFont(ofSize: 25, weight: .semibold)
-        newLabel.sizeToFit()
-        amountLabelContainer.addSubview(newLabel)
-        return newLabel
+        let digitLabel = UILabel()
+        digitLabel.text = digit
+        digitLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        digitLabel.sizeToFit()
+        amountLabelContainer.addSubview(digitLabel)
+        return digitLabel
     }
     
     func pushDigitLabel(digitLabel: UILabel) {
         digitLabel.isHidden = true
+        digitLabel.pin.left().right().size(0)
         digitLabels.append(digitLabel)
     }
     
     func popCommaLabel() -> UILabel {
         if let label = commaLabels.popLast() {
             label.isHidden = false
+            label.sizeToFit()
             return label
         }
         let commaLabel = UILabel()
@@ -313,6 +315,7 @@ private extension BettingViewController {
     
     func pushCommaLabel(commaLabel: UILabel) {
         commaLabel.isHidden = true
+        commaLabel.pin.left().right().size(0)
         commaLabels.append(commaLabel)
     }
 }
