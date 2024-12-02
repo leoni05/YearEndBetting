@@ -26,6 +26,7 @@ class BettingViewController: UIViewController {
     private enum AskingStatus {
         case askingTarget
         case askingAmount
+        case typingAmount
     }
     private var askingStatus: AskingStatus? {
         didSet {
@@ -36,12 +37,21 @@ class BettingViewController: UIViewController {
                 selectedTargetLabel.isHidden = true
                 amountPlaceHolder.isHidden = true
                 amountKeyboardView.isHidden = true
+                amountLabelContainer.isHidden = true
             case .askingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
                 selectedTargetLabel.isHidden = false
                 amountPlaceHolder.isHidden = false
                 amountKeyboardView.isHidden = false
+                amountLabelContainer.isHidden = true
+            case .typingAmount:
+                askingSelectionLabel.isHidden = true
+                groupListTableView.isHidden = true
+                selectedTargetLabel.isHidden = false
+                amountPlaceHolder.isHidden = true
+                amountKeyboardView.isHidden = false
+                amountLabelContainer.isHidden = false
             default:
                 break
             }
@@ -103,6 +113,7 @@ class BettingViewController: UIViewController {
         let amcLabel = UILabel()
         amcLabel.text = " AMC"
         amcLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        amcLabel.sizeToFit()
         amountLabels.append(amcLabel)
         amountLabelContainer.addSubview(amcLabel)
         self.view.addSubview(amountLabelContainer)
@@ -164,10 +175,13 @@ extension BettingViewController: AmountKeyboardViewDelegate {
             let newLabel = UILabel()
             newLabel.text = string
             newLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+            newLabel.sizeToFit()
             amountLabelContainer.addSubview(newLabel)
             amountLabels.insert(newLabel, at: pos)
         }
         setCommaLabels()
+        askingStatus = (amountString.count > 0) ? .typingAmount : .askingAmount
+        layout()
     }
     
     func eraseDigitTouched() {
@@ -180,6 +194,8 @@ extension BettingViewController: AmountKeyboardViewDelegate {
             amountLabels.remove(at: pos)
         }
         setCommaLabels()
+        askingStatus = (amountString.count > 0) ? .typingAmount : .askingAmount
+        layout()
     }
 }
 
@@ -204,6 +220,18 @@ private extension BettingViewController {
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(250).marginHorizontal(20).marginBottom(10)
         }
+        if askingStatus == .typingAmount {
+            selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            for i in amountLabels.indices {
+                if i == 0 { amountLabels[i].pin.left().top() }
+                else { amountLabels[i].pin.after(of: amountLabels[i-1]).top() }
+            }
+            amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(45).marginHorizontal(20)
+            amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+                .height(250).marginHorizontal(20).marginBottom(10)
+        }
     }
     
     func setCommaLabels() {
@@ -219,6 +247,7 @@ private extension BettingViewController {
             let commaLabel = UILabel()
             commaLabel.text = ","
             commaLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+            commaLabel.sizeToFit()
             amountLabelContainer.addSubview(commaLabel)
             amountLabels.insert(commaLabel, at: commaPos)
             commaPos -= 3
