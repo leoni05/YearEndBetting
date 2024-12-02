@@ -67,16 +67,16 @@ class LoginViewController: UIViewController {
         askingStatus = .askingName
         
         greetingLabel.text = "반가워요!"
-        greetingLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        greetingLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         greetingLabel.numberOfLines = 0
         self.view.addSubview(greetingLabel)
         
         askingNameLabel.text = "이름을 알려줄래요?"
-        askingNameLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        askingNameLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         askingNameLabel.numberOfLines = 0
         self.view.addSubview(askingNameLabel)
         
-        askingFavoriteLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        askingFavoriteLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         askingFavoriteLabel.numberOfLines = 0
         let groupName = "애교가 넘치는 사랑의 하츄핑"
         let askingFavoriteString = "\(groupName)은\n어떤 동물을 좋아하나요?"
