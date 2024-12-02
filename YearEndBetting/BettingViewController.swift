@@ -22,6 +22,7 @@ class BettingViewController: UIViewController {
     private var amountLabels = Array<UILabel>()
     private var amountLabelContainer = UIView()
     private var amountKeyboardView = AmountKeyboardView()
+    private var bettingButton = UIButton()
     
     private enum AskingStatus {
         case askingTarget
@@ -38,6 +39,7 @@ class BettingViewController: UIViewController {
                 amountPlaceHolder.isHidden = true
                 amountKeyboardView.isHidden = true
                 amountLabelContainer.isHidden = true
+                bettingButton.isHidden = true
             case .askingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
@@ -45,6 +47,7 @@ class BettingViewController: UIViewController {
                 amountPlaceHolder.isHidden = false
                 amountKeyboardView.isHidden = false
                 amountLabelContainer.isHidden = true
+                bettingButton.isHidden = true
             case .typingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
@@ -52,6 +55,7 @@ class BettingViewController: UIViewController {
                 amountPlaceHolder.isHidden = true
                 amountKeyboardView.isHidden = false
                 amountLabelContainer.isHidden = false
+                bettingButton.isHidden = false
             default:
                 break
             }
@@ -117,6 +121,12 @@ class BettingViewController: UIViewController {
         amountLabels.append(amcLabel)
         amountLabelContainer.addSubview(amcLabel)
         self.view.addSubview(amountLabelContainer)
+        
+        bettingButton.setTitle("베팅하기", for: .normal)
+        bettingButton.setTitleColor(.white, for: .normal)
+        bettingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        bettingButton.backgroundColor = UIColor(named: "DarkPink")
+        self.view.addSubview(bettingButton)
         
         self.view.addSubview(amountKeyboardView)
     }
@@ -231,6 +241,7 @@ private extension BettingViewController {
                 .marginTop(45).marginHorizontal(20)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(250).marginHorizontal(20).marginBottom(10)
+            bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
         }
     }
     
