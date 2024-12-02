@@ -190,7 +190,9 @@ extension BettingViewController: AmountKeyboardViewDelegate {
             amountLabels.insert(newLabel, at: pos)
         }
         setCommaLabels()
-        askingStatus = (amountString.count > 0) ? .typingAmount : .askingAmount
+        if askingStatus == .askingAmount {
+            askingStatus = .typingAmount
+        }
         layout()
     }
     
@@ -204,7 +206,9 @@ extension BettingViewController: AmountKeyboardViewDelegate {
             amountLabels.remove(at: pos)
         }
         setCommaLabels()
-        askingStatus = (amountString.count > 0) ? .typingAmount : .askingAmount
+        if amountString.count == 0 {
+            askingStatus = .askingAmount
+        }
         layout()
     }
 }
