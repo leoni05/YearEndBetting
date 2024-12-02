@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
     private var listTitleLabel = UILabel()
     private var gameListTableView = UITableView()
     
+    private var rankingButton = UIButton()
+    
     // MARK: - Life Cycle
     
     init() {
@@ -73,6 +75,11 @@ class MainViewController: UIViewController {
         lowerArea.addSubview(listTitleLabel)
         
         lowerArea.addSubview(gameListTableView)
+        
+        rankingButton.setImage(UIImage(systemName: "trophy.fill"), for: .normal)
+        rankingButton.tintColor = .systemGray2
+        rankingButton.addTarget(self, action: #selector(rankingButtonPressed), for: .touchUpInside)
+        self.view.addSubview(rankingButton)
     }
 
     override func viewDidLayoutSubviews() {
@@ -88,6 +95,9 @@ class MainViewController: UIViewController {
         
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)
         gameListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        
+        rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
+            .size(40).marginRight(16)
     }
 
 }
@@ -122,5 +132,13 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: GameItemCellDelegate {
     func cellContentsTouched(cellIndex: Int) {
         self.navigationController?.pushViewController(BettingViewController(), animated: true)
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension MainViewController {
+    @objc func rankingButtonPressed() {
+        self.navigationController?.pushViewController(RankingViewController(), animated: true)
     }
 }

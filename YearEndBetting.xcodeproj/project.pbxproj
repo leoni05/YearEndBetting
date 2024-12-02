@@ -14,6 +14,7 @@
 		D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* MainViewController.swift */; };
 		D026C7AF2CF6B17200023305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D026C7AE2CF6B17200023305 /* Assets.xcassets */; };
 		D026C7B22CF6B17200023305 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D026C7B12CF6B17200023305 /* Base */; };
+		D09F208A2CFDD39B00A02938 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09F20892CFDD39B00A02938 /* RankingViewController.swift */; };
 		D0C67B562CFC2324008C9BA7 /* AnimalKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */; };
 		D0C67B582CFC289C008C9BA7 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B572CFC289C008C9BA7 /* AnimalView.swift */; };
 		D0C67B5A2CFC62BF008C9BA7 /* BettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */; };
@@ -35,6 +36,7 @@
 		D026C7AE2CF6B17200023305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D026C7B12CF6B17200023305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D026C7B32CF6B17200023305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D09F20892CFDD39B00A02938 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKeyboardView.swift; sourceTree = "<group>"; };
 		D0C67B572CFC289C008C9BA7 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BettingViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */,
 				D0C67B5B2CFC7748008C9BA7 /* AmountKeyboardView.swift */,
 				D0C67B5D2CFC775F008C9BA7 /* AmountView.swift */,
+				D09F20892CFDD39B00A02938 /* RankingViewController.swift */,
 				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
 				D026C7B02CF6B17200023305 /* LaunchScreen.storyboard */,
 				D026C7B32CF6B17200023305 /* Info.plist */,
@@ -238,6 +241,7 @@
 				D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */,
 				D0C67B5C2CFC7748008C9BA7 /* AmountKeyboardView.swift in Sources */,
 				D0C67B5A2CFC62BF008C9BA7 /* BettingViewController.swift in Sources */,
+				D09F208A2CFDD39B00A02938 /* RankingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
