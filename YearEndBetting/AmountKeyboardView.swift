@@ -20,18 +20,18 @@ class AmountKeyboardView: UIView {
     
     weak var delegate: AmountKeyboardViewDelegate?
     private var amountViews: Array<AmountView> = [
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
-        AmountView(),
+        AmountView(buttonRole: .push, value: "1"),
+        AmountView(buttonRole: .push, value: "2"),
+        AmountView(buttonRole: .push, value: "3"),
+        AmountView(buttonRole: .push, value: "4"),
+        AmountView(buttonRole: .push, value: "5"),
+        AmountView(buttonRole: .push, value: "6"),
+        AmountView(buttonRole: .push, value: "7"),
+        AmountView(buttonRole: .push, value: "8"),
+        AmountView(buttonRole: .push, value: "9"),
+        AmountView(buttonRole: .push, value: "00"),
+        AmountView(buttonRole: .push, value: "0"),
+        AmountView(buttonRole: .pop),
     ]
     private var amountContainerView = UIView()
     private let cellGap = 10.0
