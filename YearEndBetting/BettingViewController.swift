@@ -78,7 +78,7 @@ class BettingViewController: UIViewController {
         self.view.addSubview(currentCoinLabel)
         
         askingSelectionLabel.text = "누구에게 베팅할까요?"
-        askingSelectionLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        askingSelectionLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         askingSelectionLabel.numberOfLines = 0
         self.view.addSubview(askingSelectionLabel)
         
