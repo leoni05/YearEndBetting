@@ -24,6 +24,9 @@ class BettingViewController: UIViewController {
     private var amountKeyboardView = AmountKeyboardView()
     private var bettingButton = UIButton()
     
+    private var commaLabels = Array<UILabel>()
+    private var digitLabels = Array<UILabel>()
+    
     private enum AskingStatus {
         case askingTarget
         case askingAmount
@@ -183,11 +186,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         
         let pos = amountLabels.count - 1
         if pos >= 0 {
-            let newLabel = UILabel()
-            newLabel.text = string
-            newLabel.font = .systemFont(ofSize: 25, weight: .semibold)
-            newLabel.sizeToFit()
-            amountLabelContainer.addSubview(newLabel)
+            let newLabel = popDigitLabel(digit: string)
             amountLabels.insert(newLabel, at: pos)
         }
         setCommaLabels()
@@ -207,7 +206,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         
         let pos = amountLabels.count - 2
         if pos >= 0 {
-            amountLabels[pos].removeFromSuperview()
+            pushDigitLabel(digitLabel: amountLabels[pos])
             amountLabels.remove(at: pos)
         }
         setCommaLabels()
@@ -266,21 +265,55 @@ private extension BettingViewController {
     func setCommaLabels() {
         for i in amountLabels.indices.reversed() {
             if amountLabels[i].text == "," {
-                amountLabels[i].removeFromSuperview()
+                pushCommaLabel(commaLabel: amountLabels[i])
                 amountLabels.remove(at: i)
             }
         }
         
         var commaPos = amountLabels.count - 4
         while commaPos > 0 {
-            let commaLabel = UILabel()
-            commaLabel.text = ","
-            commaLabel.font = .systemFont(ofSize: 25, weight: .semibold)
-            commaLabel.sizeToFit()
-            amountLabelContainer.addSubview(commaLabel)
+            let commaLabel = popCommaLabel()
             amountLabels.insert(commaLabel, at: commaPos)
             commaPos -= 3
         }
+    }
+    
+    func popDigitLabel(digit: String) -> UILabel {
+        if let label = digitLabels.popLast() {
+            label.isHidden = false
+            label.text = digit
+            label.sizeToFit()
+            return label
+        }
+        let newLabel = UILabel()
+        newLabel.text = digit
+        newLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        newLabel.sizeToFit()
+        amountLabelContainer.addSubview(newLabel)
+        return newLabel
+    }
+    
+    func pushDigitLabel(digitLabel: UILabel) {
+        digitLabel.isHidden = true
+        digitLabels.append(digitLabel)
+    }
+    
+    func popCommaLabel() -> UILabel {
+        if let label = commaLabels.popLast() {
+            label.isHidden = false
+            return label
+        }
+        let commaLabel = UILabel()
+        commaLabel.text = ","
+        commaLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        commaLabel.sizeToFit()
+        amountLabelContainer.addSubview(commaLabel)
+        return commaLabel
+    }
+    
+    func pushCommaLabel(commaLabel: UILabel) {
+        commaLabel.isHidden = true
+        commaLabels.append(commaLabel)
     }
 }
 
