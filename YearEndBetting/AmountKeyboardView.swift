@@ -34,7 +34,7 @@ class AmountKeyboardView: UIView {
         AmountView(buttonRole: .pop),
     ]
     private var amountContainerView = UIView()
-    private let cellGap = 10.0
+    private let cellGap = 5.0
     private let columnCnt = 3
     
     // MARK: - Life Cycle

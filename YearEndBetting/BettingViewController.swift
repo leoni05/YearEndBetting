@@ -228,7 +228,7 @@ private extension BettingViewController {
             amountPlaceHolder.pin.below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(45).marginHorizontal(20).sizeToFit(.width)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-                .height(250).marginHorizontal(20).marginBottom(10)
+                .height(250).marginHorizontal(10).marginBottom(10)
         }
         if askingStatus == .typingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
@@ -240,8 +240,9 @@ private extension BettingViewController {
             amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(45).marginHorizontal(20)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-                .height(250).marginHorizontal(20).marginBottom(10)
+                .height(250).marginHorizontal(10).marginBottom(10)
             bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
+                .marginBottom(5)
         }
     }
     
