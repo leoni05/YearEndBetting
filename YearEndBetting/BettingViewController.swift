@@ -134,6 +134,7 @@ class BettingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layout()
+        layoutAmountLabels()
     }
     
 }
@@ -192,8 +193,12 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         setCommaLabels()
         if askingStatus == .askingAmount {
             askingStatus = .typingAmount
+            layout()
+            layoutAmountLabels()
         }
-        layout()
+        else {
+            layoutAmountLabels()
+        }
     }
     
     func eraseDigitTouched() {
@@ -208,8 +213,11 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         setCommaLabels()
         if amountString.count == 0 {
             askingStatus = .askingAmount
+            layout()
         }
-        layout()
+        else {
+            layoutAmountLabels()
+        }
     }
 }
 
@@ -237,16 +245,21 @@ private extension BettingViewController {
         if askingStatus == .typingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+            amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+                .height(250).marginHorizontal(10).marginBottom(10)
+            bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
+                .marginBottom(5)
+        }
+    }
+    
+    func layoutAmountLabels() {
+        if askingStatus == .typingAmount {
             for i in amountLabels.indices {
                 if i == 0 { amountLabels[i].pin.left().top() }
                 else { amountLabels[i].pin.after(of: amountLabels[i-1]).top() }
             }
             amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(45).marginHorizontal(20)
-            amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-                .height(250).marginHorizontal(10).marginBottom(10)
-            bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
-                .marginBottom(5)
         }
     }
     
