@@ -97,8 +97,15 @@ class BettingViewController: UIViewController {
         amountPlaceHolder.text = "얼마나 베팅할까요?"
         amountPlaceHolder.font = .systemFont(ofSize: 25, weight: .semibold)
         amountPlaceHolder.numberOfLines = 0
-        amountPlaceHolder.textColor = .systemGray
+        amountPlaceHolder.textColor = .systemGray2
         self.view.addSubview(amountPlaceHolder)
+        
+        let amcLabel = UILabel()
+        amcLabel.text = " AMC"
+        amcLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        amountLabels.append(amcLabel)
+        amountLabelContainer.addSubview(amcLabel)
+        self.view.addSubview(amountLabelContainer)
         
         self.view.addSubview(amountKeyboardView)
     }
@@ -148,11 +155,31 @@ extension BettingViewController: GroupItemCellDelegate {
 
 extension BettingViewController: AmountKeyboardViewDelegate {
     func digitStringTouched(string: String) {
+        if amountString.count == 0 && Int(string) == 0 { return }
+        if amountString.count >= 9 { return }
         amountString.append(string)
+        
+        let pos = amountLabels.count - 1
+        if pos >= 0 {
+            let newLabel = UILabel()
+            newLabel.text = string
+            newLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+            amountLabelContainer.addSubview(newLabel)
+            amountLabels.insert(newLabel, at: pos)
+        }
+        setCommaLabels()
     }
     
     func eraseDigitTouched() {
+        if amountString.count == 0 { return }
         _ = amountString.popLast()
+        
+        let pos = amountLabels.count - 2
+        if pos >= 0 {
+            amountLabels[pos].removeFromSuperview()
+            amountLabels.remove(at: pos)
+        }
+        setCommaLabels()
     }
 }
 
@@ -176,6 +203,25 @@ private extension BettingViewController {
                 .marginTop(45).marginHorizontal(20).sizeToFit(.width)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(250).marginHorizontal(20).marginBottom(10)
+        }
+    }
+    
+    func setCommaLabels() {
+        for i in amountLabels.indices.reversed() {
+            if amountLabels[i].text == "," {
+                amountLabels[i].removeFromSuperview()
+                amountLabels.remove(at: i)
+            }
+        }
+        
+        var commaPos = amountLabels.count - 4
+        while commaPos > 0 {
+            let commaLabel = UILabel()
+            commaLabel.text = ","
+            commaLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+            amountLabelContainer.addSubview(commaLabel)
+            amountLabels.insert(commaLabel, at: commaPos)
+            commaPos -= 3
         }
     }
 }

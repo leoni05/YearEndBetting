@@ -85,7 +85,11 @@ private extension AmountKeyboardView {
     @objc func amountViewTouched(_ sender: UITapGestureRecognizer) {
         if let view = sender.view as? AmountView {
             if view.buttonRole == .push {
-                self.delegate?.digitStringTouched(string: view.valueForPush ?? "")
+                if let string = view.valueForPush {
+                    for i in string.indices {
+                        self.delegate?.digitStringTouched(string: String(string[i]))
+                    }
+                }
             }
             if view.buttonRole == .pop {
                 self.delegate?.eraseDigitTouched()
