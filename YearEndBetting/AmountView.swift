@@ -17,23 +17,23 @@ class AmountView: UIView {
         case push
         case pop
     }
-    private var buttonRole: ButtonRole?
-    private var value: String?
+    var buttonRole: ButtonRole?
+    var valueForPush: String?
     
     private var labelForPush: UILabel?
     private var imageViewForPop: UIImageView?
     
     // MARK: - Life Cycle
     
-    init(buttonRole: ButtonRole, value: String? = nil) {
+    init(buttonRole: ButtonRole, valueForPush: String? = nil) {
         super.init(frame: .zero)
         self.buttonRole = buttonRole
-        self.value = value
+        self.valueForPush = valueForPush
         
         switch buttonRole {
         case .push:
             let label = UILabel()
-            label.text = self.value
+            label.text = self.valueForPush
             label.font = .systemFont(ofSize: 30, weight: .medium)
             label.textColor = .black
             label.sizeToFit()

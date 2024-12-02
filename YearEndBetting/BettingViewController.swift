@@ -18,6 +18,9 @@ class BettingViewController: UIViewController {
     private var groupListTableView = UITableView()
     private var selectedTargetLabel = UILabel()
     private var amountPlaceHolder = UILabel()
+    private var amountString = ""
+    private var amountLabels = Array<UILabel>()
+    private var amountLabelContainer = UIView()
     private var amountKeyboardView = AmountKeyboardView()
     
     private enum AskingStatus {
@@ -145,11 +148,11 @@ extension BettingViewController: GroupItemCellDelegate {
 
 extension BettingViewController: AmountKeyboardViewDelegate {
     func digitStringTouched(string: String) {
-        
+        amountString.append(string)
     }
     
     func eraseDigitTouched() {
-        
+        _ = amountString.popLast()
     }
 }
 
