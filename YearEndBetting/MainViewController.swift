@@ -78,6 +78,10 @@ class MainViewController: UIViewController {
         
         rankingButton.setImage(UIImage(systemName: "trophy.fill"), for: .normal)
         rankingButton.tintColor = .systemGray2
+        rankingButton.contentHorizontalAlignment = .fill
+        rankingButton.contentVerticalAlignment = .fill
+        rankingButton.imageView?.contentMode = .scaleAspectFit
+        rankingButton.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         rankingButton.addTarget(self, action: #selector(rankingButtonPressed), for: .touchUpInside)
         self.view.addSubview(rankingButton)
     }
