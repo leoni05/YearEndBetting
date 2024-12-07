@@ -23,6 +23,7 @@ class BettingViewController: UIViewController {
     private var amountLabelContainer = UIView()
     private var amountKeyboardView = AmountKeyboardView()
     private var bettingButton = UIButton()
+    private var backButton = UIButton()
     
     private var commaLabels = Array<UILabel>()
     private var digitLabels = Array<UILabel>()
@@ -132,6 +133,13 @@ class BettingViewController: UIViewController {
         self.view.addSubview(bettingButton)
         
         self.view.addSubview(amountKeyboardView)
+        
+        backButton.setImage(UIImage(systemName: "chevron.left",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
+                              for: .normal)
+        backButton.tintColor = .darkGray
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        self.view.addSubview(backButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -226,6 +234,8 @@ private extension BettingViewController {
     func layout() {
         currentCoinLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
             .marginTop(60).marginHorizontal(20).sizeToFit(.width)
+        backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+            .size(40).marginLeft(10)
         
         if askingStatus == .askingTarget {
             askingSelectionLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
@@ -317,6 +327,10 @@ private extension BettingViewController {
         commaLabel.isHidden = true
         commaLabel.pin.left().right().size(0)
         commaLabels.append(commaLabel)
+    }
+    
+    @objc func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
