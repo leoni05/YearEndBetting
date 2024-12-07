@@ -154,6 +154,17 @@ private extension MainViewController {
     }
     
     @objc func logoutButtonPressed() {
-        
+        let alert = UIAlertController(title: "", message: "로그아웃하시겠어요?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default) { _ in
+            DispatchQueue.main.async {
+                let loginVC = LoginViewController()
+                loginVC.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(loginVC, animated: true)
+            }
+        }
+        let close = UIAlertAction(title: "취소", style: .default, handler: nil)
+        alert.addAction(action)
+        alert.addAction(close)
+        present(alert, animated: true)
     }
 }
