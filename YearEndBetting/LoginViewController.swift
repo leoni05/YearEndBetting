@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     private var groupListTableView = UITableView()
     private var askingFavoriteLabel = UILabel()
     private var animalKeyboardView = AnimalKeyboardView()
+    private var backButton = UIButton()
     
     private enum AskingStatus {
         case askingName
@@ -31,11 +32,13 @@ class LoginViewController: UIViewController {
                 groupListTableView.isHidden = false
                 askingFavoriteLabel.isHidden = true
                 animalKeyboardView.isHidden = true
+                backButton.isHidden = true
             case .askingFavoriteAnimals:
                 askingNameLabel.isHidden = true
                 groupListTableView.isHidden = true
                 askingFavoriteLabel.isHidden = false
                 animalKeyboardView.isHidden = false
+                backButton.isHidden = false
             default:
                 break
             }
@@ -89,6 +92,13 @@ class LoginViewController: UIViewController {
         self.view.addSubview(groupListTableView)
         
         self.view.addSubview(animalKeyboardView)
+        
+        backButton.setImage(UIImage(systemName: "chevron.left",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
+                              for: .normal)
+        backButton.tintColor = .darkGray
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        self.view.addSubview(backButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -165,6 +175,15 @@ private extension LoginViewController {
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
             animalKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(320).marginHorizontal(20).marginBottom(10)
+            backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+                .size(40).marginLeft(10)
         }
+    }
+    
+    @objc func backButtonPressed() {
+        groupListTableView.setContentOffset(CGPointZero, animated: false)
+        askingStatus = .askingName
+        layout()
+        animalKeyboardView.resetKeyboard()
     }
 }

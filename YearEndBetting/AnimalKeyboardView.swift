@@ -78,6 +78,17 @@ class AnimalKeyboardView: UIView {
     }
 }
 
+// MARK: - Extensions
+
+extension AnimalKeyboardView {
+    func resetKeyboard() {
+        for idx in animalViews.indices {
+            animalViews[idx].isSelected = false
+        }
+        selectedAnimals = 0
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension AnimalKeyboardView {
