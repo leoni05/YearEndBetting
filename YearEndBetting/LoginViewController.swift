@@ -99,6 +99,10 @@ class LoginViewController: UIViewController {
         backButton.tintColor = .darkGray
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         self.view.addSubview(backButton)
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+        edgePan.edges = .left
+        self.view.addGestureRecognizer(edgePan)
     }
     
     override func viewDidLayoutSubviews() {
@@ -180,10 +184,18 @@ private extension LoginViewController {
         }
     }
     
-    @objc func backButtonPressed() {
+    func goBackToAskingName() {
         groupListTableView.setContentOffset(CGPointZero, animated: false)
         askingStatus = .askingName
         layout()
         animalKeyboardView.resetKeyboard()
+    }
+    
+    @objc func backButtonPressed() {
+        goBackToAskingName()
+    }
+    
+    @objc func screenEdgeSwiped() {
+        goBackToAskingName()
     }
 }
