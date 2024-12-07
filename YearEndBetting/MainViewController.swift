@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
     private var gameListTableView = UITableView()
     
     private var rankingButton = UIButton()
+    private var logoutButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -76,14 +77,19 @@ class MainViewController: UIViewController {
         
         lowerArea.addSubview(gameListTableView)
         
-        rankingButton.setImage(UIImage(systemName: "trophy.fill"), for: .normal)
+        rankingButton.setImage(UIImage(systemName: "trophy",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)),
+                              for: .normal)
         rankingButton.tintColor = .systemGray2
-        rankingButton.contentHorizontalAlignment = .fill
-        rankingButton.contentVerticalAlignment = .fill
-        rankingButton.imageView?.contentMode = .scaleAspectFit
-        rankingButton.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         rankingButton.addTarget(self, action: #selector(rankingButtonPressed), for: .touchUpInside)
         self.view.addSubview(rankingButton)
+        
+        logoutButton.setImage(UIImage(systemName: "rectangle.portrait.and.arrow.right",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 17, weight: .bold)),
+                              for: .normal)
+        logoutButton.tintColor = .systemGray2
+        logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        self.view.addSubview(logoutButton)
     }
 
     override func viewDidLayoutSubviews() {
@@ -102,6 +108,7 @@ class MainViewController: UIViewController {
         
         rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
             .size(40).marginRight(16)
+        logoutButton.pin.before(of: rankingButton, aligned: .top).size(40).marginRight(5)
     }
 
 }
@@ -144,5 +151,9 @@ extension MainViewController: GameItemCellDelegate {
 private extension MainViewController {
     @objc func rankingButtonPressed() {
         self.navigationController?.pushViewController(RankingViewController(), animated: true)
+    }
+    
+    @objc func logoutButtonPressed() {
+        
     }
 }
