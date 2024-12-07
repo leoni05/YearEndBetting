@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
     
     private var rankingButton = UIButton()
     private var logoutButton = UIButton()
+    private var githubButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -90,6 +91,16 @@ class MainViewController: UIViewController {
         logoutButton.tintColor = .systemGray2
         logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
         self.view.addSubview(logoutButton)
+        
+        githubButton.setImage(UIImage(systemName: "link",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)),
+                              for: .normal)
+        githubButton.tintColor = .systemGray2
+        githubButton.setTitle(" github", for: .normal)
+        githubButton.setTitleColor(.systemGray2, for: .normal)
+        githubButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+        githubButton.addTarget(self, action: #selector(githubButtonPressed), for: .touchUpInside)
+        self.view.addSubview(githubButton)
     }
 
     override func viewDidLayoutSubviews() {
@@ -109,6 +120,8 @@ class MainViewController: UIViewController {
         rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
             .size(40).marginRight(16)
         logoutButton.pin.before(of: rankingButton, aligned: .top).size(40).marginRight(5)
+        githubButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+            .width(85).height(40).marginLeft(16)
     }
 
 }
@@ -166,5 +179,9 @@ private extension MainViewController {
         alert.addAction(action)
         alert.addAction(close)
         present(alert, animated: true)
+    }
+    
+    @objc func githubButtonPressed() {
+        
     }
 }
