@@ -18,6 +18,7 @@ class RankingGroupCell: UITableViewCell {
     static let cellMarginHorizontal = 16.0
     static let cellMarginVertical = 6.0
     
+    private var rankLabel = UILabel()
     private var titleLabel = UILabel()
     private var groupNumberLabel = UILabel()
     
@@ -30,6 +31,12 @@ class RankingGroupCell: UITableViewCell {
         contentView.backgroundColor = .systemGray6
         contentView.layer.cornerRadius = 10.0
         contentView.clipsToBounds = true
+        
+        rankLabel.text = "1위"
+        rankLabel.textColor = .systemPink
+        rankLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        rankLabel.sizeToFit()
+        contentView.addSubview(rankLabel)
         
         titleLabel.text = "애교가 넘치는 사랑의 하츄핑"
         titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
@@ -52,7 +59,8 @@ class RankingGroupCell: UITableViewCell {
             by: UIEdgeInsets(top: RankingGroupCell.cellMarginVertical, left: RankingGroupCell.cellMarginHorizontal,
                              bottom: RankingGroupCell.cellMarginVertical, right: RankingGroupCell.cellMarginHorizontal))
         
-        titleLabel.pin.left(15).right(15).top(12).sizeToFit(.width)
-        groupNumberLabel.pin.left(15).bottom(12)
+        rankLabel.pin.left(15).vCenter()
+        titleLabel.pin.after(of: rankLabel).right(15).top(12).marginLeft(15).sizeToFit(.width)
+        groupNumberLabel.pin.after(of: rankLabel).bottom(12).marginLeft(15)
     }
 }
