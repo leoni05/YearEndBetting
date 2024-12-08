@@ -21,6 +21,8 @@ class ResultViewController: UIViewController {
     private var betAmountLabel = UILabel()
     private var betRewardLabel = UILabel()
     
+    private var backButton = UIButton()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -82,6 +84,13 @@ class ResultViewController: UIViewController {
         betRewardLabel.attributedText = betRewardAttrString
         betRewardLabel.sizeToFit()
         upperArea.addSubview(betRewardLabel)
+        
+        backButton.setImage(UIImage(systemName: "chevron.left",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
+                              for: .normal)
+        backButton.tintColor = .darkGray
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        self.view.addSubview(backButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,11 +98,22 @@ class ResultViewController: UIViewController {
         
         upperArea.pin.top(self.view.pin.safeArea)
             .horizontally(self.view.pin.safeArea).height(200)
-        resultDescLabel.pin.top(30).hCenter()
-        currentRankLabel.pin.bottom(110).hCenter()
-        winRewardLabel.pin.below(of: currentRankLabel).hCenter().marginTop(15)
-        onePickLabel.pin.below(of: winRewardLabel).hCenter().marginTop(10)
-        betAmountLabel.pin.below(of: onePickLabel).hCenter().marginTop(5)
-        betRewardLabel.pin.below(of: betAmountLabel).hCenter().marginTop(5)
+        resultDescLabel.pin.top(45).hCenter()
+        currentRankLabel.pin.bottom(95).hCenter()
+        winRewardLabel.pin.below(of: currentRankLabel).hCenter().marginTop(10)
+        onePickLabel.pin.below(of: winRewardLabel).hCenter().marginTop(3)
+        betAmountLabel.pin.below(of: onePickLabel).hCenter().marginTop(3)
+        betRewardLabel.pin.below(of: betAmountLabel).hCenter().marginTop(3)
+        
+        backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+            .size(40).marginLeft(10)
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension ResultViewController {
+    @objc func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
