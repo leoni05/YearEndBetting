@@ -139,6 +139,16 @@ extension MainViewController: UITableViewDataSource {
         }
         cell.delegate = self
         cell.tag = indexPath.row
+        
+        if indexPath.row % 3 == 0 {
+            cell.gameStatus = .beforeBetting
+        }
+        if indexPath.row % 3 == 1 {
+            cell.gameStatus = .inProgress
+        }
+        if indexPath.row % 3 == 2 {
+            cell.gameStatus = .gameEnded
+        }
         return cell
     }
 }
@@ -154,8 +164,15 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - GroupItemCellDelegate
 
 extension MainViewController: GameItemCellDelegate {
-    func cellContentsTouched(cellIndex: Int) {
-        self.navigationController?.pushViewController(BettingViewController(), animated: true)
+    func cellContentsTouched(cellIndex: Int, gameStatus: GameItemCell.GameStatus?) {
+        switch gameStatus {
+        case .beforeBetting:
+            self.navigationController?.pushViewController(BettingViewController(), animated: true)
+        case .gameEnded:
+            self.navigationController?.pushViewController(ResultViewController(), animated: true)
+        default:
+            break
+        }
     }
 }
 

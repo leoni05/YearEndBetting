@@ -10,7 +10,7 @@ import UIKit
 import PinLayout
 
 protocol GameItemCellDelegate: AnyObject {
-    func cellContentsTouched(cellIndex: Int)
+    func cellContentsTouched(cellIndex: Int, gameStatus: GameItemCell.GameStatus?)
 }
 
 class GameItemCell: UITableViewCell {
@@ -23,6 +23,26 @@ class GameItemCell: UITableViewCell {
     static let cellMarginVertical = 6.0
     
     weak var delegate: GameItemCellDelegate?
+    
+    enum GameStatus {
+        case beforeBetting
+        case inProgress
+        case gameEnded
+    }
+    var gameStatus: GameStatus? {
+        didSet {
+            switch gameStatus {
+            case .beforeBetting:
+                rightButtonLabel.text = "베팅"
+            case .inProgress:
+                rightButtonLabel.text = "진행중"
+            case .gameEnded:
+                rightButtonLabel.text = "결과"
+            default:
+                break
+            }
+        }
+    }
     
     private var rightButtonLabel = UILabel()
     private var titleLabel = UILabel()
@@ -87,7 +107,7 @@ class GameItemCell: UITableViewCell {
 private extension GameItemCell {
     @objc func cellContentsTouched(_ sender: UITapGestureRecognizer) {
         if let view = sender.view {
-            self.delegate?.cellContentsTouched(cellIndex: view.tag)
+            self.delegate?.cellContentsTouched(cellIndex: view.tag, gameStatus: gameStatus)
         }
     }
 }
