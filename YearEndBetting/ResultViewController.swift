@@ -13,6 +13,8 @@ class ResultViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var backButton = UIButton()
+    
     private var upperArea = UIView()
     private var resultDescLabel = UILabel()
     private var currentRankLabel = UILabel()
@@ -21,9 +23,26 @@ class ResultViewController: UIViewController {
     private var betAmountLabel = UILabel()
     private var betRewardLabel = UILabel()
     
-    private var backButton = UIButton()
+    private var lowerArea = UIView()
+    private var listTitleLabel = UILabel()
+    private var groupListTableView = UITableView()
     
     // MARK: - Life Cycle
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        groupListTableView.estimatedRowHeight = ResultGroupCell.cellHeight
+        groupListTableView.delegate = self
+        groupListTableView.dataSource = self
+        groupListTableView.register(ResultGroupCell.self, forCellReuseIdentifier: ResultGroupCell.reuseIdentifier)
+        groupListTableView.separatorStyle = .none
+        groupListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +110,14 @@ class ResultViewController: UIViewController {
         backButton.tintColor = .darkGray
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         self.view.addSubview(backButton)
+        
+        self.view.addSubview(lowerArea)
+        
+        listTitleLabel.text = "전체 결과"
+        listTitleLabel.font = .systemFont(ofSize: 16)
+        lowerArea.addSubview(listTitleLabel)
+        
+        lowerArea.addSubview(groupListTableView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,6 +134,33 @@ class ResultViewController: UIViewController {
         
         backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
             .size(40).marginLeft(10)
+        
+        lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
+        listTitleLabel.pin.top(30).horizontally().marginHorizontal(ResultGroupCell.cellMarginHorizontal).sizeToFit(.width)
+        groupListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+    }
+}
+
+// MARK: - TableView DataSource
+
+extension ResultViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ResultGroupCell.reuseIdentifier, for: indexPath) as? ResultGroupCell else {
+            return UITableViewCell()
+        }
+        return cell
+    }
+}
+
+// MARK: - TableView Delegate
+
+extension ResultViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return ResultGroupCell.cellHeight
     }
 }
 

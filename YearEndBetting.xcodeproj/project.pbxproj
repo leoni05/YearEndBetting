@@ -18,6 +18,7 @@
 		D0A469E62D0571C80058D553 /* RankingGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E52D0571C80058D553 /* RankingGroupCell.swift */; };
 		D0A469E82D057C5D0058D553 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E72D057C5D0058D553 /* NavigationController.swift */; };
 		D0A469EA2D0582110058D553 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E92D0582110058D553 /* ResultViewController.swift */; };
+		D0A469EC2D05A83B0058D553 /* ResultGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469EB2D05A83B0058D553 /* ResultGroupCell.swift */; };
 		D0C67B562CFC2324008C9BA7 /* AnimalKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */; };
 		D0C67B582CFC289C008C9BA7 /* AnimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B572CFC289C008C9BA7 /* AnimalView.swift */; };
 		D0C67B5A2CFC62BF008C9BA7 /* BettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */; };
@@ -43,6 +44,7 @@
 		D0A469E52D0571C80058D553 /* RankingGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingGroupCell.swift; sourceTree = "<group>"; };
 		D0A469E72D057C5D0058D553 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D0A469E92D0582110058D553 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		D0A469EB2D05A83B0058D553 /* ResultGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGroupCell.swift; sourceTree = "<group>"; };
 		D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKeyboardView.swift; sourceTree = "<group>"; };
 		D0C67B572CFC289C008C9BA7 /* AnimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalView.swift; sourceTree = "<group>"; };
 		D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BettingViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				D09F20892CFDD39B00A02938 /* RankingViewController.swift */,
 				D0A469E52D0571C80058D553 /* RankingGroupCell.swift */,
 				D0A469E92D0582110058D553 /* ResultViewController.swift */,
+				D0A469EB2D05A83B0058D553 /* ResultGroupCell.swift */,
 				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
 				D026C7B02CF6B17200023305 /* LaunchScreen.storyboard */,
 				D026C7B32CF6B17200023305 /* Info.plist */,
@@ -251,6 +254,7 @@
 				D0E813392CFAE6510047D2FE /* LoginViewController.swift in Sources */,
 				D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */,
 				D0C67B5C2CFC7748008C9BA7 /* AmountKeyboardView.swift in Sources */,
+				D0A469EC2D05A83B0058D553 /* ResultGroupCell.swift in Sources */,
 				D0A469E62D0571C80058D553 /* RankingGroupCell.swift in Sources */,
 				D0C67B5A2CFC62BF008C9BA7 /* BettingViewController.swift in Sources */,
 				D09F208A2CFDD39B00A02938 /* RankingViewController.swift in Sources */,
