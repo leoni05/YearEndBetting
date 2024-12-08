@@ -18,6 +18,9 @@ class RankingViewController: UIViewController {
     private var currentRankLabel = UILabel()
     private var groupNameLabel = UILabel()
     
+    private var leftLaurelView = UIImageView()
+    private var rightLaurelView = UIImageView()
+    
     
     // MARK: - Life Cycle
     
@@ -42,6 +45,16 @@ class RankingViewController: UIViewController {
         groupNameLabel.textColor = .systemGray
         groupNameLabel.sizeToFit()
         upperArea.addSubview(groupNameLabel)
+        
+        leftLaurelView.contentMode = .scaleAspectFit
+        leftLaurelView.tintColor = .systemGray3
+        leftLaurelView.image = UIImage(systemName: "laurel.leading")
+        upperArea.addSubview(leftLaurelView)
+        
+        rightLaurelView.contentMode = .scaleAspectFit
+        rightLaurelView.tintColor = .systemGray3
+        rightLaurelView.image = UIImage(systemName: "laurel.trailing")
+        upperArea.addSubview(rightLaurelView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +65,10 @@ class RankingViewController: UIViewController {
         rankDescLabel.pin.top(70).hCenter()
         currentRankLabel.pin.bottom(70).hCenter()
         groupNameLabel.pin.bottom(30).hCenter()
+        leftLaurelView.pin.before(of: currentRankLabel).vCenter(to: currentRankLabel.edge.vCenter)
+            .size(30).marginRight(5)
+        rightLaurelView.pin.after(of: currentRankLabel).vCenter(to: currentRankLabel.edge.vCenter)
+            .size(30).marginLeft(5)
     }
     
 }
