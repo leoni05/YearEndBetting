@@ -28,6 +28,11 @@ class BettingViewController: UIViewController {
     private var commaLabels = Array<UILabel>()
     private var digitLabels = Array<UILabel>()
     
+    private enum NeedAnimation {
+        static let none = 0
+        static let needInsertAnim = 1
+    }
+    
     private enum AskingStatus {
         case askingTarget
         case askingAmount
@@ -195,6 +200,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         let pos = amountLabels.count - 1
         if pos >= 0 {
             let newLabel = popDigitLabel(digit: string)
+            newLabel.tag = NeedAnimation.needInsertAnim
             amountLabels.insert(newLabel, at: pos)
         }
         setCommaLabels()
@@ -264,11 +270,27 @@ private extension BettingViewController {
     func layoutAmountLabels() {
         if askingStatus == .typingAmount {
             for i in amountLabels.indices {
-                if i == 0 { amountLabels[i].pin.left().top() }
-                else { amountLabels[i].pin.after(of: amountLabels[i-1]).top() }
+                if amountLabels[i].tag == NeedAnimation.needInsertAnim {
+                    amountLabels[i].tag = NeedAnimation.none
+                    if i == 0 { amountLabels[i].pin.left().top() }
+                    else { amountLabels[i].pin.after(of: amountLabels[i-1]).top() }
+                    amountLabels[i].pin.top(-20)
+                    amountLabels[i].alpha = 0.0
+                    UIView.animate(withDuration: 0.3) {
+                        self.amountLabels[i].pin.top(0)
+                        self.amountLabels[i].alpha = 1.0
+                    }
+                }
+                else {
+                    let duration = (amountLabels[i].text == "," ? 0.0 : 0.1)
+                    UIView.animate(withDuration: duration) {
+                        if i == 0 { self.amountLabels[i].pin.left().top() }
+                        else { self.amountLabels[i].pin.after(of: self.amountLabels[i-1]).top() }
+                    }
+                }
             }
-            amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(45).marginHorizontal(20)
+            amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).left(self.view.pin.safeArea)
+                .marginTop(45).marginLeft(20)
         }
     }
     
@@ -304,6 +326,8 @@ private extension BettingViewController {
     }
     
     func pushDigitLabel(digitLabel: UILabel) {
+        digitLabel.tag = NeedAnimation.none
+        digitLabel.layer.removeAllAnimations()
         digitLabel.isHidden = true
         digitLabel.pin.left().right().size(0)
         digitLabels.append(digitLabel)
