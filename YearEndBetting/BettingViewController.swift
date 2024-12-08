@@ -281,12 +281,15 @@ private extension BettingViewController {
                         self.amountLabels[i].alpha = 1.0
                     }
                 }
-                else {
-                    let duration = (amountLabels[i].text == "," ? 0.0 : 0.1)
-                    UIView.animate(withDuration: duration) {
+                else if amountLabels[i].text != "," {
+                    UIView.animate(withDuration: 0.1) {
                         if i == 0 { self.amountLabels[i].pin.left().top() }
                         else { self.amountLabels[i].pin.after(of: self.amountLabels[i-1]).top() }
                     }
+                }
+                else {
+                    if i == 0 { self.amountLabels[i].pin.left().top() }
+                    else { self.amountLabels[i].pin.after(of: self.amountLabels[i-1]).top() }
                 }
             }
             amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).left(self.view.pin.safeArea)
