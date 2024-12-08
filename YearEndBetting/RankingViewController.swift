@@ -21,8 +21,26 @@ class RankingViewController: UIViewController {
     private var leftLaurelView = UIImageView()
     private var rightLaurelView = UIImageView()
     
+    private var lowerArea = UIView()
+    private var listTitleLabel = UILabel()
+    private var groupListTableView = UITableView()
     
     // MARK: - Life Cycle
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        groupListTableView.estimatedRowHeight = RankingGroupCell.cellHeight
+        groupListTableView.delegate = self
+        groupListTableView.dataSource = self
+        groupListTableView.register(RankingGroupCell.self, forCellReuseIdentifier: RankingGroupCell.reuseIdentifier)
+        groupListTableView.separatorStyle = .none
+        groupListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +73,14 @@ class RankingViewController: UIViewController {
         rightLaurelView.tintColor = .systemGray3
         rightLaurelView.image = UIImage(systemName: "laurel.trailing")
         upperArea.addSubview(rightLaurelView)
+        
+        self.view.addSubview(lowerArea)
+        
+        listTitleLabel.text = "전체 순위"
+        listTitleLabel.font = .systemFont(ofSize: 16)
+        lowerArea.addSubview(listTitleLabel)
+        
+        lowerArea.addSubview(groupListTableView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,6 +95,34 @@ class RankingViewController: UIViewController {
             .size(30).marginRight(5)
         rightLaurelView.pin.after(of: currentRankLabel).vCenter(to: currentRankLabel.edge.vCenter)
             .size(30).marginLeft(5)
+        
+        lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
+        listTitleLabel.pin.top(30).horizontally().marginHorizontal(RankingGroupCell.cellMarginHorizontal).sizeToFit(.width)
+        groupListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
     }
     
 }
+
+// MARK: - TableView DataSource
+
+extension RankingViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RankingGroupCell.reuseIdentifier, for: indexPath) as? RankingGroupCell else {
+            return UITableViewCell()
+        }
+        return cell
+    }
+}
+
+// MARK: - TableView Delegate
+
+extension RankingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return RankingGroupCell.cellHeight
+    }
+}
+
