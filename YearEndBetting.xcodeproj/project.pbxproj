@@ -96,28 +96,92 @@
 		D026C7A42CF6B17000023305 /* YearEndBetting */ = {
 			isa = PBXGroup;
 			children = (
-				D026C7A72CF6B17000023305 /* SceneDelegate.swift */,
-				D026C7A52CF6B17000023305 /* AppDelegate.swift */,
-				D0A469E72D057C5D0058D553 /* NavigationController.swift */,
-				D0E813382CFAE6510047D2FE /* LoginViewController.swift */,
-				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
-				D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */,
-				D0C67B572CFC289C008C9BA7 /* AnimalView.swift */,
-				D026C7A92CF6B17000023305 /* MainViewController.swift */,
-				D0E813362CFAB3A60047D2FE /* GameItemCell.swift */,
-				D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */,
-				D0C67B5B2CFC7748008C9BA7 /* AmountKeyboardView.swift */,
-				D0C67B5D2CFC775F008C9BA7 /* AmountView.swift */,
-				D09F20892CFDD39B00A02938 /* RankingViewController.swift */,
-				D0A469E52D0571C80058D553 /* RankingGroupCell.swift */,
-				D0A469E92D0582110058D553 /* ResultViewController.swift */,
-				D0A469EB2D05A83B0058D553 /* ResultGroupCell.swift */,
-				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
-				D026C7B02CF6B17200023305 /* LaunchScreen.storyboard */,
+				D0915F462D1439FC0011D521 /* Application */,
+				D0915F472D143A1B0011D521 /* Extensions */,
+				D0915F482D143A530011D521 /* Login */,
+				D0915F492D143A7A0011D521 /* Main */,
+				D0915F4A2D143B1F0011D521 /* Betting */,
+				D0915F4B2D143B9A0011D521 /* Ranking */,
+				D0915F4C2D143BBF0011D521 /* Result */,
+				D0915F4D2D143BFF0011D521 /* Resources */,
 				D026C7B32CF6B17200023305 /* Info.plist */,
 				D026C7A32CF6B17000023305 /* Products */,
 			);
 			path = YearEndBetting;
+			sourceTree = "<group>";
+		};
+		D0915F462D1439FC0011D521 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D026C7A72CF6B17000023305 /* SceneDelegate.swift */,
+				D026C7A52CF6B17000023305 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D0915F472D143A1B0011D521 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0A469E72D057C5D0058D553 /* NavigationController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D0915F482D143A530011D521 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D0E813382CFAE6510047D2FE /* LoginViewController.swift */,
+				D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */,
+				D0C67B572CFC289C008C9BA7 /* AnimalView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D0915F492D143A7A0011D521 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D026C7A92CF6B17000023305 /* MainViewController.swift */,
+				D0E813362CFAB3A60047D2FE /* GameItemCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D0915F4A2D143B1F0011D521 /* Betting */ = {
+			isa = PBXGroup;
+			children = (
+				D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */,
+				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
+				D0C67B5B2CFC7748008C9BA7 /* AmountKeyboardView.swift */,
+				D0C67B5D2CFC775F008C9BA7 /* AmountView.swift */,
+			);
+			path = Betting;
+			sourceTree = "<group>";
+		};
+		D0915F4B2D143B9A0011D521 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				D09F20892CFDD39B00A02938 /* RankingViewController.swift */,
+				D0A469E52D0571C80058D553 /* RankingGroupCell.swift */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		D0915F4C2D143BBF0011D521 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				D0A469E92D0582110058D553 /* ResultViewController.swift */,
+				D0A469EB2D05A83B0058D553 /* ResultGroupCell.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		D0915F4D2D143BFF0011D521 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D026C7AE2CF6B17200023305 /* Assets.xcassets */,
+				D026C7B02CF6B17200023305 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E8D0EA8ED41D14C927467FEF /* Frameworks */ = {
