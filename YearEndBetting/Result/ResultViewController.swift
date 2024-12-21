@@ -26,6 +26,8 @@ class ResultViewController: UIViewController {
     private var lowerArea = UIView()
     private var listTitleLabel = UILabel()
     private var groupListTableView = UITableView()
+    private var tableViewGradientView = UIView()
+    private var tableViewGradientLayer = CAGradientLayer()
     
     // MARK: - Life Cycle
     
@@ -118,6 +120,17 @@ class ResultViewController: UIViewController {
         lowerArea.addSubview(listTitleLabel)
         
         lowerArea.addSubview(groupListTableView)
+        
+        let colors: [CGColor] = [
+           .init(red: 1, green: 1, blue: 1, alpha: 1),
+           .init(red: 1, green: 1, blue: 1, alpha: 0)
+        ]
+        tableViewGradientLayer.colors = colors
+        tableViewGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        tableViewGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        lowerArea.addSubview(tableViewGradientView)
+        tableViewGradientView.layer.addSublayer(tableViewGradientLayer)
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -138,6 +151,8 @@ class ResultViewController: UIViewController {
         lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(ResultGroupCell.cellMarginHorizontal).sizeToFit(.width)
         groupListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(RankingGroupCell.cellMarginVertical)
+        tableViewGradientLayer.pin.all()
     }
 }
 
