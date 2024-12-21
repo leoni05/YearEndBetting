@@ -30,20 +30,39 @@ class LoginViewController: UIViewController {
     private var askingStatus: AskingStatus? {
         didSet {
             switch askingStatus {
+                
             case .askingName:
                 askingNameLabel.isHidden = false
                 groupListTableView.isHidden = false
                 tableViewGradientView.isHidden = false
+                UIView.animate(withDuration: 0.3) {
+                    self.askingNameLabel.alpha = 1.0
+                    self.groupListTableView.alpha = 1.0
+                    self.tableViewGradientView.alpha = 1.0
+                }
                 askingFavoriteLabel.isHidden = true
                 animalKeyboardView.isHidden = true
                 backButton.isHidden = true
+                askingFavoriteLabel.alpha = 0.0
+                animalKeyboardView.alpha = 0.0
+                backButton.alpha = 0.0
+                
             case .askingFavoriteAnimals:
                 askingNameLabel.isHidden = true
                 groupListTableView.isHidden = true
                 tableViewGradientView.isHidden = true
+                askingNameLabel.alpha = 0.0
+                groupListTableView.alpha = 0.0
+                tableViewGradientView.alpha = 0.0
                 askingFavoriteLabel.isHidden = false
                 animalKeyboardView.isHidden = false
                 backButton.isHidden = false
+                UIView.animate(withDuration: 0.3) {
+                    self.askingFavoriteLabel.alpha = 1.0
+                    self.animalKeyboardView.alpha = 1.0
+                    self.backButton.alpha = 1.0
+                }
+                
             default:
                 break
             }
@@ -202,10 +221,12 @@ private extension LoginViewController {
     }
     
     func goBackToAskingName() {
-        groupListTableView.setContentOffset(CGPointZero, animated: false)
-        askingStatus = .askingName
-        layout()
-        animalKeyboardView.resetKeyboard()
+        if askingStatus == .askingFavoriteAnimals {
+            groupListTableView.setContentOffset(CGPointZero, animated: false)
+            askingStatus = .askingName
+            layout()
+            animalKeyboardView.resetKeyboard()
+        }
     }
     
     @objc func backButtonPressed() {
