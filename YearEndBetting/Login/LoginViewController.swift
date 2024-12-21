@@ -20,6 +20,9 @@ class LoginViewController: UIViewController {
     private var animalKeyboardView = AnimalKeyboardView()
     private var backButton = UIButton()
     
+    private var tableViewGradientView = UIView()
+    private var tableViewGradientLayer = CAGradientLayer()
+    
     private enum AskingStatus {
         case askingName
         case askingFavoriteAnimals
@@ -30,12 +33,14 @@ class LoginViewController: UIViewController {
             case .askingName:
                 askingNameLabel.isHidden = false
                 groupListTableView.isHidden = false
+                tableViewGradientView.isHidden = false
                 askingFavoriteLabel.isHidden = true
                 animalKeyboardView.isHidden = true
                 backButton.isHidden = true
             case .askingFavoriteAnimals:
                 askingNameLabel.isHidden = true
                 groupListTableView.isHidden = true
+                tableViewGradientView.isHidden = true
                 askingFavoriteLabel.isHidden = false
                 animalKeyboardView.isHidden = false
                 backButton.isHidden = false
@@ -91,6 +96,16 @@ class LoginViewController: UIViewController {
         
         self.view.addSubview(groupListTableView)
         
+        let colors: [CGColor] = [
+           .init(red: 1, green: 1, blue: 1, alpha: 1),
+           .init(red: 1, green: 1, blue: 1, alpha: 0)
+        ]
+        tableViewGradientLayer.colors = colors
+        tableViewGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        tableViewGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        self.view.addSubview(tableViewGradientView)
+        tableViewGradientView.layer.addSublayer(tableViewGradientLayer)
+
         self.view.addSubview(animalKeyboardView)
         
         backButton.setImage(UIImage(systemName: "chevron.left",
@@ -173,6 +188,8 @@ private extension LoginViewController {
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
             groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
                 .marginTop(110)
+            tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(GroupItemCell.cellMarginVertical)
+            tableViewGradientLayer.pin.all()
         }
         if askingStatus == .askingFavoriteAnimals {
             askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
