@@ -45,9 +45,15 @@ class AmountKeyboardView: UIView {
         for idx in amountViews.indices {
             amountContainerView.addSubview(amountViews[idx])
             
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(amountViewTouched(_:)))
-            gesture.numberOfTapsRequired = 1
-            amountViews[idx].addGestureRecognizer(gesture)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(amountViewTouched(_:)))
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.delegate = self
+            amountViews[idx].addGestureRecognizer(tapGesture)
+            
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(amountViewLongPressed(_:)))
+            longPressGesture.minimumPressDuration = 0
+            longPressGesture.delegate = self
+            amountViews[idx].addGestureRecognizer(longPressGesture)
         }
         self.addSubview(amountContainerView)
     }
@@ -79,6 +85,14 @@ class AmountKeyboardView: UIView {
     }
 }
 
+// MARK: - UIGestureRecognizer Delegate
+
+extension AmountKeyboardView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension AmountKeyboardView {
@@ -94,6 +108,20 @@ private extension AmountKeyboardView {
             if view.buttonRole == .pop {
                 self.delegate?.eraseDigitTouched()
             }
+        }
+    }
+    
+    @objc func amountViewLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            UIView.animate(withDuration: 0.1) {
+                gesture.view?.backgroundColor = .systemGray6
+                gesture.view?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
+            }
+            return
+        }
+        UIView.animate(withDuration: 0.1) {
+            gesture.view?.backgroundColor = .clear
+            gesture.view?.transform = CGAffineTransformMakeScale(1.0, 1.0)
         }
     }
 }

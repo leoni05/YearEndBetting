@@ -27,6 +27,8 @@ class AmountView: UIView {
     
     init(buttonRole: ButtonRole, valueForPush: String? = nil) {
         super.init(frame: .zero)
+        self.layer.cornerRadius = 10.0
+        self.clipsToBounds = true
         self.buttonRole = buttonRole
         self.valueForPush = valueForPush
         
