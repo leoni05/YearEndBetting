@@ -49,9 +49,15 @@ class GroupItemCell: UITableViewCell {
         subTitleLabel.textColor = .darkGray
         containerView.addSubview(subTitleLabel)
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
-        gesture.numberOfTapsRequired = 1
-        contentView.addGestureRecognizer(gesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.delegate = self
+        contentView.addGestureRecognizer(tapGesture)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(cellContentsLongPressed(_:)))
+        longPressGesture.minimumPressDuration = 0
+        longPressGesture.delegate = self
+        contentView.addGestureRecognizer(longPressGesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,6 +76,14 @@ class GroupItemCell: UITableViewCell {
     }
 }
 
+// MARK: - UIGestureRecognizer Delegate
+
+extension GroupItemCell {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension GroupItemCell {
@@ -78,5 +92,20 @@ private extension GroupItemCell {
             delegate?.cellContentsTouched(cellIndex: idx)
         }
     }
+    
+    @objc func cellContentsLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            UIView.animate(withDuration: 0.2) {
+                self.containerView.backgroundColor = .systemGray5
+                self.containerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
+            }
+            return
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.containerView.backgroundColor = .systemGray6
+            self.containerView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        }
+    }
+
 }
 
