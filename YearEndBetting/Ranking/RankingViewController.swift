@@ -25,6 +25,8 @@ class RankingViewController: UIViewController {
     private var listTitleLabel = UILabel()
     private var groupListTableView = UITableView()
     
+    private var backButton = UIButton()
+    
     // MARK: - Life Cycle
     
     init() {
@@ -81,6 +83,13 @@ class RankingViewController: UIViewController {
         lowerArea.addSubview(listTitleLabel)
         
         lowerArea.addSubview(groupListTableView)
+        
+        backButton.setImage(UIImage(systemName: "chevron.left",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
+                              for: .normal)
+        backButton.tintColor = .darkGray
+        backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        self.view.addSubview(backButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,6 +108,9 @@ class RankingViewController: UIViewController {
         lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(RankingGroupCell.cellMarginHorizontal).sizeToFit(.width)
         groupListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        
+        backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+            .size(40).marginLeft(10)
     }
     
 }
@@ -123,6 +135,10 @@ extension RankingViewController: UITableViewDataSource {
 extension RankingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return RankingGroupCell.cellHeight
+    }
+    
+    @objc func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
