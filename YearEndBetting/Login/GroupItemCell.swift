@@ -95,13 +95,13 @@ private extension GroupItemCell {
     
     @objc func cellContentsLongPressed(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.1) {
                 self.containerView.backgroundColor = .systemGray5
                 self.containerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
             }
             return
         }
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.1) {
             self.containerView.backgroundColor = .systemGray6
             self.containerView.transform = CGAffineTransformMakeScale(1.0, 1.0)
         }
