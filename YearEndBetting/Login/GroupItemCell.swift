@@ -24,7 +24,8 @@ class GroupItemCell: UITableViewCell {
     
     var cellIndex: Int?
     weak var delegate: GroupItemCellDelegate?
-    
+
+    private var containerView = UIView()
     private var titleLabel = UILabel()
     private var subTitleLabel = UILabel()
     
@@ -34,18 +35,19 @@ class GroupItemCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         
-        contentView.backgroundColor = .systemGray6
-        contentView.layer.cornerRadius = 10.0
-        contentView.clipsToBounds = true
+        containerView.backgroundColor = .systemGray6
+        containerView.layer.cornerRadius = 10.0
+        containerView.clipsToBounds = true
+        contentView.addSubview(containerView)
         
         titleLabel.text = "애교가 넘치는 사랑의 하츄핑"
         titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        contentView.addSubview(titleLabel)
+        containerView.addSubview(titleLabel)
         
         subTitleLabel.text = "1조"
         subTitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         subTitleLabel.textColor = .darkGray
-        contentView.addSubview(subTitleLabel)
+        containerView.addSubview(subTitleLabel)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
         gesture.numberOfTapsRequired = 1
@@ -61,6 +63,7 @@ class GroupItemCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(
             by: UIEdgeInsets(top: GroupItemCell.cellMarginVertical, left: GroupItemCell.cellMarginHorizontal,
                              bottom: GroupItemCell.cellMarginVertical, right: GroupItemCell.cellMarginHorizontal))
+        containerView.pin.all()
         
         titleLabel.pin.horizontally(15).top(12).sizeToFit(.width)
         subTitleLabel.pin.horizontally(15).bottom(12).sizeToFit(.width)
