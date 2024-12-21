@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
     private var listTitleLabel = UILabel()
     private var gameListTableView = UITableView()
     private var refreshControl = UIRefreshControl()
+    private var tableViewGradientView = UIView()
+    private var tableViewGradientLayer = CAGradientLayer()
     
     private var rankingButton = UIButton()
     private var logoutButton = UIButton()
@@ -83,6 +85,16 @@ class MainViewController: UIViewController {
         
         lowerArea.addSubview(gameListTableView)
         
+        let colors: [CGColor] = [
+           .init(red: 1, green: 1, blue: 1, alpha: 1),
+           .init(red: 1, green: 1, blue: 1, alpha: 0)
+        ]
+        tableViewGradientLayer.colors = colors
+        tableViewGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        tableViewGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        lowerArea.addSubview(tableViewGradientView)
+        tableViewGradientView.layer.addSublayer(tableViewGradientLayer)
+        
         rankingButton.setImage(UIImage(systemName: "crown",
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)),
                               for: .normal)
@@ -121,6 +133,8 @@ class MainViewController: UIViewController {
         
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)
         gameListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        tableViewGradientView.pin.top(to: gameListTableView.edge.top).horizontally().height(GameItemCell.cellMarginVertical)
+        tableViewGradientLayer.pin.all()
         
         rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
             .size(40).marginRight(16)
