@@ -19,15 +19,15 @@ class AnimalKeyboardView: UIView {
     
     weak var delegate: AnimalKeyboardViewDelegate?
     private var animalViews: Array<AnimalView> = [
-        AnimalView(koreanString: "산토끼", imageName: "hare"),
-        AnimalView(koreanString: "거북이", imageName: "tortoise"),
-        AnimalView(koreanString: "강아지", imageName: "dog"),
-        AnimalView(koreanString: "고양이", imageName: "cat"),
-        AnimalView(koreanString: "도마뱀", imageName: "lizard"),
-        AnimalView(koreanString: "새", imageName: "bird"),
-        AnimalView(koreanString: "무당벌레", imageName: "ladybug"),
-        AnimalView(koreanString: "물고기", imageName: "fish"),
-        AnimalView(koreanString: "개미", imageName: "ant")
+        AnimalView(koreanString: "산토끼", imageName: "hare.fill"),
+        AnimalView(koreanString: "거북이", imageName: "tortoise.fill"),
+        AnimalView(koreanString: "강아지", imageName: "dog.fill"),
+        AnimalView(koreanString: "고양이", imageName: "cat.fill"),
+        AnimalView(koreanString: "도마뱀", imageName: "lizard.fill"),
+        AnimalView(koreanString: "새", imageName: "bird.fill"),
+        AnimalView(koreanString: "무당벌레", imageName: "ladybug.fill"),
+        AnimalView(koreanString: "물고기", imageName: "fish.fill"),
+        AnimalView(koreanString: "개미", imageName: "ant.fill")
     ]
     private var animalContainerView = UIView()
     private var selectedAnimals: Int = 0

@@ -20,11 +20,7 @@ class AnimalView: UIView {
     
     var isSelected = false {
         didSet {
-            if let imageName = imageName {
-                let imageNameSuffix = isSelected ? ".fill" : ""
-                imageView.image = UIImage(systemName: imageName + imageNameSuffix)
-                imageView.tintColor = isSelected ? UIColor(named: "DarkPink") : .systemGray3
-            }
+            imageView.tintColor = isSelected ? UIColor(named: "DarkPink") : .systemGray4
         }
     }
     
@@ -38,7 +34,7 @@ class AnimalView: UIView {
         self.clipsToBounds = true
         
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .systemGray3
+        imageView.tintColor = .systemGray4
         imageView.image = UIImage(systemName: imageName)
         imageViewArea.addSubview(imageView)
         
