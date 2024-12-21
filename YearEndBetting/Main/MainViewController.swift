@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     
     private var listTitleLabel = UILabel()
     private var gameListTableView = UITableView()
+    private var refreshControl = UIRefreshControl()
     
     private var rankingButton = UIButton()
     private var logoutButton = UIButton()
@@ -37,6 +38,10 @@ class MainViewController: UIViewController {
         gameListTableView.register(GameItemCell.self, forCellReuseIdentifier: GameItemCell.reuseIdentifier)
         gameListTableView.separatorStyle = .none
         gameListTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 6.0, right: 0)
+        
+        refreshControl.addTarget(self, action: #selector(refreshTableView(refreshControl:)), for: .valueChanged)
+        refreshControl.endRefreshing()
+        gameListTableView.refreshControl = refreshControl
         
         DispatchQueue.main.async {
             let loginVC = LoginViewController()
@@ -200,5 +205,12 @@ private extension MainViewController {
     
     @objc func githubButtonPressed() {
         
+    }
+    
+    @objc func refreshTableView(refreshControl: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            self.gameListTableView.reloadData()
+            refreshControl.endRefreshing()
+        }
     }
 }
