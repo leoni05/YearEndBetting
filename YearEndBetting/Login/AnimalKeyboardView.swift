@@ -44,9 +44,16 @@ class AnimalKeyboardView: UIView {
             animalViews[idx].tag = (1 << idx)
             animalContainerView.addSubview(animalViews[idx])
             
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(animalViewTouched(_:)))
-            gesture.numberOfTapsRequired = 1
-            animalViews[idx].addGestureRecognizer(gesture)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(animalViewTouched(_:)))
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.delegate = self
+            animalViews[idx].addGestureRecognizer(tapGesture)
+            
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(cellContentsLongPressed(_:)))
+            longPressGesture.minimumPressDuration = 0
+            longPressGesture.delegate = self
+            animalViews[idx].addGestureRecognizer(longPressGesture)
+
         }
         self.addSubview(animalContainerView)
     }
@@ -78,6 +85,14 @@ class AnimalKeyboardView: UIView {
     }
 }
 
+// MARK: - UIGestureRecognizer Delegate
+
+extension AnimalKeyboardView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
 // MARK: - Extensions
 
 extension AnimalKeyboardView {
@@ -98,6 +113,20 @@ private extension AnimalKeyboardView {
             if view.isSelected { selectedAnimals |= view.tag }
             else { selectedAnimals &= ~view.tag }
             delegate?.selectedAnimalChanged(selectedAnimals: selectedAnimals)
+        }
+    }
+    
+    @objc func cellContentsLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            UIView.animate(withDuration: 0.2) {
+                gesture.view?.backgroundColor = .systemGray5
+                gesture.view?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
+            }
+            return
+        }
+        UIView.animate(withDuration: 0.2) {
+            gesture.view?.backgroundColor = .systemGray6
+            gesture.view?.transform = CGAffineTransformMakeScale(1.0, 1.0)
         }
     }
 }
