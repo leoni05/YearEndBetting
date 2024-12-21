@@ -131,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E813382CFAE6510047D2FE /* LoginViewController.swift */,
+				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
 				D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */,
 				D0C67B572CFC289C008C9BA7 /* AnimalView.swift */,
 			);
@@ -150,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				D0C67B592CFC62BF008C9BA7 /* BettingViewController.swift */,
-				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
 				D0C67B5B2CFC7748008C9BA7 /* AmountKeyboardView.swift */,
 				D0C67B5D2CFC775F008C9BA7 /* AmountView.swift */,
 			);
