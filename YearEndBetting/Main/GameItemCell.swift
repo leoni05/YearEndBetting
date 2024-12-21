@@ -44,6 +44,7 @@ class GameItemCell: UITableViewCell {
         }
     }
     
+    private var containerView = UIView()
     private var rightButtonLabel = UILabel()
     private var titleLabel = UILabel()
     private var statusLabel = UILabel()
@@ -54,9 +55,10 @@ class GameItemCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         
-        contentView.backgroundColor = .systemGray6
-        contentView.layer.cornerRadius = 10.0
-        contentView.clipsToBounds = true
+        containerView.backgroundColor = .systemGray6
+        containerView.layer.cornerRadius = 10.0
+        containerView.clipsToBounds = true
+        contentView.addSubview(containerView)
         
         rightButtonLabel.backgroundColor = .systemGray5
         rightButtonLabel.textAlignment = .center
@@ -65,11 +67,11 @@ class GameItemCell: UITableViewCell {
         rightButtonLabel.textColor = .darkGray
         rightButtonLabel.layer.cornerRadius = 5.0
         rightButtonLabel.clipsToBounds = true
-        contentView.addSubview(rightButtonLabel)
+        containerView.addSubview(rightButtonLabel)
         
         titleLabel.text = "Round 1. 미스터리 박스"
         titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        contentView.addSubview(titleLabel)
+        containerView.addSubview(titleLabel)
         
         statusLabel.font = .systemFont(ofSize: 14, weight: .medium)
         statusLabel.textColor = .darkGray
@@ -79,7 +81,7 @@ class GameItemCell: UITableViewCell {
         let range = (statusString as NSString).range(of: changeOfAMC)
         attrString.addAttribute(.foregroundColor, value: UIColor.systemRed as Any, range: range)
         statusLabel.attributedText = attrString
-        contentView.addSubview(statusLabel)
+        containerView.addSubview(statusLabel)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
         gesture.numberOfTapsRequired = 1
@@ -95,6 +97,7 @@ class GameItemCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(
             by: UIEdgeInsets(top: GameItemCell.cellMarginVertical, left: GameItemCell.cellMarginHorizontal,
                              bottom: GameItemCell.cellMarginVertical, right: GameItemCell.cellMarginHorizontal))
+        containerView.pin.all()
         
         rightButtonLabel.pin.right(15).vCenter().width(50).height(30)
         titleLabel.pin.before(of: rightButtonLabel).left(15).top(12).marginRight(5).sizeToFit(.width)
