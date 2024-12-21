@@ -24,6 +24,8 @@ class RankingViewController: UIViewController {
     private var lowerArea = UIView()
     private var listTitleLabel = UILabel()
     private var groupListTableView = UITableView()
+    private var tableViewGradientView = UIView()
+    private var tableViewGradientLayer = CAGradientLayer()
     
     private var backButton = UIButton()
     
@@ -84,6 +86,16 @@ class RankingViewController: UIViewController {
         
         lowerArea.addSubview(groupListTableView)
         
+        let colors: [CGColor] = [
+           .init(red: 1, green: 1, blue: 1, alpha: 1),
+           .init(red: 1, green: 1, blue: 1, alpha: 0)
+        ]
+        tableViewGradientLayer.colors = colors
+        tableViewGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        tableViewGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        lowerArea.addSubview(tableViewGradientView)
+        tableViewGradientView.layer.addSublayer(tableViewGradientLayer)
+        
         backButton.setImage(UIImage(systemName: "chevron.left",
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
                               for: .normal)
@@ -108,6 +120,8 @@ class RankingViewController: UIViewController {
         lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(RankingGroupCell.cellMarginHorizontal).sizeToFit(.width)
         groupListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(RankingGroupCell.cellMarginVertical)
+        tableViewGradientLayer.pin.all()
         
         backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
             .size(40).marginLeft(10)
