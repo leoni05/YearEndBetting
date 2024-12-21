@@ -83,9 +83,15 @@ class GameItemCell: UITableViewCell {
         statusLabel.attributedText = attrString
         containerView.addSubview(statusLabel)
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
-        gesture.numberOfTapsRequired = 1
-        contentView.addGestureRecognizer(gesture)
+        let tagGesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
+        tagGesture.numberOfTapsRequired = 1
+        tagGesture.delegate = self
+        contentView.addGestureRecognizer(tagGesture)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(cellContentsLongPressed(_:)))
+        longPressGesture.minimumPressDuration = 0
+        longPressGesture.delegate = self
+        contentView.addGestureRecognizer(longPressGesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -105,12 +111,34 @@ class GameItemCell: UITableViewCell {
     }
 }
 
+// MARK: - UIGestureRecognizer Delegate
+
+extension GameItemCell {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension GameItemCell {
     @objc func cellContentsTouched(_ sender: UITapGestureRecognizer) {
         if let view = sender.view {
             self.delegate?.cellContentsTouched(cellIndex: view.tag, gameStatus: gameStatus)
+        }
+    }
+    
+    @objc func cellContentsLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            UIView.animate(withDuration: 0.2) {
+                self.containerView.backgroundColor = .systemGray5
+                self.containerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
+            }
+            return
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.containerView.backgroundColor = .systemGray6
+            self.containerView.transform = CGAffineTransformMakeScale(1.0, 1.0)
         }
     }
 }
