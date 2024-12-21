@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
         
         lowerArea.addSubview(gameListTableView)
         
-        rankingButton.setImage(UIImage(systemName: "trophy",
+        rankingButton.setImage(UIImage(systemName: "crown",
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)),
                               for: .normal)
         rankingButton.tintColor = .systemGray2
