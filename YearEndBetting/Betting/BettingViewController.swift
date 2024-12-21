@@ -28,6 +28,9 @@ class BettingViewController: UIViewController {
     private var commaLabels = Array<UILabel>()
     private var digitLabels = Array<UILabel>()
     
+    private var tableViewGradientView = UIView()
+    private var tableViewGradientLayer = CAGradientLayer()
+    
     private enum NeedAnimation {
         static let none = 0
         static let needInsertAnim = 1
@@ -44,6 +47,7 @@ class BettingViewController: UIViewController {
             case .askingTarget:
                 askingSelectionLabel.isHidden = false
                 groupListTableView.isHidden = false
+                tableViewGradientView.isHidden = false
                 selectedTargetLabel.isHidden = true
                 amountPlaceHolder.isHidden = true
                 amountKeyboardView.isHidden = true
@@ -52,6 +56,7 @@ class BettingViewController: UIViewController {
             case .askingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
+                tableViewGradientView.isHidden = true
                 selectedTargetLabel.isHidden = false
                 amountPlaceHolder.isHidden = false
                 amountKeyboardView.isHidden = false
@@ -60,6 +65,7 @@ class BettingViewController: UIViewController {
             case .typingAmount:
                 askingSelectionLabel.isHidden = true
                 groupListTableView.isHidden = true
+                tableViewGradientView.isHidden = true
                 selectedTargetLabel.isHidden = false
                 amountPlaceHolder.isHidden = true
                 amountKeyboardView.isHidden = false
@@ -106,6 +112,16 @@ class BettingViewController: UIViewController {
         self.view.addSubview(askingSelectionLabel)
         
         self.view.addSubview(groupListTableView)
+        
+        let colors: [CGColor] = [
+           .init(red: 1, green: 1, blue: 1, alpha: 1),
+           .init(red: 1, green: 1, blue: 1, alpha: 0)
+        ]
+        tableViewGradientLayer.colors = colors
+        tableViewGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        tableViewGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        self.view.addSubview(tableViewGradientView)
+        tableViewGradientView.layer.addSublayer(tableViewGradientLayer)
         
         selectedTargetLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         selectedTargetLabel.numberOfLines = 0
@@ -248,6 +264,8 @@ private extension BettingViewController {
                 .marginTop(15).marginHorizontal(20).sizeToFit(.width)
             groupListTableView.pin.below(of: askingSelectionLabel).horizontally(self.view.pin.safeArea).bottom()
                 .marginTop(110)
+            tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(GroupItemCell.cellMarginVertical)
+            tableViewGradientLayer.pin.all()
         }
         if askingStatus == .askingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
