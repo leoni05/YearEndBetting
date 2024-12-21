@@ -83,10 +83,10 @@ class GameItemCell: UITableViewCell {
         statusLabel.attributedText = attrString
         containerView.addSubview(statusLabel)
         
-        let tagGesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
-        tagGesture.numberOfTapsRequired = 1
-        tagGesture.delegate = self
-        contentView.addGestureRecognizer(tagGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellContentsTouched(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.delegate = self
+        contentView.addGestureRecognizer(tapGesture)
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(cellContentsLongPressed(_:)))
         longPressGesture.minimumPressDuration = 0
