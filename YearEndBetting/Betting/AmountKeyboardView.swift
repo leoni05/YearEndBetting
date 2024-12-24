@@ -113,13 +113,13 @@ private extension AmountKeyboardView {
     
     @objc func amountViewLongPressed(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction) {
                 gesture.view?.backgroundColor = .systemGray6
                 gesture.view?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
             }
             return
         }
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction) {
             gesture.view?.backgroundColor = .clear
             gesture.view?.transform = CGAffineTransformMakeScale(1.0, 1.0)
         }
