@@ -14,6 +14,7 @@
 		D026C7AA2CF6B17000023305 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C7A92CF6B17000023305 /* MainViewController.swift */; };
 		D026C7AF2CF6B17200023305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D026C7AE2CF6B17200023305 /* Assets.xcassets */; };
 		D026C7B22CF6B17200023305 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D026C7B12CF6B17200023305 /* Base */; };
+		D030007A2D1D7103005F4829 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03000792D1D7103005F4829 /* WelcomeViewController.swift */; };
 		D09F208A2CFDD39B00A02938 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09F20892CFDD39B00A02938 /* RankingViewController.swift */; };
 		D0A469E62D0571C80058D553 /* RankingGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E52D0571C80058D553 /* RankingGroupCell.swift */; };
 		D0A469E82D057C5D0058D553 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E72D057C5D0058D553 /* NavigationController.swift */; };
@@ -40,6 +41,7 @@
 		D026C7AE2CF6B17200023305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D026C7B12CF6B17200023305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D026C7B32CF6B17200023305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D03000792D1D7103005F4829 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D09F20892CFDD39B00A02938 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		D0A469E52D0571C80058D553 /* RankingGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingGroupCell.swift; sourceTree = "<group>"; };
 		D0A469E72D057C5D0058D553 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				D00799DB2CFB68DC009AFBFB /* GroupItemCell.swift */,
 				D0C67B552CFC2324008C9BA7 /* AnimalKeyboardView.swift */,
 				D0C67B572CFC289C008C9BA7 /* AnimalView.swift */,
+				D03000792D1D7103005F4829 /* WelcomeViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				D0C67B562CFC2324008C9BA7 /* AnimalKeyboardView.swift in Sources */,
 				D0E813372CFAB3A60047D2FE /* GameItemCell.swift in Sources */,
 				D00799DC2CFB68DC009AFBFB /* GroupItemCell.swift in Sources */,
+				D030007A2D1D7103005F4829 /* WelcomeViewController.swift in Sources */,
 				D0A469EA2D0582110058D553 /* ResultViewController.swift in Sources */,
 				D0A469E82D057C5D0058D553 /* NavigationController.swift in Sources */,
 				D0C67B5E2CFC775F008C9BA7 /* AmountView.swift in Sources */,
