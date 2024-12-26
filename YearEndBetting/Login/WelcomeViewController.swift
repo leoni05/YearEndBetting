@@ -40,7 +40,8 @@ class WelcomeViewController: UIViewController {
             heartImageView.tintColor = UIColor(named: "DarkPink")
             heartImageView.contentMode = .scaleAspectFit
             if idx > 0 {
-                heartImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
+                heartImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0)
+                heartImageView.isHidden = true
             }
             containerView.addSubview(heartImageView)
             heartImageViews.append(heartImageView)
@@ -49,6 +50,7 @@ class WelcomeViewController: UIViewController {
         welcomeButton.setTitle("OK", for: .normal)
         welcomeButton.setTitleColor(.white, for: .normal)
         welcomeButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        welcomeButton.addTarget(self, action: #selector(welcomeButtonPressed), for: .touchUpInside)
         containerView.addSubview(welcomeButton)
     }
     
@@ -62,4 +64,28 @@ class WelcomeViewController: UIViewController {
         containerView.pin.wrapContent().center()
     }
     
+}
+
+
+// MARK: - Private Extensions
+
+private extension WelcomeViewController {
+    @objc func welcomeButtonPressed() {
+        UIView.animate(withDuration: 0.3) {
+            self.welcomeButton.alpha = 0.0
+        } completion: { _ in
+            self.welcomeButton.isHidden = true
+        }
+        
+        for idx in heartImageViews.indices {
+            heartImageViews[idx].isHidden = false
+            UIView.animate(withDuration: 4, delay: 0.3 * Double(idx + 1)) {
+                self.heartImageViews[idx].transform = CGAffineTransformScale(CGAffineTransformIdentity, 50, 50)
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7.0) {
+            
+        }
+    }
 }
