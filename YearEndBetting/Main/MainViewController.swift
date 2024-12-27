@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
         
         DispatchQueue.main.async {
             let loginVC = LoginViewController()
-            loginVC.modalPresentationStyle = .fullScreen
+            loginVC.modalPresentationStyle = .overFullScreen
             self.navigationController?.present(loginVC, animated: false)
         }
     }
@@ -208,7 +208,7 @@ private extension MainViewController {
         let action = UIAlertAction(title: "확인", style: .default) { _ in
             DispatchQueue.main.async {
                 let loginVC = LoginViewController()
-                loginVC.modalPresentationStyle = .fullScreen
+                loginVC.modalPresentationStyle = .overFullScreen
                 self.navigationController?.present(loginVC, animated: true)
             }
         }

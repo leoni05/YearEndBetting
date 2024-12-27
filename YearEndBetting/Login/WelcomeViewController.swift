@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 import PinLayout
 
+protocol WelcomeViewControllerDelegate: AnyObject {
+    func dismissLoginVC()
+}
+
 class WelcomeViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var delegate: WelcomeViewControllerDelegate?
     private let heartCount = 10
-    
     private var containerView = UIView()
     private var welcomeLabel = UILabel()
     private var welcomeButton = UIButton()
@@ -79,13 +83,13 @@ private extension WelcomeViewController {
         
         for idx in heartImageViews.indices {
             heartImageViews[idx].isHidden = false
-            UIView.animate(withDuration: 4, delay: 0.3 * Double(idx + 1)) {
+            UIView.animate(withDuration: 3, delay: 0.3 * Double(idx + 1)) {
                 self.heartImageViews[idx].transform = CGAffineTransformScale(CGAffineTransformIdentity, 50, 50)
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7.0) {
-            
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6.0) {
+            self.delegate?.dismissLoginVC()
         }
     }
 }
