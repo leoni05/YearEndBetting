@@ -20,7 +20,6 @@ class RankingGroupCell: UITableViewCell {
     
     private var rankLabel = UILabel()
     private var titleLabel = UILabel()
-    private var groupNumberLabel = UILabel()
     private var coinLabel = UILabel()
     
     // MARK: - Life Cycle
@@ -39,13 +38,7 @@ class RankingGroupCell: UITableViewCell {
         rankLabel.sizeToFit()
         contentView.addSubview(rankLabel)
         
-        groupNumberLabel.text = "1조"
-        groupNumberLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        groupNumberLabel.textColor = .systemGray2
-        groupNumberLabel.sizeToFit()
-        contentView.addSubview(groupNumberLabel)
-        
-        titleLabel.text = "애교가 넘치는 사랑의 하츄핑"
+        titleLabel.text = "1조. 애교가 넘치는 사랑의 하츄핑"
         titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
         contentView.addSubview(titleLabel)
         
@@ -66,9 +59,7 @@ class RankingGroupCell: UITableViewCell {
                              bottom: RankingGroupCell.cellMarginVertical, right: RankingGroupCell.cellMarginHorizontal))
         
         rankLabel.pin.left(15).vCenter()
-        groupNumberLabel.pin.right(15).top(12)
-        titleLabel.pin.after(of: rankLabel).before(of: groupNumberLabel, aligned: .center)
-            .marginHorizontal(15).sizeToFit(.width)
+        titleLabel.pin.after(of: rankLabel).right().top(12).marginHorizontal(15).sizeToFit(.width)
         coinLabel.pin.after(of: rankLabel).right(15).bottom(12).marginLeft(15).sizeToFit(.width)
     }
 }
