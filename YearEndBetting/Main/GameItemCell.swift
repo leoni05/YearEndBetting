@@ -79,7 +79,7 @@ class GameItemCell: UITableViewCell {
         let statusString = "게임 1위, 예측 결과 2위 \(changeOfAMC)"
         let attrString = NSMutableAttributedString(string: statusString)
         let range = (statusString as NSString).range(of: changeOfAMC)
-        attrString.addAttribute(.foregroundColor, value: UIColor.systemRed as Any, range: range)
+        attrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: range)
         statusLabel.attributedText = attrString
         containerView.addSubview(statusLabel)
         
