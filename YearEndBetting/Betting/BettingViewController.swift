@@ -44,6 +44,7 @@ class BettingViewController: UIViewController {
         case askingTarget
         case askingAmount
         case typingAmount
+        case finalCheck
     }
     private var askingStatus: AskingStatus? {
         didSet {
@@ -421,6 +422,7 @@ private extension BettingViewController {
             shakeAmountLabelContainer()
             return
         }
+        askingStatus = .finalCheck
     }
     
     func askingStatusDidChange() {
@@ -445,6 +447,8 @@ private extension BettingViewController {
             amountKeyboardView.alpha = 0.0
             amountLabelContainer.alpha = 0.0
             bettingButton.alpha = 0.0
+            postpositionLabel.isHidden = true
+            postpositionLabel.alpha = 0.0
             
         case .askingAmount:
             askingSelectionLabel.isHidden = true
@@ -465,6 +469,8 @@ private extension BettingViewController {
                 self.amountPlaceHolder.alpha = 1.0
                 self.amountKeyboardView.alpha = 1.0
             }
+            postpositionLabel.isHidden = true
+            postpositionLabel.alpha = 0.0
             
         case .typingAmount:
             askingSelectionLabel.isHidden = true
@@ -484,6 +490,30 @@ private extension BettingViewController {
                 self.amountKeyboardView.alpha = 1.0
                 self.amountLabelContainer.alpha = 1.0
                 self.bettingButton.alpha = 1.0
+            }
+            postpositionLabel.isHidden = true
+            postpositionLabel.alpha = 0.0
+            
+        case .finalCheck:
+            askingSelectionLabel.isHidden = true
+            groupListTableView.isHidden = true
+            tableViewGradientView.isHidden = true
+            amountPlaceHolder.isHidden = true
+            askingSelectionLabel.alpha = 0.0
+            groupListTableView.alpha = 0.0
+            tableViewGradientView.alpha = 0.0
+            amountPlaceHolder.alpha = 0.0
+            selectedTargetLabel.isHidden = false
+            amountKeyboardView.isHidden = true
+            amountLabelContainer.isHidden = false
+            bettingButton.isHidden = true
+            selectedTargetLabel.alpha = 1.0
+            amountKeyboardView.alpha = 0.0
+            amountLabelContainer.alpha = 1.0
+            bettingButton.alpha = 0.0
+            postpositionLabel.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.postpositionLabel.alpha = 1.0
             }
             
         default:
