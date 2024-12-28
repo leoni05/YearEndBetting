@@ -210,6 +210,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         if amountString.count >= 9 { return }
         amountString.append(string)
         errorLabel.isHidden = true
+        amountLabelContainer.layer.removeAllAnimations()
         
         let pos = amountLabels.count - 1
         if pos >= 0 {
@@ -232,6 +233,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         if amountString.count == 0 { return }
         _ = amountString.popLast()
         errorLabel.isHidden = true
+        amountLabelContainer.layer.removeAllAnimations()
         
         let pos = amountLabels.count - 2
         if pos >= 0 {
@@ -391,6 +393,14 @@ private extension BettingViewController {
         guard let amount = Int(amountString) else { return }
         if amount > currentCoin {
             errorLabel.isHidden = false
+            
+            let shakeAnimation = CABasicAnimation(keyPath: "position.x")
+            shakeAnimation.duration = 0.05
+            shakeAnimation.repeatCount = 4
+            shakeAnimation.autoreverses = true
+            shakeAnimation.fromValue = amountLabelContainer.center.x - 3
+            shakeAnimation.toValue = amountLabelContainer.center.x + 3
+            amountLabelContainer.layer.add(shakeAnimation, forKey: "position.x")
             return
         }
     }
