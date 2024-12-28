@@ -195,7 +195,7 @@ extension MainViewController: GameItemCellDelegate {
         case .beforeBetting:
             self.navigationController?.pushViewController(BettingViewController(), animated: true)
         case .gameEnded:
-            self.navigationController?.pushViewController(ResultViewController(), animated: true)
+            break;
         default:
             break
         }
