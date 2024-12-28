@@ -21,6 +21,7 @@ class BettingViewController: UIViewController {
     private var amountString = ""
     private var amountLabels = Array<UILabel>()
     private var amountLabelContainer = UIView()
+    private var errorLabel = UILabel()
     private var amountKeyboardView = AmountKeyboardView()
     private var bettingButton = UIButton()
     private var backButton = UIButton()
@@ -30,6 +31,8 @@ class BettingViewController: UIViewController {
     
     private var tableViewGradientView = UIView()
     private var tableViewGradientLayer = CAGradientLayer()
+    
+    private var currentCoin = 5105000
     
     private enum NeedAnimation {
         static let none = 0
@@ -84,7 +87,14 @@ class BettingViewController: UIViewController {
         
         currentCoinLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         currentCoinLabel.numberOfLines = 0
-        currentCoinLabel.text = "현재 1,000,000 AMC 보유 중!"
+        
+        var amountOfAMC = "AMC"
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        if let decimalString = numberFormatter.string(for: currentCoin) {
+            amountOfAMC = decimalString + " AMC"
+        }
+        currentCoinLabel.text = "현재 \(amountOfAMC) 보유 중!"
         self.view.addSubview(currentCoinLabel)
         
         askingSelectionLabel.text = "누구에게 베팅할까요?"
@@ -127,7 +137,15 @@ class BettingViewController: UIViewController {
         bettingButton.setTitleColor(.white, for: .normal)
         bettingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         bettingButton.backgroundColor = UIColor(named: "DarkPink")
+        bettingButton.addTarget(self, action: #selector(bettingButtonPressed), for: .touchUpInside)
         self.view.addSubview(bettingButton)
+        
+        errorLabel.text = "베팅할 코인이 보유 중인 코인보다 많아요!"
+        errorLabel.textColor = UIColor(named: "DarkPink")
+        errorLabel.numberOfLines = 0
+        errorLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        errorLabel.isHidden = true
+        self.view.addSubview(errorLabel)
         
         self.view.addSubview(amountKeyboardView)
         
@@ -191,6 +209,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         if amountString.count == 0 && Int(string) == 0 { return }
         if amountString.count >= 9 { return }
         amountString.append(string)
+        errorLabel.isHidden = true
         
         let pos = amountLabels.count - 1
         if pos >= 0 {
@@ -212,6 +231,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
     func eraseDigitTouched() {
         if amountString.count == 0 { return }
         _ = amountString.popLast()
+        errorLabel.isHidden = true
         
         let pos = amountLabels.count - 2
         if pos >= 0 {
@@ -291,6 +311,8 @@ private extension BettingViewController {
             }
             amountLabelContainer.pin.wrapContent().below(of: selectedTargetLabel).left(self.view.pin.safeArea)
                 .marginTop(45).marginLeft(20)
+            errorLabel.pin.below(of: amountLabelContainer).horizontally(self.view.pin.safeArea)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
         }
     }
     
@@ -363,6 +385,14 @@ private extension BettingViewController {
         let targetRange = (selectedTargetString as NSString).range(of: target)
         targetAttrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: targetRange)
         selectedTargetLabel.attributedText = targetAttrString
+    }
+    
+    @objc func bettingButtonPressed() {
+        guard let amount = Int(amountString) else { return }
+        if amount > currentCoin {
+            errorLabel.isHidden = false
+            return
+        }
     }
     
     func askingStatusDidChange() {
