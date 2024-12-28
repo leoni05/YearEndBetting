@@ -10,7 +10,7 @@ import UIKit
 import PinLayout
 
 protocol GameItemCellDelegate: AnyObject {
-    func cellContentsTouched(cellIndex: Int, gameStatus: GameItemCell.GameStatus?)
+    func cellContentsTouched(cellIndex: Int, gameStatus: GameStatus?)
 }
 
 class GameItemCell: UITableViewCell {
@@ -24,11 +24,6 @@ class GameItemCell: UITableViewCell {
     
     weak var delegate: GameItemCellDelegate?
     
-    enum GameStatus {
-        case beforeBetting
-        case inProgress
-        case gameEnded
-    }
     var gameStatus: GameStatus? {
         didSet {
             switch gameStatus {

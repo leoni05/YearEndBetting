@@ -183,7 +183,7 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - GroupItemCellDelegate
 
 extension MainViewController: GameItemCellDelegate {
-    func cellContentsTouched(cellIndex: Int, gameStatus: GameItemCell.GameStatus?) {
+    func cellContentsTouched(cellIndex: Int, gameStatus: GameStatus?) {
         switch gameStatus {
         case .beforeBetting:
             self.navigationController?.pushViewController(BettingViewController(), animated: true)
