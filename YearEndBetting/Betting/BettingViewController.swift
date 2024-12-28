@@ -19,6 +19,7 @@ class BettingViewController: UIViewController {
     private var selectedTargetLabel = UILabel()
     private var amountPlaceHolder = UILabel()
     private var amountString = ""
+    private var postpositionLabel = UILabel()
     private var amountLabels = Array<UILabel>()
     private var amountLabelContainer = UIView()
     private var errorLabel = UILabel()
@@ -131,6 +132,15 @@ class BettingViewController: UIViewController {
         amcLabel.sizeToFit()
         amountLabels.append(amcLabel)
         amountLabelContainer.addSubview(amcLabel)
+        
+        postpositionLabel.text = "을"
+        postpositionLabel.font = .systemFont(ofSize: 25, weight: .semibold)
+        postpositionLabel.sizeToFit()
+        postpositionLabel.alpha = 0.0
+        postpositionLabel.isHidden = true
+        amountLabels.append(postpositionLabel)
+        amountLabelContainer.addSubview(postpositionLabel)
+        
         self.view.addSubview(amountLabelContainer)
         
         bettingButton.setTitle("베팅하기", for: .normal)
@@ -216,7 +226,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         }
         amountString.append(string)
         
-        let pos = amountLabels.count - 1
+        let pos = amountLabels.count - 2
         if pos >= 0 {
             let newLabel = popDigitLabel(digit: string)
             newLabel.tag = NeedAnimation.needInsertAnim
@@ -240,7 +250,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         if amountString.count == 0 { return }
         _ = amountString.popLast()
         
-        let pos = amountLabels.count - 2
+        let pos = amountLabels.count - 3
         if pos >= 0 {
             pushDigitLabel(digitLabel: amountLabels[pos])
             amountLabels.remove(at: pos)
@@ -331,7 +341,7 @@ private extension BettingViewController {
             }
         }
         
-        var commaPos = amountLabels.count - 4
+        var commaPos = amountLabels.count - 5
         while commaPos > 0 {
             let commaLabel = popCommaLabel()
             amountLabels.insert(commaLabel, at: commaPos)
