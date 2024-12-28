@@ -57,7 +57,10 @@ class RankingGroupCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(
             by: UIEdgeInsets(top: RankingGroupCell.cellMarginVertical, left: RankingGroupCell.cellMarginHorizontal,
                              bottom: RankingGroupCell.cellMarginVertical, right: RankingGroupCell.cellMarginHorizontal))        
-        layout()
+        
+        rankLabel.pin.left(15).vCenter()
+        titleLabel.pin.after(of: rankLabel).right().top(12).marginHorizontal(15).sizeToFit(.width)
+        coinLabel.pin.after(of: rankLabel).right(15).bottom(12).marginLeft(15).sizeToFit(.width)
     }
 }
 
@@ -77,17 +80,5 @@ extension RankingGroupCell {
             amountOfAMC = decimalString + " AMC"
         }
         coinLabel.text = amountOfAMC
-        
-        layout()
-    }
-}
-
-// MARK: - Private Extensions
-
-private extension RankingGroupCell {
-    func layout() {
-        rankLabel.pin.left(15).vCenter()
-        titleLabel.pin.after(of: rankLabel).right().top(12).marginHorizontal(15).sizeToFit(.width)
-        coinLabel.pin.after(of: rankLabel).right(15).bottom(12).marginLeft(15).sizeToFit(.width)
     }
 }
