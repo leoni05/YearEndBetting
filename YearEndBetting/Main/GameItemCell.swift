@@ -125,7 +125,7 @@ extension GameItemCell {
                 changeOfAMC = (gameInfo.changeOfAMC >= 0 ? "+" : "") + decimalString + " AMC"
             }
             
-            let statusString = "게임 \(gameInfo.gameTeamRank)위, 예측 결과 \(gameInfo.gamePredictResult)위 \(changeOfAMC)"
+            let statusString = "게임 \(gameInfo.gameGroupRank)위, 예측 결과 \(gameInfo.gamePredictResult)위 \(changeOfAMC)"
             let attrString = NSMutableAttributedString(string: statusString)
             let range = (statusString as NSString).range(of: changeOfAMC)
             let amcColor: UIColor? = ((gameInfo.changeOfAMC >= 0) ? UIColor(named: "DarkPink") : .systemBlue)

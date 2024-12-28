@@ -17,7 +17,7 @@ struct GameModel {
     let gameIndex: Int
     let gameName: String
     let gameStatus: GameStatus
-    let gameTeamRank: Int
+    let gameGroupRank: Int
     let gamePredictResult: Int
     let changeOfAMC: Int
     let bettingAmount: Int
