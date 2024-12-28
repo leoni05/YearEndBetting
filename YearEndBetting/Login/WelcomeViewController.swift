@@ -24,6 +24,10 @@ class WelcomeViewController: UIViewController {
     private var welcomeButton = UIButton()
     private var heartImageViews = Array<UIImageView>()
     
+    private var logoContainerView = UIView()
+    private var logoImageView = UIImageView()
+    private var logoLabelView = UILabel()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -56,6 +60,21 @@ class WelcomeViewController: UIViewController {
         welcomeButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         welcomeButton.addTarget(self, action: #selector(welcomeButtonPressed), for: .touchUpInside)
         containerView.addSubview(welcomeButton)
+        
+        logoContainerView.alpha = 0.0
+        logoContainerView.isHidden = true
+        self.view.addSubview(logoContainerView)
+        
+        logoImageView.image = UIImage(systemName: "heart.circle.fill")
+        logoImageView.tintColor = .white
+        logoImageView.contentMode = .scaleAspectFit
+        logoContainerView.addSubview(logoImageView)
+        
+        logoLabelView.text = "YEAR END BETTING"
+        logoLabelView.font = .systemFont(ofSize: 16, weight: .semibold)
+        logoLabelView.textColor = .white
+        logoLabelView.sizeToFit()
+        logoContainerView.addSubview(logoLabelView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,6 +85,11 @@ class WelcomeViewController: UIViewController {
         }
         welcomeButton.pin.below(of: welcomeLabel, aligned: .center).size(80)
         containerView.pin.wrapContent().center()
+        
+        logoContainerView.pin.size(200)
+        logoImageView.pin.top().hCenter().size(60)
+        logoLabelView.pin.below(of: logoImageView, aligned: .center).marginTop(6)
+        logoContainerView.pin.wrapContent().center()
     }
     
 }
@@ -86,6 +110,11 @@ private extension WelcomeViewController {
             UIView.animate(withDuration: 3, delay: 0.3 * Double(idx + 1)) {
                 self.heartImageViews[idx].transform = CGAffineTransformScale(CGAffineTransformIdentity, 50, 50)
             }
+        }
+        
+        logoContainerView.isHidden = false
+        UIView.animate(withDuration: 1.0, delay: 4) {
+            self.logoContainerView.alpha = 1.0
         }
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6.0) {
