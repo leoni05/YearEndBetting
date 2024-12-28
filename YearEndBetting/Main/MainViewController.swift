@@ -145,7 +145,7 @@ class MainViewController: UIViewController {
         lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
         
         coinDescLabel.pin.top(70).hCenter()
-        coinAmountLabel.pin.bottom(70).hCenter()
+        coinAmountLabel.pin.bottom(65).hCenter()
         groupNameLabel.pin.bottom(30).hCenter()
         
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)

@@ -80,12 +80,12 @@ class RankingViewController: UIViewController {
         upperArea.addSubview(groupNameLabel)
         
         leftLaurelView.contentMode = .scaleAspectFit
-        leftLaurelView.tintColor = .systemGray3
+        leftLaurelView.tintColor = UIColor(named: "DarkPink")
         leftLaurelView.image = UIImage(systemName: "laurel.leading")
         upperArea.addSubview(leftLaurelView)
         
         rightLaurelView.contentMode = .scaleAspectFit
-        rightLaurelView.tintColor = .systemGray3
+        rightLaurelView.tintColor = UIColor(named: "DarkPink")
         rightLaurelView.image = UIImage(systemName: "laurel.trailing")
         upperArea.addSubview(rightLaurelView)
         
@@ -121,12 +121,12 @@ class RankingViewController: UIViewController {
         upperArea.pin.top(self.view.pin.safeArea)
             .horizontally(self.view.pin.safeArea).height(200)
         rankDescLabel.pin.top(70).hCenter()
-        currentRankLabel.pin.bottom(70).hCenter()
+        currentRankLabel.pin.bottom(65).hCenter()
         groupNameLabel.pin.bottom(30).hCenter()
         leftLaurelView.pin.before(of: currentRankLabel).vCenter(to: currentRankLabel.edge.vCenter)
-            .size(30).marginRight(5)
+            .size(50).marginRight(-13)
         rightLaurelView.pin.after(of: currentRankLabel).vCenter(to: currentRankLabel.edge.vCenter)
-            .size(30).marginLeft(5)
+            .size(50).marginLeft(-13)
         
         lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
         listTitleLabel.pin.top(30).horizontally().marginHorizontal(RankingGroupCell.cellMarginHorizontal).sizeToFit(.width)
