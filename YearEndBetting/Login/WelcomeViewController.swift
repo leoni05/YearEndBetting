@@ -70,7 +70,7 @@ class WelcomeViewController: UIViewController {
         logoImageView.contentMode = .scaleAspectFit
         logoContainerView.addSubview(logoImageView)
         
-        logoLabelView.text = "YEAR END BETTING"
+        logoLabelView.text = "YEAR-END BETTING"
         logoLabelView.font = .systemFont(ofSize: 16, weight: .semibold)
         logoLabelView.textColor = .white
         logoLabelView.sizeToFit()
