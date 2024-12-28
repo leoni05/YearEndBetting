@@ -214,7 +214,7 @@ private extension LoginViewController {
         
         if askingStatus == .askingName {
             askingNameLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             groupListTableView.pin.below(of: askingNameLabel).horizontally(self.view.pin.safeArea).bottom()
                 .marginTop(110)
             tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(GroupItemCell.cellMarginVertical)
@@ -222,7 +222,7 @@ private extension LoginViewController {
         }
         if askingStatus == .askingFavoriteAnimals {
             askingFavoriteLabel.pin.below(of: greetingLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             animalKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(320).marginHorizontal(20).marginBottom(10)
             backButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)

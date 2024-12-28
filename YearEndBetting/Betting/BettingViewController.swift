@@ -295,7 +295,7 @@ private extension BettingViewController {
         
         if askingStatus == .askingTarget {
             askingSelectionLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             groupListTableView.pin.below(of: askingSelectionLabel).horizontally(self.view.pin.safeArea).bottom()
                 .marginTop(110)
             tableViewGradientView.pin.top(to: groupListTableView.edge.top).horizontally().height(GroupItemCell.cellMarginVertical)
@@ -303,7 +303,7 @@ private extension BettingViewController {
         }
         if askingStatus == .askingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             amountPlaceHolder.pin.below(of: selectedTargetLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(45).marginHorizontal(20).sizeToFit(.width)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
@@ -311,7 +311,7 @@ private extension BettingViewController {
         }
         if askingStatus == .typingAmount {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
-                .marginTop(15).marginHorizontal(20).sizeToFit(.width)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(250).marginHorizontal(10).marginBottom(10)
             bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
