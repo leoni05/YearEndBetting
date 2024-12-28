@@ -15,6 +15,7 @@
 		D026C7AF2CF6B17200023305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D026C7AE2CF6B17200023305 /* Assets.xcassets */; };
 		D026C7B22CF6B17200023305 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D026C7B12CF6B17200023305 /* Base */; };
 		D030007A2D1D7103005F4829 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03000792D1D7103005F4829 /* WelcomeViewController.swift */; };
+		D06192752D1FE7C600E15C5A /* RankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06192742D1FE7C600E15C5A /* RankingModel.swift */; };
 		D099997C2D1FA8E700EDF209 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D099997B2D1FA8E700EDF209 /* MainModel.swift */; };
 		D09F208A2CFDD39B00A02938 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09F20892CFDD39B00A02938 /* RankingViewController.swift */; };
 		D0A469E62D0571C80058D553 /* RankingGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A469E52D0571C80058D553 /* RankingGroupCell.swift */; };
@@ -43,6 +44,7 @@
 		D026C7B12CF6B17200023305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D026C7B32CF6B17200023305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03000792D1D7103005F4829 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		D06192742D1FE7C600E15C5A /* RankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingModel.swift; sourceTree = "<group>"; };
 		D099997B2D1FA8E700EDF209 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		D09F20892CFDD39B00A02938 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		D0A469E52D0571C80058D553 /* RankingGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingGroupCell.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		D0915F4B2D143B9A0011D521 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
+				D06192742D1FE7C600E15C5A /* RankingModel.swift */,
 				D09F20892CFDD39B00A02938 /* RankingViewController.swift */,
 				D0A469E52D0571C80058D553 /* RankingGroupCell.swift */,
 			);
@@ -324,6 +327,7 @@
 				D026C7A62CF6B17000023305 /* AppDelegate.swift in Sources */,
 				D0E813392CFAE6510047D2FE /* LoginViewController.swift in Sources */,
 				D026C7A82CF6B17000023305 /* SceneDelegate.swift in Sources */,
+				D06192752D1FE7C600E15C5A /* RankingModel.swift in Sources */,
 				D0C67B5C2CFC7748008C9BA7 /* AmountKeyboardView.swift in Sources */,
 				D0A469EC2D05A83B0058D553 /* ResultGroupCell.swift in Sources */,
 				D099997C2D1FA8E700EDF209 /* MainModel.swift in Sources */,

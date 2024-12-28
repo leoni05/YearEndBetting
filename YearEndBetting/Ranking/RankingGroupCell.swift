@@ -72,3 +72,11 @@ class RankingGroupCell: UITableViewCell {
         coinLabel.pin.after(of: rankLabel).right(15).bottom(12).marginLeft(15).sizeToFit(.width)
     }
 }
+
+// MARK: - Extensions
+
+extension RankingGroupCell {
+    func setRankingCell(rankInfo: RankingModel) {
+        
+    }
+}

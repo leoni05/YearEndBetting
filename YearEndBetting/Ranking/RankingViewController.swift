@@ -29,6 +29,17 @@ class RankingViewController: UIViewController {
     
     private var backButton = UIButton()
     
+    private let ranking: Array<RankingModel> = [
+        RankingModel(rank: 1, groupName: "애교가 넘치는 사랑의 하츄핑", groupNumber: 1, coinAmount: 5105000),
+        RankingModel(rank: 2, groupName: "다정하고 상냥한 포실핑", groupNumber: 7, coinAmount: 4901000),
+        RankingModel(rank: 3, groupName: "성실한 올바름의 바로핑", groupNumber: 2, coinAmount: 3050000),
+        RankingModel(rank: 4, groupName: "배려심이 깊은 샤샤핑", groupNumber: 8, coinAmount: 2991000),
+        RankingModel(rank: 5, groupName: "쾌활한 즐거움의 라라핑", groupNumber: 5, coinAmount: 2080000),
+        RankingModel(rank: 6, groupName: "용기의 아자핑", groupNumber: 3, coinAmount: 2071000),
+        RankingModel(rank: 7, groupName: "감정이 풍부한 해핑", groupNumber: 6, coinAmount: 1589000),
+        RankingModel(rank: 8, groupName: "너그러운 희망의 차차핑", groupNumber: 4, coinAmount: 1440000)
+    ]
+    
     // MARK: - Life Cycle
     
     init() {
@@ -133,13 +144,14 @@ class RankingViewController: UIViewController {
 
 extension RankingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return ranking.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RankingGroupCell.reuseIdentifier, for: indexPath) as? RankingGroupCell else {
             return UITableViewCell()
         }
+        cell.setRankingCell(rankInfo: ranking[indexPath.row])
         return cell
     }
 }
