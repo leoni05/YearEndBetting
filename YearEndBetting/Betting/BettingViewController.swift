@@ -43,71 +43,7 @@ class BettingViewController: UIViewController {
     }
     private var askingStatus: AskingStatus? {
         didSet {
-            switch askingStatus {
-                
-            case .askingTarget:
-                askingSelectionLabel.isHidden = false
-                groupListTableView.isHidden = false
-                tableViewGradientView.isHidden = false
-                UIView.animate(withDuration: 0.3) {
-                    self.askingSelectionLabel.alpha = 1.0
-                    self.groupListTableView.alpha = 1.0
-                    self.tableViewGradientView.alpha = 1.0
-                }
-                selectedTargetLabel.isHidden = true
-                amountPlaceHolder.isHidden = true
-                amountKeyboardView.isHidden = true
-                amountLabelContainer.isHidden = true
-                bettingButton.isHidden = true
-                selectedTargetLabel.alpha = 0.0
-                amountPlaceHolder.alpha = 0.0
-                amountKeyboardView.alpha = 0.0
-                amountLabelContainer.alpha = 0.0
-                bettingButton.alpha = 0.0
-                
-            case .askingAmount:
-                askingSelectionLabel.isHidden = true
-                groupListTableView.isHidden = true
-                tableViewGradientView.isHidden = true
-                amountLabelContainer.isHidden = true
-                bettingButton.isHidden = true
-                askingSelectionLabel.alpha = 0.0
-                groupListTableView.alpha = 0.0
-                tableViewGradientView.alpha = 0.0
-                amountLabelContainer.alpha = 0.0
-                bettingButton.alpha = 0.0
-                selectedTargetLabel.isHidden = false
-                amountPlaceHolder.isHidden = false
-                amountKeyboardView.isHidden = false
-                UIView.animate(withDuration: 0.3) {
-                    self.selectedTargetLabel.alpha = 1.0
-                    self.amountPlaceHolder.alpha = 1.0
-                    self.amountKeyboardView.alpha = 1.0
-                }
-                
-            case .typingAmount:
-                askingSelectionLabel.isHidden = true
-                groupListTableView.isHidden = true
-                tableViewGradientView.isHidden = true
-                amountPlaceHolder.isHidden = true
-                askingSelectionLabel.alpha = 0.0
-                groupListTableView.alpha = 0.0
-                tableViewGradientView.alpha = 0.0
-                amountPlaceHolder.alpha = 0.0
-                selectedTargetLabel.isHidden = false
-                amountKeyboardView.isHidden = false
-                amountLabelContainer.isHidden = false
-                bettingButton.isHidden = false
-                UIView.animate(withDuration: 0.3) {
-                    self.selectedTargetLabel.alpha = 1.0
-                    self.amountKeyboardView.alpha = 1.0
-                    self.amountLabelContainer.alpha = 1.0
-                    self.bettingButton.alpha = 1.0
-                }
-                
-            default:
-                break
-            }
+            askingStatusDidChange()
         }
     }
     
@@ -410,6 +346,74 @@ private extension BettingViewController {
     
     @objc func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func askingStatusDidChange() {
+        switch askingStatus {
+            
+        case .askingTarget:
+            askingSelectionLabel.isHidden = false
+            groupListTableView.isHidden = false
+            tableViewGradientView.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.askingSelectionLabel.alpha = 1.0
+                self.groupListTableView.alpha = 1.0
+                self.tableViewGradientView.alpha = 1.0
+            }
+            selectedTargetLabel.isHidden = true
+            amountPlaceHolder.isHidden = true
+            amountKeyboardView.isHidden = true
+            amountLabelContainer.isHidden = true
+            bettingButton.isHidden = true
+            selectedTargetLabel.alpha = 0.0
+            amountPlaceHolder.alpha = 0.0
+            amountKeyboardView.alpha = 0.0
+            amountLabelContainer.alpha = 0.0
+            bettingButton.alpha = 0.0
+            
+        case .askingAmount:
+            askingSelectionLabel.isHidden = true
+            groupListTableView.isHidden = true
+            tableViewGradientView.isHidden = true
+            amountLabelContainer.isHidden = true
+            bettingButton.isHidden = true
+            askingSelectionLabel.alpha = 0.0
+            groupListTableView.alpha = 0.0
+            tableViewGradientView.alpha = 0.0
+            amountLabelContainer.alpha = 0.0
+            bettingButton.alpha = 0.0
+            selectedTargetLabel.isHidden = false
+            amountPlaceHolder.isHidden = false
+            amountKeyboardView.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.selectedTargetLabel.alpha = 1.0
+                self.amountPlaceHolder.alpha = 1.0
+                self.amountKeyboardView.alpha = 1.0
+            }
+            
+        case .typingAmount:
+            askingSelectionLabel.isHidden = true
+            groupListTableView.isHidden = true
+            tableViewGradientView.isHidden = true
+            amountPlaceHolder.isHidden = true
+            askingSelectionLabel.alpha = 0.0
+            groupListTableView.alpha = 0.0
+            tableViewGradientView.alpha = 0.0
+            amountPlaceHolder.alpha = 0.0
+            selectedTargetLabel.isHidden = false
+            amountKeyboardView.isHidden = false
+            amountLabelContainer.isHidden = false
+            bettingButton.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.selectedTargetLabel.alpha = 1.0
+                self.amountKeyboardView.alpha = 1.0
+                self.amountLabelContainer.alpha = 1.0
+                self.bettingButton.alpha = 1.0
+            }
+            
+        default:
+            break
+        }
     }
 }
 
