@@ -65,7 +65,20 @@ class RankingGroupCell: UITableViewCell {
 
 extension RankingGroupCell {
     func setRankingCell(rankInfo: RankingModel) {
+        rankLabel.text = "\(rankInfo.rank)위"
+        rankLabel.sizeToFit()
         
+        titleLabel.text = "\(rankInfo.groupNumber)조. \(rankInfo.groupName)"
+
+        var amountOfAMC = "AMC"
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        if let decimalString = numberFormatter.string(for: rankInfo.coinAmount) {
+            amountOfAMC = decimalString + " AMC"
+        }
+        coinLabel.text = amountOfAMC
+        
+        layout()
     }
 }
 
