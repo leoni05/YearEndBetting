@@ -166,6 +166,10 @@ class BettingViewController: UIViewController {
         backButton.tintColor = .darkGray
         backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         self.view.addSubview(backButton)
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped(_:)))
+        edgePan.edges = .left
+        self.view.addGestureRecognizer(edgePan)
     }
     
     override func viewDidLayoutSubviews() {
@@ -270,6 +274,38 @@ extension BettingViewController: AmountKeyboardViewDelegate {
 // MARK: - Private Extensions
 
 private extension BettingViewController {
+    @objc func screenEdgeSwiped(_ sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .ended {
+            goBackToPreviousStatus()
+        }
+    }
+    
+    @objc func backButtonPressed() {
+        goBackToPreviousStatus()
+    }
+    
+    func goBackToPreviousStatus() {
+        switch askingStatus {
+            
+        case .askingTarget:
+            self.navigationController?.popViewController(animated: true)
+            
+        case .askingAmount:
+            askingStatus = .askingTarget
+            
+        case .typingAmount:
+            askingStatus = .askingTarget
+            
+        case .finalCheck:
+            askingStatus = .typingAmount
+            
+        default:
+            break
+        }
+        layout()
+        layoutAmountLabels()
+    }
+    
     func layout() {
         currentCoinLabel.pin.top(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
             .marginTop(60).marginHorizontal(20).sizeToFit(.width)
@@ -391,10 +427,6 @@ private extension BettingViewController {
         commaLabel.isHidden = true
         commaLabel.pin.left().right().size(0)
         commaLabels.append(commaLabel)
-    }
-    
-    @objc func backButtonPressed() {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func setSelectedTargetLabel(target: String) {
