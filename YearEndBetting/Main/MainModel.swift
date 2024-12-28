@@ -20,4 +20,5 @@ struct GameModel {
     let gameTeamRank: Int
     let gamePredictResult: Int
     let changeOfAMC: Int
+    let bettingAmount: Int
 }

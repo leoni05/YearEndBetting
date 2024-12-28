@@ -24,20 +24,7 @@ class GameItemCell: UITableViewCell {
     
     weak var delegate: GameItemCellDelegate?
     
-    var gameStatus: GameStatus? {
-        didSet {
-            switch gameStatus {
-            case .beforeBetting:
-                rightButtonLabel.text = "베팅"
-            case .inProgress:
-                rightButtonLabel.text = "진행중"
-            case .gameEnded:
-                rightButtonLabel.text = "결과"
-            default:
-                break
-            }
-        }
-    }
+    var gameStatus: GameStatus?
     
     private var containerView = UIView()
     private var rightButtonLabel = UILabel()
@@ -111,6 +98,45 @@ class GameItemCell: UITableViewCell {
 extension GameItemCell {
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+// MARK: - Extensions
+
+extension GameItemCell {
+    func setGameStatus(gameInfo: GameModel) {
+        gameStatus = gameInfo.gameStatus
+        
+        switch gameStatus {
+        case .beforeBetting:
+            rightButtonLabel.text = "베팅"
+            statusLabel.text = "준비 중"
+            
+        case .inProgress:
+            rightButtonLabel.text = "진행중"
+            statusLabel.text = "베팅 코인 \(gameInfo.bettingAmount) AMC"
+            
+        case .gameEnded:
+            rightButtonLabel.text = "결과"
+            var changeOfAMC = "AMC"
+            let numberFormatter: NumberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            if let decimalString = numberFormatter.string(for: gameInfo.changeOfAMC) {
+                changeOfAMC = (gameInfo.changeOfAMC >= 0 ? "+" : "") + decimalString + " AMC"
+            }
+            
+            let statusString = "게임 \(gameInfo.gameTeamRank)위, 예측 결과 \(gameInfo.gamePredictResult)위 \(changeOfAMC)"
+            let attrString = NSMutableAttributedString(string: statusString)
+            let range = (statusString as NSString).range(of: changeOfAMC)
+            let amcColor: UIColor? = ((gameInfo.changeOfAMC >= 0) ? UIColor(named: "DarkPink") : .systemBlue)
+            attrString.addAttribute(.foregroundColor, value: amcColor as Any, range: range)
+            statusLabel.attributedText = attrString
+            
+        default:
+            break
+        }
+        
+        titleLabel.text = "Round \(gameInfo.gameIndex). \(gameInfo.gameName)"
     }
 }
 

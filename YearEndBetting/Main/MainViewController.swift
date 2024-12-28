@@ -29,6 +29,23 @@ class MainViewController: UIViewController {
     private var logoutButton = UIButton()
     private var githubButton = UIButton()
     
+    private let games: Array<GameModel> = [
+        GameModel(gameIndex: 1, gameName: "미스터리 박스", gameStatus: .gameEnded,
+                  gameTeamRank: 2, gamePredictResult: 1, changeOfAMC: 512000, bettingAmount: -1),
+        GameModel(gameIndex: 2, gameName: "안 숨은 그림 찾기", gameStatus: .gameEnded,
+                  gameTeamRank: 4, gamePredictResult: 3, changeOfAMC: -189000, bettingAmount: -1),
+        GameModel(gameIndex: 3, gameName: "행동지령 게임", gameStatus: .gameEnded,
+                  gameTeamRank: 1, gamePredictResult: 1, changeOfAMC: 4000000, bettingAmount: -1),
+        GameModel(gameIndex: 4, gameName: "몸으로 말해요", gameStatus: .inProgress,
+                  gameTeamRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: 100000),
+        GameModel(gameIndex: 5, gameName: "티니핑 맞추기", gameStatus: .beforeBetting,
+                  gameTeamRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: -1),
+        GameModel(gameIndex: 6, gameName: "네글자 게임", gameStatus: .beforeBetting,
+                  gameTeamRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: -1),
+        GameModel(gameIndex: 7, gameName: "제시된 문장 카톡으로 보내기", gameStatus: .beforeBetting,
+                  gameTeamRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: -1)
+    ]
+    
     // MARK: - Life Cycle
     
     init() {
@@ -149,7 +166,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return games.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,17 +174,7 @@ extension MainViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
-        cell.tag = indexPath.row
-        
-        if indexPath.row % 3 == 0 {
-            cell.gameStatus = .beforeBetting
-        }
-        if indexPath.row % 3 == 1 {
-            cell.gameStatus = .inProgress
-        }
-        if indexPath.row % 3 == 2 {
-            cell.gameStatus = .gameEnded
-        }
+        cell.setGameStatus(gameInfo: games[indexPath.row])
         return cell
     }
 }
