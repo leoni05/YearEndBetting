@@ -206,11 +206,15 @@ extension BettingViewController: GroupItemCellDelegate {
 
 extension BettingViewController: AmountKeyboardViewDelegate {
     func digitStringTouched(string: String) {
-        if amountString.count == 0 && Int(string) == 0 { return }
-        if amountString.count >= 9 { return }
-        amountString.append(string)
         errorLabel.isHidden = true
         amountLabelContainer.layer.removeAllAnimations()
+        
+        if amountString.count == 0 && Int(string) == 0 { return }
+        if amountString.count >= 9 {
+            shakeAmountLabelContainer()
+            return
+        }
+        amountString.append(string)
         
         let pos = amountLabels.count - 1
         if pos >= 0 {
@@ -230,10 +234,11 @@ extension BettingViewController: AmountKeyboardViewDelegate {
     }
     
     func eraseDigitTouched() {
-        if amountString.count == 0 { return }
-        _ = amountString.popLast()
         errorLabel.isHidden = true
         amountLabelContainer.layer.removeAllAnimations()
+        
+        if amountString.count == 0 { return }
+        _ = amountString.popLast()
         
         let pos = amountLabels.count - 2
         if pos >= 0 {
@@ -389,18 +394,21 @@ private extension BettingViewController {
         selectedTargetLabel.attributedText = targetAttrString
     }
     
+    func shakeAmountLabelContainer() {
+        let shakeAnimation = CABasicAnimation(keyPath: "position.x")
+        shakeAnimation.duration = 0.05
+        shakeAnimation.repeatCount = 4
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = amountLabelContainer.center.x - 3
+        shakeAnimation.toValue = amountLabelContainer.center.x + 3
+        amountLabelContainer.layer.add(shakeAnimation, forKey: "position.x")
+    }
+    
     @objc func bettingButtonPressed() {
         guard let amount = Int(amountString) else { return }
         if amount > currentCoin {
             errorLabel.isHidden = false
-            
-            let shakeAnimation = CABasicAnimation(keyPath: "position.x")
-            shakeAnimation.duration = 0.05
-            shakeAnimation.repeatCount = 4
-            shakeAnimation.autoreverses = true
-            shakeAnimation.fromValue = amountLabelContainer.center.x - 3
-            shakeAnimation.toValue = amountLabelContainer.center.x + 3
-            amountLabelContainer.layer.add(shakeAnimation, forKey: "position.x")
+            shakeAmountLabelContainer()
             return
         }
     }
