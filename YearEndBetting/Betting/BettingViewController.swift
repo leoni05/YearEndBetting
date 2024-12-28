@@ -25,6 +25,7 @@ class BettingViewController: UIViewController {
     private var errorLabel = UILabel()
     private var amountKeyboardView = AmountKeyboardView()
     private var bettingButton = UIButton()
+    private var finalCheckLabel = UILabel()
     private var backButton = UIButton()
     
     private var commaLabels = Array<UILabel>()
@@ -159,6 +160,11 @@ class BettingViewController: UIViewController {
         self.view.addSubview(errorLabel)
         
         self.view.addSubview(amountKeyboardView)
+        
+        finalCheckLabel.text = "베팅하시겠어요?"
+        finalCheckLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        finalCheckLabel.sizeToFit()
+        self.view.addSubview(finalCheckLabel)
         
         backButton.setImage(UIImage(systemName: "chevron.left",
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)),
@@ -336,10 +342,14 @@ private extension BettingViewController {
             bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
                 .marginBottom(5)
         }
+        if askingStatus == .finalCheck {
+            selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
+                .marginTop(8).marginHorizontal(20).sizeToFit(.width)
+        }
     }
     
     func layoutAmountLabels() {
-        if askingStatus == .typingAmount {
+        if askingStatus == .typingAmount || askingStatus == .finalCheck {
             for i in amountLabels.indices {
                 if amountLabels[i].tag == NeedAnimation.needInsertAnim {
                     amountLabels[i].tag = NeedAnimation.none
@@ -367,6 +377,8 @@ private extension BettingViewController {
                 .marginTop(45).marginLeft(20)
             errorLabel.pin.below(of: amountLabelContainer).horizontally(self.view.pin.safeArea)
                 .marginTop(8).marginHorizontal(20).sizeToFit(.width)
+            finalCheckLabel.pin.below(of: amountLabelContainer).left(self.view.pin.safeArea)
+                .marginTop(8).marginLeft(20)
         }
     }
     
@@ -480,7 +492,9 @@ private extension BettingViewController {
             amountLabelContainer.alpha = 0.0
             bettingButton.alpha = 0.0
             postpositionLabel.isHidden = true
+            finalCheckLabel.isHidden = true
             postpositionLabel.alpha = 0.0
+            finalCheckLabel.alpha = 0.0
             
         case .askingAmount:
             askingSelectionLabel.isHidden = true
@@ -502,7 +516,9 @@ private extension BettingViewController {
                 self.amountKeyboardView.alpha = 1.0
             }
             postpositionLabel.isHidden = true
+            finalCheckLabel.isHidden = true
             postpositionLabel.alpha = 0.0
+            finalCheckLabel.alpha = 0.0
             
         case .typingAmount:
             askingSelectionLabel.isHidden = true
@@ -524,7 +540,9 @@ private extension BettingViewController {
                 self.bettingButton.alpha = 1.0
             }
             postpositionLabel.isHidden = true
+            finalCheckLabel.isHidden = true
             postpositionLabel.alpha = 0.0
+            finalCheckLabel.alpha = 0.0
             
         case .finalCheck:
             askingSelectionLabel.isHidden = true
@@ -544,8 +562,10 @@ private extension BettingViewController {
             amountLabelContainer.alpha = 1.0
             bettingButton.alpha = 0.0
             postpositionLabel.isHidden = false
+            finalCheckLabel.isHidden = false
             UIView.animate(withDuration: 0.3) {
                 self.postpositionLabel.alpha = 1.0
+                self.finalCheckLabel.alpha = 1.0
             }
             
         default:
