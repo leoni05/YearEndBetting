@@ -301,6 +301,7 @@ private extension BettingViewController {
             
         case .typingAmount:
             askingStatus = .askingTarget
+            eraseAlldigits()
             
         case .finalCheck:
             askingStatus = .typingAmount
@@ -310,6 +311,22 @@ private extension BettingViewController {
         }
         layout()
         layoutAmountLabels()
+    }
+    
+    func eraseAlldigits() {
+        errorLabel.isHidden = true
+        amountLabelContainer.layer.removeAllAnimations()
+        amountString = ""
+        
+        while true {
+            let pos = amountLabels.count - 3
+            if pos >= 0 {
+                pushDigitLabel(digitLabel: amountLabels[pos])
+                amountLabels.remove(at: pos)
+            }
+            else { break }
+        }
+        setCommaLabels()
     }
     
     func layout() {
