@@ -33,7 +33,7 @@ class RankingGroupCell: UITableViewCell {
         contentView.clipsToBounds = true
         
         rankLabel.text = "1위"
-        rankLabel.textColor = .systemPink
+        rankLabel.textColor = UIColor(named: "DarkPink")
         rankLabel.font = .systemFont(ofSize: 16, weight: .medium)
         rankLabel.sizeToFit()
         contentView.addSubview(rankLabel)
