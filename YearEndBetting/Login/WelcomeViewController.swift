@@ -88,7 +88,7 @@ class WelcomeViewController: UIViewController {
         
         logoContainerView.pin.size(200)
         logoImageView.pin.top().hCenter().size(60)
-        logoLabelView.pin.below(of: logoImageView, aligned: .center).marginTop(6)
+        logoLabelView.pin.below(of: logoImageView, aligned: .center).marginTop(3)
         logoContainerView.pin.wrapContent().center()
     }
     
