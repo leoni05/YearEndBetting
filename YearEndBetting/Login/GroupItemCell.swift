@@ -26,8 +26,8 @@ class GroupItemCell: UITableViewCell {
     weak var delegate: GroupItemCellDelegate?
 
     private var containerView = UIView()
-    private var titleLabel = UILabel()
-    private var subTitleLabel = UILabel()
+    var titleLabel = UILabel()
+    var subTitleLabel = UILabel()
     
     // MARK: - Life Cycle
     

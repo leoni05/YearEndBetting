@@ -23,6 +23,17 @@ class LoginViewController: UIViewController {
     private var tableViewGradientView = UIView()
     private var tableViewGradientLayer = CAGradientLayer()
     
+    private let groupNames: Array<String> = [
+        "애교가 넘치는 사랑의 하츄핑",
+        "성실한 올바름의 바로핑",
+        "용기의 아자핑",
+        "너그러운 희망의 차차핑",
+        "쾌활한 즐거움의 라라핑",
+        "감정이 풍부한 해핑",
+        "다정하고 상냥한 포실핑",
+        "배려심이 깊은 샤샤핑"
+    ]
+    
     private enum AskingStatus {
         case askingName
         case askingFavoriteAnimals
@@ -105,12 +116,7 @@ class LoginViewController: UIViewController {
         
         askingFavoriteLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         askingFavoriteLabel.numberOfLines = 0
-        let groupName = "애교가 넘치는 사랑의 하츄핑"
-        let askingFavoriteString = "\(groupName)은\n어떤 동물을 좋아하나요?"
-        let attrString = NSMutableAttributedString(string: askingFavoriteString)
-        let range = (askingFavoriteString as NSString).range(of: groupName)
-        attrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: range)
-        askingFavoriteLabel.attributedText = attrString
+        setAskingFavoriteLabel(groupName: "애교가 넘치는 사랑의 하츄핑")
         self.view.addSubview(askingFavoriteLabel)
         
         self.view.addSubview(groupListTableView)
@@ -150,7 +156,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return groupNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,6 +165,8 @@ extension LoginViewController: UITableViewDataSource {
         }
         cell.delegate = self
         cell.cellIndex = indexPath.row
+        cell.titleLabel.text = groupNames[indexPath.row]
+        cell.subTitleLabel.text = "\(indexPath.row+1)조"
         return cell
     }
 }
@@ -175,6 +183,7 @@ extension LoginViewController: UITableViewDelegate {
 
 extension LoginViewController: GroupItemCellDelegate {
     func cellContentsTouched(cellIndex: Int) {
+        setAskingFavoriteLabel(groupName: groupNames[cellIndex])
         askingStatus = .askingFavoriteAnimals
         layout()
     }
@@ -245,5 +254,13 @@ private extension LoginViewController {
     
     @objc func screenEdgeSwiped() {
         goBackToAskingName()
+    }
+    
+    func setAskingFavoriteLabel(groupName: String) {
+        let askingFavoriteString = "\(groupName)은\n어떤 동물을 좋아하나요?"
+        let attrString = NSMutableAttributedString(string: askingFavoriteString)
+        let range = (askingFavoriteString as NSString).range(of: groupName)
+        attrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: range)
+        askingFavoriteLabel.attributedText = attrString
     }
 }
