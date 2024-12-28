@@ -25,6 +25,7 @@ class BettingViewController: UIViewController {
     private var errorLabel = UILabel()
     private var amountKeyboardView = AmountKeyboardView()
     private var bettingButton = UIButton()
+    private var finalButton = UIButton()
     private var finalCheckLabel = UILabel()
     private var backButton = UIButton()
     
@@ -145,12 +146,21 @@ class BettingViewController: UIViewController {
         
         self.view.addSubview(amountLabelContainer)
         
-        bettingButton.setTitle("베팅하기", for: .normal)
+        bettingButton.setTitle("다음", for: .normal)
         bettingButton.setTitleColor(.white, for: .normal)
         bettingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         bettingButton.backgroundColor = UIColor(named: "DarkPink")
         bettingButton.addTarget(self, action: #selector(bettingButtonPressed), for: .touchUpInside)
         self.view.addSubview(bettingButton)
+        
+        finalButton.setTitle("베팅하기", for: .normal)
+        finalButton.setTitleColor(.white, for: .normal)
+        finalButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        finalButton.backgroundColor = UIColor(named: "DarkPink")
+        finalButton.addTarget(self, action: #selector(finalButtonPressed), for: .touchUpInside)
+        finalButton.layer.cornerRadius = 5.0
+        finalButton.clipsToBounds = true
+        self.view.addSubview(finalButton)
         
         errorLabel.text = "베팅할 코인이 보유 중인 코인보다 많아요!"
         errorLabel.textColor = UIColor(named: "DarkPink")
@@ -362,6 +372,8 @@ private extension BettingViewController {
         if askingStatus == .finalCheck {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(8).marginHorizontal(20).sizeToFit(.width)
+            finalButton.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+                .height(50).marginHorizontal(20).marginBottom(10)
         }
     }
     
@@ -484,6 +496,11 @@ private extension BettingViewController {
             return
         }
         askingStatus = .finalCheck
+        layout()
+    }
+    
+    @objc func finalButtonPressed() {
+        
     }
     
     func askingStatusDidChange() {
@@ -510,8 +527,10 @@ private extension BettingViewController {
             bettingButton.alpha = 0.0
             postpositionLabel.isHidden = true
             finalCheckLabel.isHidden = true
+            finalButton.isHidden = true
             postpositionLabel.alpha = 0.0
             finalCheckLabel.alpha = 0.0
+            finalButton.alpha = 0.0
             
         case .askingAmount:
             askingSelectionLabel.isHidden = true
@@ -534,8 +553,10 @@ private extension BettingViewController {
             }
             postpositionLabel.isHidden = true
             finalCheckLabel.isHidden = true
+            finalButton.isHidden = true
             postpositionLabel.alpha = 0.0
             finalCheckLabel.alpha = 0.0
+            finalButton.alpha = 0.0
             
         case .typingAmount:
             askingSelectionLabel.isHidden = true
@@ -558,8 +579,10 @@ private extension BettingViewController {
             }
             postpositionLabel.isHidden = true
             finalCheckLabel.isHidden = true
+            finalButton.isHidden = true
             postpositionLabel.alpha = 0.0
             finalCheckLabel.alpha = 0.0
+            finalButton.alpha = 0.0
             
         case .finalCheck:
             askingSelectionLabel.isHidden = true
@@ -580,9 +603,11 @@ private extension BettingViewController {
             bettingButton.alpha = 0.0
             postpositionLabel.isHidden = false
             finalCheckLabel.isHidden = false
+            finalButton.isHidden = false
             UIView.animate(withDuration: 0.3) {
                 self.postpositionLabel.alpha = 1.0
                 self.finalCheckLabel.alpha = 1.0
+                self.finalButton.alpha = 1.0
             }
             
         default:
