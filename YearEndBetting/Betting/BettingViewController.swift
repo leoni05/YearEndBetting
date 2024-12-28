@@ -47,6 +47,17 @@ class BettingViewController: UIViewController {
         }
     }
     
+    private let groupNames: Array<String> = [
+        "애교가 넘치는 사랑의 하츄핑",
+        "성실한 올바름의 바로핑",
+        "용기의 아자핑",
+        "너그러운 희망의 차차핑",
+        "쾌활한 즐거움의 라라핑",
+        "감정이 풍부한 해핑",
+        "다정하고 상냥한 포실핑",
+        "배려심이 깊은 샤샤핑"
+    ]
+    
     // MARK: - Life Cycle
     
     init() {
@@ -95,12 +106,7 @@ class BettingViewController: UIViewController {
         
         selectedTargetLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         selectedTargetLabel.numberOfLines = 0
-        let target = "애교가 넘치는 사랑의 하츄핑"
-        let selectedTargetString = "\(target)에게"
-        let targetAttrString = NSMutableAttributedString(string: selectedTargetString)
-        let targetRange = (selectedTargetString as NSString).range(of: target)
-        targetAttrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: targetRange)
-        selectedTargetLabel.attributedText = targetAttrString
+        setSelectedTargetLabel(target: "애교가 넘치는 사랑의 하츄핑")
         self.view.addSubview(selectedTargetLabel)
         
         amountPlaceHolder.text = "얼마나 베팅할까요?"
@@ -145,7 +151,7 @@ class BettingViewController: UIViewController {
 
 extension BettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return groupNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,6 +160,8 @@ extension BettingViewController: UITableViewDataSource {
         }
         cell.delegate = self
         cell.cellIndex = indexPath.row
+        cell.titleLabel.text = groupNames[indexPath.row]
+        cell.subTitleLabel.text = "\(indexPath.row+1)조"
         return cell
     }
 }
@@ -170,6 +178,7 @@ extension BettingViewController: UITableViewDelegate {
 
 extension BettingViewController: GroupItemCellDelegate {
     func cellContentsTouched(cellIndex: Int) {
+        setSelectedTargetLabel(target: groupNames[cellIndex])
         askingStatus = .askingAmount
         layout()
     }
@@ -346,6 +355,14 @@ private extension BettingViewController {
     
     @objc func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func setSelectedTargetLabel(target: String) {
+        let selectedTargetString = "\(target)에게"
+        let targetAttrString = NSMutableAttributedString(string: selectedTargetString)
+        let targetRange = (selectedTargetString as NSString).range(of: target)
+        targetAttrString.addAttribute(.foregroundColor, value: UIColor(named: "DarkPink") as Any, range: targetRange)
+        selectedTargetLabel.attributedText = targetAttrString
     }
     
     func askingStatusDidChange() {
