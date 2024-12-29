@@ -500,11 +500,11 @@ private extension BettingViewController {
     
     func shakeAmountLabelContainer() {
         let shakeAnimation = CABasicAnimation(keyPath: "position.x")
-        shakeAnimation.duration = 0.05
-        shakeAnimation.repeatCount = 4
+        shakeAnimation.duration = 0.04
+        shakeAnimation.repeatCount = 5
         shakeAnimation.autoreverses = true
-        shakeAnimation.fromValue = amountLabelContainer.center.x - 3
-        shakeAnimation.toValue = amountLabelContainer.center.x + 3
+        shakeAnimation.fromValue = amountLabelContainer.center.x - 4
+        shakeAnimation.toValue = amountLabelContainer.center.x + 4
         amountLabelContainer.layer.add(shakeAnimation, forKey: "position.x")
     }
     
