@@ -24,7 +24,7 @@ class BettingViewController: UIViewController {
     private var amountLabelContainer = UIView()
     private var errorLabel = UILabel()
     private var amountKeyboardView = AmountKeyboardView()
-    private var bettingButton = UIButton()
+    private var nextButton = UIButton()
     private var finalButton = UIButton()
     private var finalCheckLabel = UILabel()
     private var backButton = UIButton()
@@ -146,16 +146,16 @@ class BettingViewController: UIViewController {
         
         self.view.addSubview(amountLabelContainer)
         
-        bettingButton.setTitle("다음", for: .normal)
-        bettingButton.setTitleColor(.white, for: .normal)
-        bettingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        bettingButton.backgroundColor = UIColor(named: "DarkPink")
-        bettingButton.addTarget(self, action: #selector(bettingButtonPressed), for: .touchUpInside)
-        self.view.addSubview(bettingButton)
+        nextButton.setTitle("다음", for: .normal)
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .medium)
+        nextButton.backgroundColor = UIColor(named: "DarkPink")
+        nextButton.addTarget(self, action: #selector(bettingButtonPressed), for: .touchUpInside)
+        self.view.addSubview(nextButton)
         
         finalButton.setTitle("베팅하기", for: .normal)
         finalButton.setTitleColor(.white, for: .normal)
-        finalButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        finalButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .medium)
         finalButton.backgroundColor = UIColor(named: "DarkPink")
         finalButton.addTarget(self, action: #selector(finalButtonPressed), for: .touchUpInside)
         finalButton.layer.cornerRadius = 5.0
@@ -366,14 +366,14 @@ private extension BettingViewController {
                 .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             amountKeyboardView.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
                 .height(250).marginHorizontal(10).marginBottom(10)
-            bettingButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
+            nextButton.pin.above(of: amountKeyboardView).horizontally(self.view.pin.safeArea).height(50)
                 .marginBottom(5)
         }
         if askingStatus == .finalCheck {
             selectedTargetLabel.pin.below(of: currentCoinLabel).horizontally(self.view.pin.safeArea)
                 .marginTop(8).marginHorizontal(20).sizeToFit(.width)
             finalButton.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
-                .height(50).marginHorizontal(20).marginBottom(10)
+                .height(50).marginHorizontal(10).marginBottom(10)
         }
     }
     
@@ -519,12 +519,12 @@ private extension BettingViewController {
             amountPlaceHolder.isHidden = true
             amountKeyboardView.isHidden = true
             amountLabelContainer.isHidden = true
-            bettingButton.isHidden = true
+            nextButton.isHidden = true
             selectedTargetLabel.alpha = 0.0
             amountPlaceHolder.alpha = 0.0
             amountKeyboardView.alpha = 0.0
             amountLabelContainer.alpha = 0.0
-            bettingButton.alpha = 0.0
+            nextButton.alpha = 0.0
             postpositionLabel.isHidden = true
             finalCheckLabel.isHidden = true
             finalButton.isHidden = true
@@ -537,12 +537,12 @@ private extension BettingViewController {
             groupListTableView.isHidden = true
             tableViewGradientView.isHidden = true
             amountLabelContainer.isHidden = true
-            bettingButton.isHidden = true
+            nextButton.isHidden = true
             askingSelectionLabel.alpha = 0.0
             groupListTableView.alpha = 0.0
             tableViewGradientView.alpha = 0.0
             amountLabelContainer.alpha = 0.0
-            bettingButton.alpha = 0.0
+            nextButton.alpha = 0.0
             selectedTargetLabel.isHidden = false
             amountPlaceHolder.isHidden = false
             amountKeyboardView.isHidden = false
@@ -570,12 +570,12 @@ private extension BettingViewController {
             selectedTargetLabel.isHidden = false
             amountKeyboardView.isHidden = false
             amountLabelContainer.isHidden = false
-            bettingButton.isHidden = false
+            nextButton.isHidden = false
             UIView.animate(withDuration: 0.3) {
                 self.selectedTargetLabel.alpha = 1.0
                 self.amountKeyboardView.alpha = 1.0
                 self.amountLabelContainer.alpha = 1.0
-                self.bettingButton.alpha = 1.0
+                self.nextButton.alpha = 1.0
             }
             postpositionLabel.isHidden = true
             finalCheckLabel.isHidden = true
@@ -596,11 +596,11 @@ private extension BettingViewController {
             selectedTargetLabel.isHidden = false
             amountKeyboardView.isHidden = true
             amountLabelContainer.isHidden = false
-            bettingButton.isHidden = true
+            nextButton.isHidden = true
             selectedTargetLabel.alpha = 1.0
             amountKeyboardView.alpha = 0.0
             amountLabelContainer.alpha = 1.0
-            bettingButton.alpha = 0.0
+            nextButton.alpha = 0.0
             postpositionLabel.isHidden = false
             finalCheckLabel.isHidden = false
             finalButton.isHidden = false
