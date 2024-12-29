@@ -115,7 +115,13 @@ extension GameItemCell {
             
         case .inProgress:
             rightButtonLabel.text = "진행중"
-            statusLabel.text = "베팅 코인 \(gameInfo.bettingAmount) AMC"
+            var amountOfAMC = "AMC"
+            let numberFormatter: NumberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            if let decimalString = numberFormatter.string(for: gameInfo.bettingAmount) {
+                amountOfAMC = decimalString + " AMC"
+            }
+            statusLabel.text = "베팅 코인 \(amountOfAMC)"
             
         case .gameEnded:
             rightButtonLabel.text = "결과"
