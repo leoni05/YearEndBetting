@@ -46,7 +46,7 @@ class BettingResultViewController: UIViewController {
             amountOfAMC = decimalString + " AMC"
         }
         
-        bettingFinishLabel.font = .systemFont(ofSize: 22, weight: .medium)
+        bettingFinishLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         bettingFinishLabel.numberOfLines = 0
         
         let finishString = "\(bettingTarget)에게\n\(amountOfAMC)\n베팅 완료!"
