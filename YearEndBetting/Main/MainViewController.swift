@@ -29,7 +29,8 @@ class MainViewController: UIViewController {
     private var logoutButton = UIButton()
     private var githubButton = UIButton()
     
-    private let games: Array<GameModel> = [
+    private var currentCoinAmount = 5105000
+    private var games: Array<GameModel> = [
         GameModel(gameIndex: 1, gameName: "미스터리 박스", gameStatus: .gameEnded,
                   gameGroupRank: 2, gamePredictResult: 1, changeOfAMC: 512000, bettingAmount: -1),
         GameModel(gameIndex: 2, gameName: "안 숨은 그림 찾기", gameStatus: .gameEnded,
@@ -38,8 +39,8 @@ class MainViewController: UIViewController {
                   gameGroupRank: 1, gamePredictResult: 1, changeOfAMC: 4000000, bettingAmount: -1),
         GameModel(gameIndex: 4, gameName: "몸으로 말해요", gameStatus: .gameEnded,
                   gameGroupRank: 2, gamePredictResult: 3, changeOfAMC: -218000, bettingAmount: -1),
-        GameModel(gameIndex: 5, gameName: "티니핑 맞추기", gameStatus: .inProgress,
-                  gameGroupRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: 100000),
+        GameModel(gameIndex: 5, gameName: "티니핑 맞추기", gameStatus: .beforeBetting,
+                  gameGroupRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: -1),
         GameModel(gameIndex: 6, gameName: "네글자 게임", gameStatus: .beforeBetting,
                   gameGroupRank: -1, gamePredictResult: -1, changeOfAMC: -1, bettingAmount: -1),
         GameModel(gameIndex: 7, gameName: "제시된 문장 카톡으로 보내기", gameStatus: .beforeBetting,
@@ -85,9 +86,8 @@ class MainViewController: UIViewController {
         coinDescLabel.sizeToFit()
         upperArea.addSubview(coinDescLabel)
         
-        coinAmountLabel.text = "5,105,000 AMC"
         coinAmountLabel.font = .systemFont(ofSize: 30, weight: .heavy)
-        coinAmountLabel.sizeToFit()
+        setCoinAmountLabel()
         upperArea.addSubview(coinAmountLabel)
         
         groupNameLabel.text = "애교가 넘치는 사랑의 하츄핑"
@@ -139,25 +139,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        upperArea.pin.top(self.view.pin.safeArea)
-            .horizontally(self.view.pin.safeArea).height(200)
-        lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
-        
-        coinDescLabel.pin.top(70).hCenter()
-        coinAmountLabel.pin.bottom(70).hCenter()
-        groupNameLabel.pin.bottom(30).hCenter()
-        
-        listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)
-        gameListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
-        tableViewGradientView.pin.top(to: gameListTableView.edge.top).horizontally().height(GameItemCell.cellMarginVertical)
-        tableViewGradientLayer.pin.all()
-        
-        rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
-            .size(40).marginRight(16)
-        logoutButton.pin.before(of: rankingButton, aligned: .top).size(40).marginRight(5)
-        githubButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
-            .width(85).height(40).marginLeft(16)
+        layout()
     }
 
 }
@@ -174,6 +156,7 @@ extension MainViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
+        cell.cellIndex = indexPath.row
         cell.setGameStatus(gameInfo: games[indexPath.row])
         return cell
     }
@@ -193,7 +176,9 @@ extension MainViewController: GameItemCellDelegate {
     func cellContentsTouched(cellIndex: Int, gameStatus: GameStatus?) {
         switch gameStatus {
         case .beforeBetting:
-            self.navigationController?.pushViewController(BettingViewController(), animated: true)
+            let bettingVC = BettingViewController(currentCoin: currentCoinAmount, selectedCellIndex: cellIndex)
+            bettingVC.delegate = self
+            self.navigationController?.pushViewController(bettingVC, animated: true)
         case .gameEnded:
             break;
         default:
@@ -202,9 +187,44 @@ extension MainViewController: GameItemCellDelegate {
     }
 }
 
+// MARK: - BettingViewControllerDelegate
+
+extension MainViewController: BettingViewControllerDelegate {
+    func bettingFinished(cellIndex: Int, bettingAmount: Int) {
+        currentCoinAmount -= bettingAmount
+        games[cellIndex].gameStatus = .inProgress
+        games[cellIndex].bettingAmount = bettingAmount
+        gameListTableView.reloadData()
+        
+        setCoinAmountLabel()
+        layout()
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension MainViewController {
+    func layout() {
+        upperArea.pin.top(self.view.pin.safeArea)
+            .horizontally(self.view.pin.safeArea).height(200)
+        lowerArea.pin.below(of: upperArea).horizontally(self.view.pin.safeArea).bottom()
+        
+        coinDescLabel.pin.top(70).hCenter()
+        coinAmountLabel.pin.bottom(70).hCenter()
+        groupNameLabel.pin.bottom(30).hCenter()
+        
+        listTitleLabel.pin.top(30).horizontally().marginHorizontal(GameItemCell.cellMarginHorizontal).sizeToFit(.width)
+        gameListTableView.pin.below(of: listTitleLabel).horizontally().bottom().marginTop(15)
+        tableViewGradientView.pin.top(to: gameListTableView.edge.top).horizontally().height(GameItemCell.cellMarginVertical)
+        tableViewGradientLayer.pin.all()
+        
+        rankingButton.pin.top(self.view.pin.safeArea).right(self.view.pin.safeArea)
+            .size(40).marginRight(16)
+        logoutButton.pin.before(of: rankingButton, aligned: .top).size(40).marginRight(5)
+        githubButton.pin.top(self.view.pin.safeArea).left(self.view.pin.safeArea)
+            .width(85).height(40).marginLeft(16)
+    }
+    
     @objc func rankingButtonPressed() {
         self.navigationController?.pushViewController(RankingViewController(), animated: true)
     }
@@ -233,5 +253,16 @@ private extension MainViewController {
             self.gameListTableView.reloadData()
             refreshControl.endRefreshing()
         }
+    }
+    
+    func setCoinAmountLabel() {
+        var amountOfAMC = "AMC"
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        if let decimalString = numberFormatter.string(for: currentCoinAmount) {
+            amountOfAMC = decimalString + " AMC"
+        }
+        coinAmountLabel.text = amountOfAMC
+        coinAmountLabel.sizeToFit()
     }
 }

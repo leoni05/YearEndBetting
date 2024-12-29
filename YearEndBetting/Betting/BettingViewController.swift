@@ -9,10 +9,15 @@ import Foundation
 import UIKit
 import PinLayout
 
+protocol BettingViewControllerDelegate: AnyObject {
+    func bettingFinished(cellIndex: Int, bettingAmount: Int)
+}
+
 class BettingViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var delegate: BettingViewControllerDelegate?
     private var currentCoinLabel = UILabel()
     private var askingSelectionLabel = UILabel()
     private var groupListTableView = UITableView()
@@ -35,7 +40,8 @@ class BettingViewController: UIViewController {
     private var tableViewGradientView = UIView()
     private var tableViewGradientLayer = CAGradientLayer()
     
-    private var currentCoin = 5105000
+    private var currentCoin: Int
+    private var selectedCellIndex: Int
     private var selectedTargetIndex: Int?
     
     private enum NeedAnimation {
@@ -68,7 +74,9 @@ class BettingViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    init() {
+    init(currentCoin: Int, selectedCellIndex: Int) {
+        self.currentCoin = currentCoin
+        self.selectedCellIndex = selectedCellIndex
         super.init(nibName: nil, bundle: nil)
         
         groupListTableView.estimatedRowHeight = GroupItemCell.cellHeight
@@ -515,6 +523,7 @@ private extension BettingViewController {
         guard let amount = Int(amountString),
               let targetIndex = selectedTargetIndex else { return }
         
+        delegate?.bettingFinished(cellIndex: selectedCellIndex, bettingAmount: amount)
         let bettingResultVC = BettingResultViewController(bettingTarget: groupNames[targetIndex],
                                                           bettingAmount: amount)
         bettingResultVC.delegate = self

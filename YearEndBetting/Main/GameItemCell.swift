@@ -24,6 +24,7 @@ class GameItemCell: UITableViewCell {
     
     weak var delegate: GameItemCellDelegate?
     
+    var cellIndex: Int?
     var gameStatus: GameStatus?
     
     private var containerView = UIView()
@@ -144,8 +145,8 @@ extension GameItemCell {
 
 private extension GameItemCell {
     @objc func cellContentsTouched(_ sender: UITapGestureRecognizer) {
-        if let view = sender.view {
-            self.delegate?.cellContentsTouched(cellIndex: view.tag, gameStatus: gameStatus)
+        if let cellIndex = cellIndex {
+            self.delegate?.cellContentsTouched(cellIndex: cellIndex, gameStatus: gameStatus)
         }
     }
     
