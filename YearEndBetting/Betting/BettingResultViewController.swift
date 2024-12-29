@@ -9,13 +9,19 @@ import Foundation
 import UIKit
 import PinLayout
 
+protocol BettingResultViewControllerDelegate: AnyObject {
+    func popBettingVC()
+}
+
 class BettingResultViewController: UIViewController {
     
     // MARK: - Properties
  
+    weak var delegate: BettingResultViewControllerDelegate?
     var bettingTarget: String
     var bettingAmount: Int
     private var bettingFinishLabel = UILabel()
+    private var okButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -58,10 +64,28 @@ class BettingResultViewController: UIViewController {
         bettingFinishLabel.attributedText = finishAttrString
         bettingFinishLabel.sizeToFit()
         self.view.addSubview(bettingFinishLabel)
+        
+        okButton.setTitle("확인", for: .normal)
+        okButton.setTitleColor(.white, for: .normal)
+        okButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .medium)
+        okButton.backgroundColor = UIColor(named: "DarkPink")
+        okButton.addTarget(self, action: #selector(okButtonPressed), for: .touchUpInside)
+        okButton.layer.cornerRadius = 5.0
+        okButton.clipsToBounds = true
+        self.view.addSubview(okButton)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bettingFinishLabel.pin.top(self.view.pin.safeArea).hCenter().marginTop(100)
+        okButton.pin.bottom(self.view.pin.safeArea).horizontally(self.view.pin.safeArea)
+            .height(50).marginHorizontal(10).marginBottom(10)
+    }
+}
+
+private extension BettingResultViewController {
+    @objc func okButtonPressed() {
+        delegate?.popBettingVC()
+        self.dismiss(animated: true)
     }
 }

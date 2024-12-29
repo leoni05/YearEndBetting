@@ -289,6 +289,14 @@ extension BettingViewController: AmountKeyboardViewDelegate {
     }
 }
 
+// MARK: - AnimalKeyboardViewDelegate
+
+extension BettingViewController: BettingResultViewControllerDelegate {
+    func popBettingVC() {
+        self.navigationController?.popViewController(animated: false)
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension BettingViewController {
@@ -509,7 +517,8 @@ private extension BettingViewController {
         
         let bettingResultVC = BettingResultViewController(bettingTarget: groupNames[targetIndex],
                                                           bettingAmount: amount)
-        bettingResultVC.modalPresentationStyle = .fullScreen
+        bettingResultVC.delegate = self
+        bettingResultVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.present(bettingResultVC, animated: true)
     }
     
