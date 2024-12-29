@@ -36,6 +36,7 @@ class BettingViewController: UIViewController {
     private var tableViewGradientLayer = CAGradientLayer()
     
     private var currentCoin = 5105000
+    private var selectedTargetIndex: Int?
     
     private enum NeedAnimation {
         static let none = 0
@@ -227,6 +228,7 @@ extension BettingViewController: UITableViewDelegate {
 
 extension BettingViewController: GroupItemCellDelegate {
     func cellContentsTouched(cellIndex: Int) {
+        selectedTargetIndex = cellIndex
         setSelectedTargetLabel(target: groupNames[cellIndex])
         askingStatus = .askingAmount
         layout()
@@ -308,9 +310,11 @@ private extension BettingViewController {
             
         case .askingAmount:
             askingStatus = .askingTarget
+            selectedTargetIndex = nil
             
         case .typingAmount:
             askingStatus = .askingTarget
+            selectedTargetIndex = nil
             eraseAlldigits()
             
         case .finalCheck:
@@ -500,7 +504,13 @@ private extension BettingViewController {
     }
     
     @objc func finalButtonPressed() {
+        guard let amount = Int(amountString),
+              let targetIndex = selectedTargetIndex else { return }
         
+        let bettingResultVC = BettingResultViewController(bettingTarget: groupNames[targetIndex],
+                                                          bettingAmount: amount)
+        bettingResultVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(bettingResultVC, animated: true)
     }
     
     func askingStatusDidChange() {
