@@ -4,6 +4,7 @@
 
 <br>
 
-- 개발 환경 : Swift, PinLayout
-  
+- 개발 환경 : Swift, PinLayout  
+- 시연 영상
+
 ![화면 기록 2024-12-31 오후 3 19 33](https://github.com/user-attachments/assets/b2c938c2-1cb6-40ff-a7e5-1c9c385abfe0)
