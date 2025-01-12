@@ -145,7 +145,7 @@ class BettingViewController: UIViewController {
         amountLabels.append(amcLabel)
         amountLabelContainer.addSubview(amcLabel)
         
-        postpositionLabel.text = "을"
+        postpositionLabel.text = "를"
         postpositionLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         postpositionLabel.sizeToFit()
         postpositionLabel.alpha = 0.0
@@ -153,6 +153,7 @@ class BettingViewController: UIViewController {
         amountLabels.append(postpositionLabel)
         amountLabelContainer.addSubview(postpositionLabel)
         
+        amountLabelContainer.isAccessibilityElement = true
         self.view.addSubview(amountLabelContainer)
         
         nextButton.setTitle("다음", for: .normal)
@@ -272,6 +273,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         else {
             layoutAmountLabels()
         }
+        amountAccessibilityLabel()
     }
     
     func eraseDigitTouched() {
@@ -294,6 +296,7 @@ extension BettingViewController: AmountKeyboardViewDelegate {
         else {
             layoutAmountLabels()
         }
+        amountAccessibilityLabel()
     }
 }
 
@@ -517,6 +520,7 @@ private extension BettingViewController {
         }
         askingStatus = .finalCheck
         layout()
+        amountAccessibilityLabel()
     }
     
     @objc func finalButtonPressed() {
@@ -649,5 +653,10 @@ extension BettingViewController {
     override func accessibilityPerformEscape() -> Bool {
         goBackToPreviousStatus()
         return true
+    }
+    
+    private func amountAccessibilityLabel() {
+        let suffix = (askingStatus == .finalCheck ? " 를" : "")
+        amountLabelContainer.accessibilityLabel = amountString + " AMC" + suffix
     }
 }
