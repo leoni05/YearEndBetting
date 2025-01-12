@@ -21,6 +21,7 @@ class AnimalView: UIView {
     var isSelected = false {
         didSet {
             imageView.tintColor = isSelected ? UIColor(named: "DarkPink") : .systemGray4
+            self.accessibilityValue = isSelected ? "켬" : "끔"
         }
     }
     
@@ -49,6 +50,8 @@ class AnimalView: UIView {
         self.isAccessibilityElement = true
         self.accessibilityTraits = .button
         self.accessibilityLabel = koreanString
+        self.accessibilityValue = "끔"
+        self.accessibilityHint = "끄거나 켜려면 이중 탭 하세요."
     }
     
     required init?(coder: NSCoder) {
