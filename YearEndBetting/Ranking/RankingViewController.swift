@@ -168,3 +168,10 @@ extension RankingViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - Accessibility
+extension RankingViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        self.navigationController?.popViewController(animated: true)
+        return true
+    }
+}

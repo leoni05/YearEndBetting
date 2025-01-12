@@ -264,3 +264,11 @@ private extension LoginViewController {
         askingFavoriteLabel.attributedText = attrString
     }
 }
+
+// MARK: - Accessibility
+extension LoginViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        goBackToAskingName()
+        return true
+    }
+}

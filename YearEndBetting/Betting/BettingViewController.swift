@@ -644,3 +644,10 @@ private extension BettingViewController {
     }
 }
 
+// MARK: - Accessibility
+extension BettingViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        goBackToPreviousStatus()
+        return true
+    }
+}
