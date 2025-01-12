@@ -645,6 +645,8 @@ private extension BettingViewController {
         default:
             break
         }
+        
+        UIAccessibility.post(notification: .screenChanged, argument: nil)
     }
 }
 

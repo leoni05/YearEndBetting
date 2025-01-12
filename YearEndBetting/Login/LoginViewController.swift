@@ -77,6 +77,8 @@ class LoginViewController: UIViewController {
             default:
                 break
             }
+            
+            UIAccessibility.post(notification: .screenChanged, argument: nil)
         }
     }
     
