@@ -48,6 +48,18 @@ class AmountView: UIView {
             imageViewForPop = imageView
             self.addSubview(imageView)
         }
+        
+        self.isAccessibilityElement = true
+        self.accessibilityTraits = .button
+        switch buttonRole {
+        case .push:
+            if let valueString = valueForPush {
+                let suffix = (valueString.count > 1 ? " \(valueString.count)개" : "")
+                self.accessibilityLabel = valueString + suffix
+            }
+        case .pop:
+            self.accessibilityLabel = "마지막 숫자 지우기"
+        }
     }
     
     required init?(coder: NSCoder) {
