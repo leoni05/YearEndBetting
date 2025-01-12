@@ -117,6 +117,7 @@ class MainViewController: UIViewController {
                               for: .normal)
         rankingButton.tintColor = .systemGray2
         rankingButton.addTarget(self, action: #selector(rankingButtonPressed), for: .touchUpInside)
+        rankingButton.accessibilityLabel = "랭킹"
         self.view.addSubview(rankingButton)
         
         logoutButton.setImage(UIImage(systemName: "rectangle.portrait.and.arrow.right",
@@ -124,6 +125,7 @@ class MainViewController: UIViewController {
                               for: .normal)
         logoutButton.tintColor = .systemGray2
         logoutButton.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        logoutButton.accessibilityLabel = "로그아웃"
         self.view.addSubview(logoutButton)
         
         githubButton.setImage(UIImage(systemName: "link",
