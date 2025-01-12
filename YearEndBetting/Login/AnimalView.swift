@@ -45,6 +45,10 @@ class AnimalView: UIView {
         label.textColor = .black
         label.sizeToFit()
         self.addSubview(label)
+        
+        self.isAccessibilityElement = true
+        self.accessibilityTraits = .button
+        self.accessibilityLabel = koreanString
     }
     
     required init?(coder: NSCoder) {
