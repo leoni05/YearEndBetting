@@ -656,7 +656,14 @@ extension BettingViewController {
     }
     
     private func amountAccessibilityLabel() {
+        guard let amountInt = Int(amountString) else { return }
+        
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .spellOut
+        numberFormatter.locale = Locale(identifier: "ko_KR")
+        let amountSpellOut = numberFormatter.string(from: NSNumber(value: amountInt))
+        
         let suffix = (askingStatus == .finalCheck ? " 를" : "")
-        amountLabelContainer.accessibilityLabel = amountString + " AMC" + suffix
+        amountLabelContainer.accessibilityLabel = (amountSpellOut ?? "") + " AMC" + suffix
     }
 }
